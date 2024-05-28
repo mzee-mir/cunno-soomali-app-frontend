@@ -1,0 +1,8 @@
+Approuter = 
+<Route path ="/user-profile" element= {
+    <Layout>
+        <UserProfilePage/>
+    </Layout>
+    } 
+/>
+<Route path ="/auth-callback" element= {<AuthCallBack/>} />
