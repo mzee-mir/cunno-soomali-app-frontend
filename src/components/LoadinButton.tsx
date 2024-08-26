@@ -11,4 +11,4 @@ const LoadinButton = () => {
   )
 }
 
-export default LoadinButton
+export default LoadinButton;

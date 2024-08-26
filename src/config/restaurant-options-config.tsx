@@ -1,0 +1,22 @@
+export const cuisineList = [
+    " Cunno wadani" ,
+    " Cunno Galbeed",
+    " Cunno Somali",
+    " Cunno Carabeed",
+    " Cunno Afrikaan",
+    " Cunno Meksikaan",
+    " Cunno itooebiyaan",
+    " Quraac",
+    " Qado",
+    " Casho",
+    " Casariyo ",
+    " Mac Macaan ",
+    " Cabitaan Shiditaan ",
+    " Cabitaan aashito ",
+    " Cabitaan gasac ",
+    " Caano xoolaad ",
+    " Hiliib Garsan",
+    " Hiliib umitaysan",
+    " khudaar",
+
+]
