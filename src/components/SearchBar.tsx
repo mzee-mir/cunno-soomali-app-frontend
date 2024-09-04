@@ -20,7 +20,6 @@ const formSchema = z.object({
     placeHolder: string;
     onReset?: () => void;
     searchQuery?: string;
-    className?: string;
 };
 
 const SearchBar = ({ onSubmit, onReset, placeHolder, searchQuery }: Props) => {

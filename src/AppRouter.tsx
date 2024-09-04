@@ -8,6 +8,7 @@ import ProtectedRoute from "./auth/ProtectedRoute";
 import ManageRestaurantPage from "./Pages/ManageRestaurantPage";
 import SearchBar from "./components/SearchBar";
 import SearchPage from "./Pages/SearchPage";
+import DetailPage from "./Pages/detailsPage";
 
 const AppRoute = () => {
     return(
@@ -23,6 +24,10 @@ const AppRoute = () => {
 
             <Route path ="/search/:city" element= {<Layout showHero={false}> 
                 <SearchPage /> 
+            </Layout>} />
+
+            <Route path ="/detail/:restaurantId" element= {<Layout showHero={false}> 
+                <DetailPage /> 
             </Layout>} />
 
             <Route element={<ProtectedRoute/>}>

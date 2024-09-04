@@ -1,7 +1,7 @@
 import { number } from "zod";
 
 export type User = {
-    _Id: string;
+    _id: string;
     email: string;
     name: string;
     addressLine1: string;
@@ -9,7 +9,7 @@ export type User = {
     country: string;
 };
 
-export type MenuItem = {
+export type MenuItems = {
     _id: string;
     name: string;
     price: number;
@@ -17,7 +17,7 @@ export type MenuItem = {
 
 export type Restaurant = {
     imageFile: any;
-    _Id: string;
+    _id: string;
     user: string;
     restaurantName: string;
     city: string;
@@ -25,7 +25,7 @@ export type Restaurant = {
     deliveryPrice: number;
     estimatedDeliveryTime:number;
     cuisines: string[];
-    menuItems: MenuItem[];
+    menuItems: MenuItems[];
     imageUrl: string;
     lastUpdated:string;
 };

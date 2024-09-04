@@ -86,7 +86,6 @@ if(isLoading){
             </div>
             <div id="main-content" className="flex flex-col gap-5" >
                 <SearchBar 
-                className="m-100"
                 searchQuery={searchState.searchQuery}
                 onSubmit={setSearchQuery} placeHolder="search by cuisine or restaurant name" 
                 onReset={resetSearch} />
