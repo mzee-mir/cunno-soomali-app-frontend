@@ -24,7 +24,7 @@ const OrderSummery =  ({cartItems, restaurant, removeFromCart}: Props) => {
 
     return(
         <>
-        <Card>
+        
             <CardHeader>
                 <CardTitle className="text-2xl font-bold tracking-tight flex justify-between ">
                     <span>Your Order</span>
@@ -55,7 +55,7 @@ const OrderSummery =  ({cartItems, restaurant, removeFromCart}: Props) => {
                 </div>
                 <Separator />
             </CardContent>
-        </Card>
+        
         </>
     )
 };
