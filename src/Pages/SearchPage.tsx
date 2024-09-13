@@ -22,10 +22,10 @@ const SearchPage =() => {
         searchQuery:"",
         page: 1,
         selectedCuisines: [],
-        sortOption: '',
+        sortOption: 'bestMatch',
     });
 
-    const [isExpanded, setisExpanded] = useState<boolean>(false);
+    const [isExpanded, setIsExpanded] = useState<boolean>(false);
     const {results, isLoading } = useSearchRestaurants(searchState, city);
 
     const setSelectedCuisines = (selectedCuisines:string[]) => {
@@ -79,7 +79,7 @@ if(isLoading){
             <div id="cuisines-list" > 
             <CuisineFilter
             isExpanded={isExpanded}
-            onExpandedClick={() => setisExpanded((prevIsExpanded)=> !prevIsExpanded)} 
+            onExpandedClick={() => setIsExpanded((prevIsExpanded)=> !prevIsExpanded)} 
             selectedCuisines={searchState.selectedCuisines} 
             onChange={setSelectedCuisines}
             />    
