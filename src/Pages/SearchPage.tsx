@@ -95,7 +95,7 @@ if(isLoading){
                     sortOption={searchState.sortOption} onChange={(value)=> setSortOption(value)} />
                 </div>
                 {results.data.map((restaurant) => (
-                    <SearchResultsCard restaurant={restaurant} />
+                    <SearchResultsCard key={restaurant._id} restaurant={restaurant} />
                     
                 ))}
                 <PaginationSelector 
