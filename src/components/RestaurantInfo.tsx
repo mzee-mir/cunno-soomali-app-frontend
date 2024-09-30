@@ -17,7 +17,7 @@ const RestaurantInfo = ({restaurant}: Props) => {
                     {restaurant.city}, {restaurant.country}
                 </CardDescription>
             </CardHeader>
-            <CardContent className="flex md:flex-wrap justify-content align-center gap-2" >
+            <CardContent className="grid grid-cols-4 gap-4 sm:flex flex-wrap" >
                 {restaurant.cuisines.map((item, index) => (
                     <span key={index} className="flex items-center">
                         <span>{item}</span>

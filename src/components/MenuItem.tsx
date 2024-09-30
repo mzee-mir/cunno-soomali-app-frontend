@@ -8,7 +8,7 @@ type Props = {
 
 const MenuItem = ({menuItem, addToCart}: Props) => {
     return (
-        <Card className="cursor-pointer" onClick={addToCart}>
+        <Card className="cursor-pointer hover:bg-[#ecfeff] active:bg-[#a5f3fc] transition-colors duration-200" onClick={addToCart} >
             <CardHeader>
                 <CardTitle>
                     {menuItem.name}

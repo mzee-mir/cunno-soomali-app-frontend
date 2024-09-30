@@ -41,7 +41,7 @@ const OrderSummery =  ({cartItems, restaurant, removeFromCart}: Props) => {
                             {item.name}
                         </span>
                         <span className="flex items-center gap-1">
-                            <Trash className="cursor-pointer" color="red" size={20} 
+                            <Trash className="cursor-pointer text-blue-600 hover:text-red-600 transition-colors duration-200" size={20} 
                             onClick={() => removeFromCart(item)}/>
 
                             ${((item.price * item.quantity)/100).toFixed(2)}

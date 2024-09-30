@@ -114,7 +114,7 @@ const DetailPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-[4fr_2fr] gap-5 md:px-32" >
                 <div className="flex flex-col gap-4 " >
                     <RestaurantInfo restaurant={restaurant} />
-                    <span className="text-2xl font-bold tracking-tight">
+                    <span className="text-2xl font-bold tracking-tight ">
                         {restaurant.menuItems.map((menuItem)=> (
                             <MenuItem key={menuItem._id} menuItem={menuItem} addToCart={() =>addToCart(menuItem)} />
                         ))}

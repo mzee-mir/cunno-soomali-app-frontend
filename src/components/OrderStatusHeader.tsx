@@ -26,12 +26,23 @@ const OrderStatusHeader= ({order}:Props) => {
     const getOrderStatusInfo = () => {
         return ORDER_STATUS.find((o)=> o.value === order.status) || ORDER_STATUS[0]
     }
+    const getOrderDateInfo = ()=> {
+        const date = new Date(order.createdAt);
+        date.getMonth();
+        const day = date.getDate();
+        const year = date.getFullYear();
+        return `${day}-${date.getMonth() + 1}-${year}`;
+    }
+    
+    
+    
 
   return (
     <>
     <h1 className="text-4xl font-bold tracking-tighter flex flex-col ap-5 md:flex-row md:justify-between">
         <span>order status: {getOrderStatusInfo().label}</span>
         <span>Expected by: {getExpectedDelivery()}</span>
+        <span className="text-2xl font-bold ">Order Date: {getOrderDateInfo()}</span>
     </h1>
     <Progress className= "animate-pulse" value={getOrderStatusInfo().progressValue}/>
     </>
