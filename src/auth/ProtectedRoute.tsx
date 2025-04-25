@@ -1,16 +1,16 @@
-import { useAuth0 } from "@auth0/auth0-react"
 import { Navigate, Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const ProtectedRoute = () => {
-    const  {isAuthenticated, isLoading} = useAuth0();
+  const user = useSelector((state: RootState) => state.user);
+  const accessToken = localStorage.getItem("accessToken");
 
-    if (isLoading){
-        return null;
-    }
-    if (isAuthenticated){
-        return <Outlet/>
-    }
-    return <Navigate to="/" replace />
+  if (!user._id || !accessToken) {
+    return <Navigate to="/" replace />;
+  }
+
+  return <Outlet />;
 };
 
-export default ProtectedRoute
+export default ProtectedRoute;

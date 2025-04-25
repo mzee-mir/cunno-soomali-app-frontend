@@ -13,7 +13,7 @@ const ImageSecion = () => {
         <div>
             <h2 className='text-2xl font-bold'>Image</h2>
             <FormDescription>
-                Add an image that will be displayed on your restaurant listing  in thr search result. Adding a new image will overwrite the existing one. 
+                Add an image that will be displayed for your dish  listing  in thr search result. Adding a new image will overwrite the existing one. 
             </FormDescription>
         </div>
         <div className='flex flex-col gap-8 md:w-[50%]'>
@@ -30,11 +30,9 @@ const ImageSecion = () => {
             name='imageFile' 
             render={({field}) => <FormItem>
                 <FormControl>
-                    <Input className='bg-white' type='file' accept='.jpm, .jpeg, .png'
+                    <Input className='bg-white' type='file' accept='.jpg, .jpeg, .jfif, .pjpeg, .pjp .gif, .png, .svg'
                     onChange={(event) => 
-                    field.onChange (event.target.files ? event.target.files[0] : null
-
-                    )
+                    field.onChange(event.target.files ? event.target.files[0] : null)
                     }
                  />
                 </FormControl>

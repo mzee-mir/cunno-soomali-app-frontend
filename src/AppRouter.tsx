@@ -3,16 +3,22 @@ import Layout from "./layouts/layouts";
 import HomePage from "./Pages/HomePage";
 import AuthCallBack from "./Pages/AuthCallBack";
 import UserProfilePage from "./Pages/UserProfilePage";
-//import manageRestaurantPage from "./Pages/ManageRestaurantPage";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import ManageRestaurantPage from "./Pages/ManageRestaurantPage";
-import SearchBar from "./components/SearchBar";
 import SearchPage from "./Pages/SearchPage";
 import DetailPage from "./Pages/detailsPage";
 import OrderStatusPage from "./Pages/OrderStatusPage";
-
+import LoginPage from "./Pages/LoginPage";
+import EmailVerificationPage from "./Pages/emailVerification";
+import ForgotPassword from "./Pages/forgotPassword";
+import VerifyResetPasswordOtp from "./Pages/resetpasswordVerification";
+import ResetPassword from "./Pages/resetPassword";
+import MenuItems from "./components/MenuItems";
+import Address from "./Pages/Adress";
+import AnalyticsDashboard from "./components/Dashboard";
+import Dashboard from "./components/dashboardpages";
 const AppRoute = () => {
-    return(
+    return( 
         <Routes>
             <Route 
             path ="/" 
@@ -21,6 +27,48 @@ const AppRoute = () => {
                 <HomePage/>
             </Layout>
             } />
+
+            <Route 
+            path ="/Login-Page" 
+            element= { 
+            <Layout>
+                <LoginPage/>
+            </Layout>
+            } />
+
+            <Route 
+            path ="/verification-email" 
+            element= { 
+            <Layout>
+                <EmailVerificationPage/>
+            </Layout>
+            } />
+
+            <Route 
+            path ="/forgot-Password" 
+            element= { 
+            <Layout>
+                <ForgotPassword/>
+            </Layout>
+            } />
+
+            <Route 
+            path ="/resetPassword-Otp" 
+            element= { 
+            <Layout>
+                <VerifyResetPasswordOtp/>
+            </Layout>
+            } />
+
+            <Route
+            path ="/resetPassword"
+            element= {
+            <Layout>
+                <ResetPassword/>
+            </Layout>
+            }
+            />
+
             <Route path ="/auth-callback" element= {<AuthCallBack/>} />
 
             <Route path ="/search/:city" element= {<Layout showHero={false}> 
@@ -49,20 +97,58 @@ const AppRoute = () => {
                 />
                 
                 <Route 
-                path ="/manage-restaurant" 
-                element= {
-                <Layout>
-                    <ManageRestaurantPage/>
-                </Layout>
-                } 
+                    path="/manage-restaurant" 
+                    element={
+                    <Layout>
+                        <ManageRestaurantPage/>
+                    </Layout>
+                    } 
+                />
+                
+                <Route 
+                    path="/address" 
+                    element={
+                    <Layout>
+                        <Address/>
+                    </Layout>
+                    } 
+                />
+                
+                <Route 
+                    path="/menuItems" 
+                    element={
+                    <Layout>
+                        <MenuItems/>
+                    </Layout>
+                    } 
                 />
 
-            </Route>
+                <Route 
+                    path="/analytical" 
+                    element={
+                    <Layout>
+                        <AnalyticsDashboard/>
+                    </Layout>
+                    } 
+                />
+
+                <Route 
+                    path="/dashboard" 
+                    element={
+                    <Layout>
+                        <Dashboard/>
+                    </Layout>
+                    } 
+                />
+
+                </Route>
             
             
             <Route path ="*" element= {<Navigate to = "/" />} />
+            
         </Routes>
     );
+    
 }
 
 export default AppRoute

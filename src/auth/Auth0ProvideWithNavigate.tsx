@@ -1,42 +1,49 @@
-import { useCreateMyUser } from "@/api/myUserApi";
-import { AppState, Auth0Provider,} from "@auth0/auth0-react";
+import { setUserDetails, logout } from "@/store/userSlice";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { useEffect } from "react";
+import fetchUserDetails from "@/lib/fetchUserDetails";
 
 type Props = {
-    children : React.ReactNode
-}
+  children: React.ReactNode;
+};
 
-const Auth0ProvideWithNavigate = ({ children }: Props) => {
-    const navigate = useNavigate();
+const AuthProvider = ({ children }: Props) => {
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
     
-
-    const domain= import.meta.env.VITE_AUTH0_DOMAIN;
-    const clientId=import.meta.env.VITE__AUTH0_CLIENT_ID;
-    const redirectUri= import.meta.env.VITE_AUTH0_CALLBACK_URL;
-    const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
-
-    if (!domain || !clientId || !redirectUri || !audience) {
-        throw new Error("Unable to initialise Auth");
-    }
-const onRedirectCallback = (appState?:AppState) => {
-        navigate(appState?.returnTo || "/auth-callback")
+    const fetchUser = async () => {
+      try {
+        const userData = await fetchUserDetails();
+        if (userData?.data?._id) {
+          dispatch(setUserDetails(userData.data));
+        } else {
+          // If no valid user data, log out
+          dispatch(logout());
+          localStorage.clear();
+        }
+      } catch (err) {
+        console.error("Failed to fetch user details", err);
+        dispatch(logout());
+        localStorage.clear();
+      }
     };
- 
-    return(
-        <Auth0Provider 
-        domain={domain}
-        clientId={clientId}
-        authorizationParams={{
-            redirect_uri: redirectUri,
-            audience,
-            scope: "openid profile email",
 
-        }}
-        onRedirectCallback={onRedirectCallback}
-        >
-            {children}
-        </Auth0Provider>
-    )
-}
+    // Only fetch user if there's an access token and no user ID in state
+    if (accessToken && !user._id) {
+      fetchUser();
+    } else if (!accessToken && user._id) {
+      // If no token but user in state, log out
+      dispatch(logout());
+    }
+  }, [dispatch, user._id]);
 
-export default Auth0ProvideWithNavigate;
+  return <>{children}</>;
+};
+
+export default AuthProvider;

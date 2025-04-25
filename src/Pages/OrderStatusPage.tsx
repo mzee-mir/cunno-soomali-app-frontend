@@ -1,34 +1,28 @@
 import { useGetMyOrders } from "@/api/OrderApi";
-import OrderStatusDetail from "@/components/OrderStatusDetail";
-import OrderStatusHeader from "@/components/OrderStatusHeader";
-import { AspectRatio } from "@radix-ui/react-aspect-ratio";
+import { OrderHistoryTable } from "@/components/OrderHistoryTable";
 
-const OrderStatusPage = ()=>{
-    const {orders, isLoading} = useGetMyOrders();
 
-    if (isLoading) {
-        return "Loading..."
-    }
+const OrderStatusPage = () => {
+  const { orders, isLoading: isOrderLoading } = useGetMyOrders();
 
-    if (!orders || orders.length === 0){
-        return "No orders found"
-    }
+  const handleRemoveOrder = (orderId: string) => {
+    // Your remove order logic here
+    console.log("Removing order:", orderId);
+  };
 
-    return (
-        <div className="space-y-10">
-            {orders.map((order)=> (
-                <div className="space-y-10 bg-blue-50 p-10 rounded-lg" key={order.createdAt}>
-                    <OrderStatusHeader order={order}/>
-                    <div className="grid gab-10 md:grid-cols-2">
-                        <OrderStatusDetail order={order} />
-                        <AspectRatio ratio={16/6}>
-                                <img src={order.restaurant.imageUrl} className="rounded-md object-cover h-full w-full" />
-                        </AspectRatio>
-                    </div>
-                </div>
-            ))}
-        </div>
-    )
+  if (isOrderLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!orders || orders.length === 0) {
+    return <p>No orders found</p>;
+  }
+
+  return (
+    <div className="container mx-auto py-10">
+      <OrderHistoryTable orders={orders} handleRemoveOrder={handleRemoveOrder}/>  {/* Pass all orders at once */}
+    </div>
+  );
 };
 
 export default OrderStatusPage;

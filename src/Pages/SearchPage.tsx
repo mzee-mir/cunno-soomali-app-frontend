@@ -1,4 +1,3 @@
-import { useGetMyRestaurant } from "@/api/MyRestaurantApi";
 import { useSearchRestaurants } from "@/api/RestaurentApi";
 import CuisineFilter from "@/components/CuinesFilter";
 import PaginationSelector from "@/components/PaginationSelector";

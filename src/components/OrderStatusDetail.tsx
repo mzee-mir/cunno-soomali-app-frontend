@@ -1,5 +1,4 @@
-import { Order } from "@/types";
-import { Item } from "@radix-ui/react-dropdown-menu";
+import { Order } from "@/store/OrderSlice";
 import { Separator } from "@radix-ui/react-separator";
 
 type Props = {
@@ -11,8 +10,8 @@ const OrderStatusDetail = ({order}:Props) => {
   return <div className="space-y-5">
     <div className="flex flex-col">
         <span className="font-bold">Delivering to:</span>
-        <span>{order.deliveryDetails.name}</span>
-        <span>{order.deliveryDetails.addressLine1}, {order.deliveryDetails.city}</span>
+        <span>{order.deliveryDetails?.name}</span>
+        <span>{order.deliveryDetails?.address}</span>
     </div>
     <div className="flex flex-col">
         <span className="font-bold">Your Order</span>

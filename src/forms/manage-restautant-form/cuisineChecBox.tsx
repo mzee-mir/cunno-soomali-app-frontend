@@ -4,7 +4,7 @@ import { ControllerRenderProps, FieldValues } from "react-hook-form";
 
 type Props = {
   cuisine: string;
-  field: ControllerRenderProps<FieldValues, "cuisines">;
+  field: ControllerRenderProps<FieldValues, "cuisineType">; // Changed from "cuisines" to "cuisineType"
 };
 
 const CuisineCheckbox = ({ cuisine, field }: Props) => {
@@ -13,13 +13,13 @@ const CuisineCheckbox = ({ cuisine, field }: Props) => {
       <FormControl>
         <Checkbox
           className="bg-white"
-          checked={field.value.includes(cuisine)}
+          checked={field.value?.includes(cuisine) || false}
           onCheckedChange={(checked) => {
             if (checked) {
-              field.onChange([...field.value, cuisine]);
+              field.onChange([...(field.value || []), cuisine]);
             } else {
               field.onChange(
-                field.value.filter((value: string) => value !== cuisine)
+                (field.value || []).filter((value: string) => value !== cuisine)
               );
             }
           }}

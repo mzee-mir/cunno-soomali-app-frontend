@@ -1,5 +1,5 @@
 import { Order, OrderStatus } from "@/types";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Separator } from "@radix-ui/react-separator";
 import { Badge } from "./ui/badge";
 import { Label } from "./ui/label";
@@ -7,7 +7,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { ORDER_STATUS } from "@/config/order-status-config";
 import { useEffect, useState } from "react";
 import { useUpdateMyRestaurantOrder } from "@/api/MyRestaurantApi";
-
+import { Avatar, Chip } from "@mui/material";
+import OrderItemCardInfo from "./orderItemCardInfo";
 type Props = {
     order: Order;
 }
@@ -20,6 +21,14 @@ const OrderItemCard = ({order}: Props)=> {
     useEffect(() => {
         setStatus(order.status);
     }, [order.status]);
+
+    const getOrderDateInfo = ()=> {
+        const date = new Date(order.createdAt);
+        date.getMonth();
+        const day = date.getDate();
+        const year = date.getFullYear();
+        return `${day}-${date.getMonth() + 1}-${year}`;
+    }
 
     const handleStatusChange = async (newStatus: OrderStatus) => {
         await updateRestaurantStatus({
@@ -42,72 +51,52 @@ const OrderItemCard = ({order}: Props)=> {
         return `${hours}:${paddedMinutes}`;
     }
     return(
-        <Card>
-            <CardHeader>
-                <CardTitle className="grid md:grid-cols-4 gap-4 justify-between mb-3">
-                    <div>
-                        Customer Name:
-                        <span className="ml-2 font-normal">
-                            {order.deliveryDetails.name}
-                        </span>
-                    </div>
-                    
-                    <div>
-                        Deliver address:
-                        <span className="ml-2 font-normal">
-                            {order.deliveryDetails.addressLine1}, {order.deliveryDetails.city}
-                        </span>
-                    </div>
-
-                    <div>
-                        Time:
-                        <span className="ml-2 font-normal">
-                            {getTime()}
-                        </span>
-                    </div>
-
-                    <div>
-                        Total Cost:
-                        <span className="ml-2 font-normal">
-                            ${(order.totalAmount/100).toFixed(2)}
-                        </span>
-                    </div>
-                </CardTitle>
-                <Separator/>
+        <div >
+        <div className="w-full">
+            <Card className=" w-full ml-3 mb-4">
+            <CardHeader className="pb-4">
+                
+            <CardTitle className="flex flex-col-2 gap-6">
+                <div className="flex flex-row gap-6">
+                    <h1 className="">Order Date: {getOrderDateInfo()}</h1>
+                    <h1 className="flex-1"></h1>
+                    <h1 className="text-right">Order Time: {getTime()}</h1>
+                </div>
+                
+                
+            </CardTitle>
+            
             </CardHeader>
 
-            <CardContent className="flex flex-col gap-6">
-                <div className="flex flex-col gap-2">
-                    {order.cartItems.map((cartItem)=>(
-                        <span key={cartItem.menuItemId}>
-                            <Badge variant="outline" className="mr-2">
-                            {cartItem.quantity}
-                        </Badge>
-                        {cartItem.name} 
-                        </span>
-                    ))}
+            <CardContent className="flex flex-col-3 gap-3 pb-3">
+                <Avatar 
+                src={order.user?.email}
+                sx={{ width: 52, height: 52 }}
+                />
+                <div className="flex flex-col gap-1">
+                <h1 className="text-lg font-semibold">Customer: {order.user.name}</h1>
+                <h1 className="text-sm text-gray-600">Items: {order.cartItems.length}</h1>
                 </div>
-                <div className="flex flex-cols space-y-1.5">
-                    <Label htmlFor="status">
-                        What is the status of this order?
-                    </Label>
-                    <Select 
-                    value={status}
-                    disabled={isLoading}
-                    onValueChange={(value)=> handleStatusChange(value as OrderStatus)}>
-                        <SelectTrigger id ="status">
-                            <SelectValue placeholder="status"></SelectValue>
-                        </SelectTrigger>
-                        <SelectContent position="popper">
-                            {ORDER_STATUS.map((status)=>(<SelectItem 
-                            value={status.value}
-                            key={status.label}
-                            >{status.label}</SelectItem>))}
-                        </SelectContent>
-                    </Select>
+                
+                <div className="flex-1"></div>
+
+                <div className="justify-items-end">
+                    <Chip label={order.status} />
                 </div>
+                        
             </CardContent>
-        </Card>
+
+            
+            <CardFooter className="pb-4">
+                <h1 className="pl-12 text-lg font-bold">Total: {(order.totalAmount/100).toFixed(2)}</h1>
+            </CardFooter>
+            </Card>
+        </div>
+            
+            <Separator/>
+        
+        </div>
+        
     )
 }
 
