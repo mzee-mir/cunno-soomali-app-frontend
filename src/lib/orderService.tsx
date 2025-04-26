@@ -9,6 +9,7 @@ import {
   setOrderError,
   Order
 } from "@/store/OrderSlice";
+import { OrderStatus } from "@/store/OrderSlice";
 
 export const OrderService = {
   /**
@@ -47,7 +48,7 @@ export const OrderService = {
   async updateRestaurantOrderStatus(
     dispatch: Dispatch,
     orderId: string,
-    status: string
+    status: OrderStatus  
   ): Promise<Order> {
     try {
       dispatch(setOrderLoading(true));

@@ -15,6 +15,7 @@ import { IAddress } from "@/store/addressSlice";
 import { useGetRestaurant } from "@/api/RestaurentApi";
 import { useParams } from "react-router-dom";
 import { ICartMenuItem } from "@/store/cartMenuItem";
+import toast from "react-hot-toast";
 
 type Props = {
     disabled?: boolean;
@@ -67,41 +68,32 @@ const CheckoutButton = ({ disabled }: Props) => {
     }, [open, user, addresses.length, fetchAddress]);
 
     const handleCheckout = async () => {
-        const deliveryAddress = selectedAddress 
-            ? addresses.find(addr => addr._id === selectedAddress)?.address_line || ""
-            : customAddress;
-    
-        const checkoutData = {
-            cartItems: cartItems.map(item => ({
-                menuItemId: item.menuItemId._id,
-                name: item.menuItemId.name,
-                imageUrl: item.menuItemId.imageUrl,
-                price: item.menuItemId.price,
-                quantity: item.quantity.toString(),
-
-            })),
-            deliveryDetails: {
-                name,
-                email,
-                mobile: user.mobile,
-                address: deliveryAddress,
-            },
-            restaurantId,
-        };
-    
-        try {
-            const response = await createCheckoutSession(checkoutData);
-            const url = response?.data?.url;
-    
-            if (url) {
-                window.location.href = url;
-            } else {
-                console.error("No URL returned from checkout session", response);
-            }
-        } catch (error) {
-            console.error("Checkout failed:", error);
+        if (!selectedAddress && !customAddress) {
+          toast.error("Please select or enter a delivery address.");
+          return;
         }
-    };
+      
+        const checkoutData = {
+          cartItems: cartItems.map((item) => ({
+            _id: item._id,
+            userId: item.userId,
+            menuItemId: item.menuItemId,
+            quantity: item.quantity, // keep it as number, NOT string
+          })),
+          deliveryDetails: {
+            addressId: selectedAddress, // <-- pass only address ID here
+            instructions: customAddress || "", // optional notes if user typed new address
+          },
+          restaurantId: restaurantId!,
+        };
+      
+        try {
+          await createCheckoutSession(checkoutData);
+        } catch (error) {
+          console.error("Checkout failed:", error);
+        }
+      };
+      
     
     
     
