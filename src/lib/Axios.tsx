@@ -50,10 +50,10 @@ Axios.interceptors.response.use(
 );
 
 // ✅ Refresh Access Token
-const refreshAccessToken = async (refreshToken) => {
+const refreshAccessToken = async (refreshToken: string): Promise<string | null> => {
   try {
     const response = await Axios({
-      ...SummaryApi.auth.refreshToken, // Uses structured API endpoint
+      ...SummaryApi.auth.refreshToken,
       headers: {
         Authorization: `Bearer ${refreshToken}`,
       },
@@ -70,6 +70,7 @@ const refreshAccessToken = async (refreshToken) => {
 
   return null;
 };
+
 
 // ✅ Logout user (clears tokens and redirects to login)
 const logoutUser = () => {

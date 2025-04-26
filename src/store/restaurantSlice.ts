@@ -1,5 +1,6 @@
 // store/restaurantSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IMenuItem } from "./menuItemSlice";
 
 // src/types/restaurant.ts
 interface IRestaurant {
@@ -17,6 +18,7 @@ interface IRestaurant {
   imageUrl: string;
   cuisineType: string[];
   isActive: boolean;
+  menuItems: IMenuItem[]; 
 }
 
 interface SearchRestaurantsResponse {

@@ -14,6 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { IAddress } from "@/store/addressSlice";
 import { useGetRestaurant } from "@/api/RestaurentApi";
 import { useParams } from "react-router-dom";
+import { ICartMenuItem } from "@/store/cartMenuItem";
 
 type Props = {
     disabled?: boolean;

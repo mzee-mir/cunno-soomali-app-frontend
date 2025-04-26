@@ -18,6 +18,7 @@ const OrderStatusPage = () => {
     return <p>No orders found</p>;
   }
 
+
   return (
     <div className="container mx-auto py-10">
       <OrderHistoryTable orders={orders} handleRemoveOrder={handleRemoveOrder}/>  {/* Pass all orders at once */}

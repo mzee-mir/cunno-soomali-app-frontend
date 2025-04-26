@@ -100,7 +100,7 @@ const ManageRestaurantPage = () => {
           <TabsTrigger value="dashboard">Dasboard</TabsTrigger>
         </TabsList>
 
-        {loading && <LoadinButton className="mx-auto my-8" />}
+        {loading && <LoadinButton />}
         {error && <p className="text-red-500 text-center py-4">{error}</p>}
 
         <TabsContent value="orders" className="bg-blue-50 rounded-lg">
@@ -152,10 +152,6 @@ const ManageRestaurantPage = () => {
             </h2>
             
             <ManageRestaurantForm
-              restaurant={currentRestaurant}
-              onSave={handleSaveRestaurant}
-              onDelete={currentRestaurant?._id ? () => handleDeleteRestaurant(currentRestaurant._id) : undefined}
-              isLoading={loading}
             />
           </div>
         </TabsContent>

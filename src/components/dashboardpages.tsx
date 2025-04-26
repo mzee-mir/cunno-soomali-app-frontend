@@ -18,6 +18,7 @@ import {
 } from '@mui/material';
 import { fetchDashboardData, setTimePeriod } from '@/store/dashboardSlice';
 import { DashboardLineChart } from './dashboardLineChart';
+import type { SelectChangeEvent } from '@mui/material';
 
 const Dashboard: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -27,9 +28,9 @@ const Dashboard: React.FC = () => {
       dispatch(fetchDashboardData(timePeriod));
     }, [dispatch, timePeriod]);
 
-  const handleTimePeriodChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    dispatch(setTimePeriod(event.target.value as string));
-  };
+    const handleTimePeriodChange = (event: SelectChangeEvent) => {
+      dispatch(setTimePeriod(event.target.value));
+    };
 
   if (loading && !data) {
     return (

@@ -1,14 +1,13 @@
-import { Restaurant } from "@/types";
 import { useQuery } from "react-query";
-import { RestaurantSearchResponse } from "@/types";
 import { SearchState } from "@/Pages/SearchPage";
 import Axios from "@/lib/Axios";
 import ApiEndpoints from "./Userauth";
+import { IRestaurant, SearchRestaurantsResponse } from "@/store/restaurantSlice";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const useGetRestaurant = (restaurantId?: string) => {
-  const getRestaurantByIdRequest = async (): Promise<Restaurant> => {
+  const getRestaurantByIdRequest = async (): Promise<IRestaurant> => {
     try {
       const response = await Axios({
         ...ApiEndpoints.restaurant.getRestaurant,
@@ -24,7 +23,11 @@ export const useGetRestaurant = (restaurantId?: string) => {
       if (!data || typeof data !== "object") {
         throw new Error("Invalid data format");
       }
-  
+      
+      if (!data.menuItems) {
+        data.menuItems = [];
+      }
+      
       return data;
     } catch (error) {
       console.error("Error fetching restaurant:", error);
@@ -48,7 +51,7 @@ export const useSearchRestaurants = (
   searchState: SearchState,
   city?: string
 ) => {
-  const createSearchRequest = async (): Promise<RestaurantSearchResponse> => {
+  const createSearchRequest = async (): Promise<SearchRestaurantsResponse> => {
     const params = new URLSearchParams();
     if (searchState.searchQuery) {
       params.set("searchQuery", searchState.searchQuery);

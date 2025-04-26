@@ -111,7 +111,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({ isOpen, onClose }) => {
                             <div className="flex-1 flex items-end justify-between text-sm">
                               <p className="text-gray-500">Qty {item.quantity}</p>
                               <div className="w-32">
-                                <AddToCartButton data={{ _id: item.menuItemId._id }} />
+                              <AddToCartButton data={item.menuItemId} />
                               </div>
                             </div>
                           </div>

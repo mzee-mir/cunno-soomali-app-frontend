@@ -8,9 +8,10 @@ import {
   setReviewError, 
   Review
 } from '@/store/ReviewSlice';
-import { useCreateReview, useGetRestaurantReviews } from '@/api/OrderApi';
+import { useCreateOrderReview, useGetOrderReviews } from '@/api/OrderApi';
 import { Star, StarHalf, StarOutline } from '@mui/icons-material';
 import { Button, TextField, CircularProgress, Alert, Avatar, Box, Typography } from '@mui/material';
+import { Axios } from 'axios';
 
 interface ReviewFormProps {
   restaurantId: string;
@@ -21,7 +22,8 @@ const ReviewForm = ({ restaurantId, onReviewSubmit }: ReviewFormProps) => {
   const [rating, setRating] = useState<number>(0);
   const [hoverRating, setHoverRating] = useState<number>(0);
   const [comment, setComment] = useState<string>('');
-  const { createReview, isLoading } = useCreateReview(restaurantId);
+  const { mutateAsync: createReview, isLoading } = useCreateOrderReview(restaurantId);
+
   const dispatch = useAppDispatch();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -128,7 +130,8 @@ const RestaurantReviews = ({ restaurantId }: { restaurantId: string }) => {
   const { reviews, averageRating, loading, error } = useAppSelector(
     (state) => state.review
   );
-  const { reviews: apiReviews, isLoading, error: apiError } = useGetRestaurantReviews(restaurantId);
+  const { data: apiReviews, isLoading, error: apiError } = useGetOrderReviews(restaurantId);
+
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
@@ -138,8 +141,8 @@ const RestaurantReviews = ({ restaurantId }: { restaurantId: string }) => {
   }, [apiReviews, dispatch]);
 
   useEffect(() => {
-    if (apiError) {
-      dispatch(setReviewError(apiError.message));
+    if (apiError && typeof apiError === 'object' && 'message' in apiError) {
+      dispatch(setReviewError((apiError as any).message));
     }
   }, [apiError, dispatch]);
 

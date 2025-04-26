@@ -122,9 +122,17 @@ const MenuItems = () => {
   }, [selectedMenuItem, menuItems, form]);
 
   // Update your onSubmit function to handle the image properly
-const onSubmit = async (formData: MenuItemFormData) => {
-  try {
-    dispatch(setMenuItemLoading(true));
+  const onSubmit = async (formData: MenuItemFormData) => {
+    try {
+      if (!currentRestaurant?._id) {
+        toast.error("No restaurant selected");
+        return;
+      }
+  
+      dispatch(setMenuItemLoading(true));
+
+      const restaurantId = currentRestaurant?._id;
+      if (!restaurantId) return null;
     
     if (selectedMenuItem && currentMenuItem) {
       // Update existing menu item
@@ -161,8 +169,12 @@ const onSubmit = async (formData: MenuItemFormData) => {
       
       const newMenuItem = await MenuItemService.createMenuItem(
         dispatch,
-        currentRestaurant._id, 
-        formData
+        restaurantId,
+        {
+          ...formData,
+          restaurantId: { _id: restaurantId },
+          imageUrl: "",
+        }
       );
 
       // Upload image if one was selected

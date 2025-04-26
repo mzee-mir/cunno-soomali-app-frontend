@@ -18,7 +18,7 @@ import { Avatar } from "@mui/material";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { format } from "date-fns";
 import { useAppDispatch } from "@/store/store";
-import { Order, Orders, OrderStatus } from "@/store/OrderSlice";
+import { Order, OrderStatus } from "@/store/OrderSlice";
 import { OrderService } from "@/lib/orderService";
 import { ORDER_STATUS } from "@/config/order-status-config";
 

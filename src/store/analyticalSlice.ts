@@ -6,6 +6,7 @@ export interface DailyStats {
     month: number;
     day: number;
   };
+  date: string;
   totalOrders: number;
   totalRevenue: number;
 }

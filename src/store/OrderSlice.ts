@@ -30,7 +30,7 @@ export type OrderStatus =
     name: string;
   };
   
-  export type Order = {
+  export interface Order {
     _id: string;
     createdAt: string;
     restaurant: Restaurant;

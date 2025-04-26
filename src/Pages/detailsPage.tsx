@@ -1,4 +1,3 @@
-import { useCreateCheckoutSession } from "@/api/OrderApi";
 import { useGetRestaurant } from "@/api/RestaurentApi";
 import CheckoutButton from "@/components/CheckoutButton";
 import MenuItem from "@/components/MenuItem";

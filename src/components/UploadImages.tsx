@@ -49,7 +49,8 @@ const ImageUploader = ({
       setLoading(true);
       const response = await Axios.post(uploadUrl, formData);
       if (response.data?.success) {
-        dispatch(updateAction(response.data.data.imageUrl));
+        updateAction(response.data.data.imageUrl);
+;
         toast.success('Image uploaded successfully');
         if (onClose) onClose();
       }

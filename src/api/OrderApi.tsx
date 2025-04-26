@@ -6,17 +6,11 @@ import { useMutation } from 'react-query';
 import toast from 'react-hot-toast';
 import type { ICartMenuItem } from '@/store/cartMenuItem';
 import ApiEndpoints from '@/api/Userauth';
-import { setOrderLoading, setOrderError, setOrders } from '@/store/OrderSlice';
+import { setOrderLoading, setOrderError, setOrders, Order } from '@/store/OrderSlice';
 import { addReview, setCurrentRestaurantReviews  } from '@/store/ReviewSlice';
 
 
-interface IOrder {
-  // Define order structure based on your backend response
-  _id: string;
-  items: Array<{ menuItemId: string; quantity: number }>;
-  total: number;
-  status: string;
-}
+
 
 export interface UserInfo {
   _id: string;
@@ -42,7 +36,7 @@ export interface Review {
 export const useGetMyOrders = () => {
   const dispatch = useAppDispatch();
 
-  const { data, isLoading, error } = useQuery<IOrder[]>(
+  const { data, isLoading, error } = useQuery<Order[]>(
     'fetchMyOrders',
     async () => {
       dispatch(setOrderLoading(true));
@@ -52,8 +46,8 @@ export const useGetMyOrders = () => {
         // Remove success check - directly use the response data
         dispatch(setOrders(response.data));  // Changed from response.data.data
         return response.data;
-      } catch (err) {
-        const errorMessage = err.response?.data?.message || 'Failed to fetch orders';
+      } catch (error: any) {
+        const errorMessage = error.response?.data?.message || 'Failed to fetch orders';
         dispatch(setOrderError(errorMessage));
         throw new Error(errorMessage);
       } finally {

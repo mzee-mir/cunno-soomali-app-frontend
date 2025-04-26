@@ -6,9 +6,9 @@ import {
   setOrders,
   updateOrderStatus,
   setOrderLoading,
-  setOrderError
+  setOrderError,
+  Order
 } from "@/store/OrderSlice";
-import type { Order } from "@/types";
 
 export const OrderService = {
   /**

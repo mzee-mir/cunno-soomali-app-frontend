@@ -113,24 +113,22 @@ const ManageRestaurantForm = () => {
     try {
       dispatch(setRestaurantLoading(true));
       
-      const restaurantData = {
+      const restaurantPayload = {
         ...formData,
-        owner: userId,
         deliveryPrice: formData.deliveryPrice,
+        imageUrl: currentRestaurant?.imageUrl || "",
+        cuisineType: currentRestaurant?.cuisineType || [],
+        menuItems: currentRestaurant?.menuItems || [],
       };
-
-      const action = currentRestaurant?._id 
-        ? RestaurantService.updateRestaurant
-        : RestaurantService.createRestaurant;
-
-      const result = await action(
-        dispatch,
-        currentRestaurant?._id ,
-        restaurantData
-      );
-      console.log("restaurantId", result);
       
-
+      let result;
+      
+      if (currentRestaurant?._id) {
+        result = await RestaurantService.updateRestaurant(dispatch, currentRestaurant._id, restaurantPayload);
+      } else {
+        result = await RestaurantService.createRestaurant(dispatch, restaurantPayload);
+      }
+  
       dispatch(setCurrentRestaurant(result));
       toast.success(
         currentRestaurant?._id 
@@ -147,6 +145,8 @@ const ManageRestaurantForm = () => {
       dispatch(setRestaurantLoading(false));
     }
   };
+  
+  
 
   const renderImageSection = () => (
     <div className="space-y-4  max-w-2xl mx-auto">
