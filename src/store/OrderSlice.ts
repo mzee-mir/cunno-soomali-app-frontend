@@ -65,12 +65,13 @@ const orderSlice = createSlice({
     setOrders: (state, action: PayloadAction<Order[]>) => {
       state.orders = action.payload;
     },
-    updateOrderStatus: (state, action: PayloadAction<{orderId: string, status: string}>) => {
+    updateOrderStatus: (state, action: PayloadAction<{ orderId: string, status: OrderStatus }>) => {
       const index = state.orders.findIndex(order => order._id === action.payload.orderId);
       if (index !== -1) {
         state.orders[index].status = action.payload.status;
       }
     },
+    
     setOrderLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },

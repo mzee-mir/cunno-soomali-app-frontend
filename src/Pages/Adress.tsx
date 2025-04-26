@@ -10,12 +10,13 @@ import toast from 'react-hot-toast';
 import AxiosToastError from '../lib/AxiosTost';
 import { RootState } from '@/store/store';
 import { useGlobalContext } from '@/Provider/Global';
+import { IAddress } from '@/store/addressSlice';
 
 const Address = () => {
   const addressList = useSelector((state: RootState) => state.address.addresses)
   const [openAddress,setOpenAddress] = useState(false)
   const [OpenEdit,setOpenEdit] = useState(false)
-  const [editData,setEditData] = useState({})
+  const [editData, setEditData] = useState<IAddress | null>(null);
   const { fetchAddress} = useGlobalContext()
 
   const handleDisableAddress = async(id:string)=>{
@@ -85,9 +86,9 @@ const Address = () => {
         }
 
         {
-          OpenEdit && (
-            <EditAddressDetails data={editData} close={() => setOpenEdit(false)}/>
-          )
+        OpenEdit && editData && (
+          <EditAddressDetails data={editData} close={() => setOpenEdit(false)} />
+        )
         }
     </div>
   )

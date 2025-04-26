@@ -8,7 +8,7 @@ interface IAddress {
   state: string;
   pincode: string;
   country: string;
-  mobile: number | null;
+  mobile: number;
   status: boolean;
   userId: string;
   createdAt: string;

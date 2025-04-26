@@ -17,7 +17,7 @@ interface EditAddressDetailsProps {
       state: string;
       country: string;
       pincode: string;
-      mobile: string;
+      mobile: number;
     };
   }  
 
