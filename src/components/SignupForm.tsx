@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import PasswordStrengthMeter from "./ui/password";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Axios from "@/lib/Axios"; // ✅ Import Axios client
 import SummaryApi from "@/api/Userauth"; // ✅ Use structured API endpoints
 import AxiosToastError from "@/lib/AxiosTost"; // ✅ Handle errors with toast
@@ -21,40 +21,33 @@ export function SignupForm({ className, ...props }: React.ComponentProps<"div">)
 
     // ✅ Handle signup form submission
     const handleSignUp = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setLoading(true);
-
-        if (password !== confirmPassword) {
-            toast.error("Passwords do not match.");
-            setLoading(false);
-            return;
-        }
-
-        try {
-            // ✅ Make API call using Axios and SummaryApi
-            const response = await Axios.post(SummaryApi.auth.Signup.url, {
-                name,
-                email,
-                password,
-                confirmPassword,
-            });
-
-            if (!response.data.success) {
-                toast.error(response.data.message || "Signup failed. Please try again.");
-                return;
-            }
-
-            // ✅ Store email for verification page
-            localStorage.setItem("userEmail", email);
-
-            toast.success("Signup successful! Please verify your email.");
-            navigate("/verification-email"); // ✅ Redirect to verification page
-        } catch (error) {
-            AxiosToastError(error);
-        } finally {
-            setLoading(false);
-        }
+      e.preventDefault();
+      setLoading(true);
+    
+      if (password !== confirmPassword) {
+        toast.error("Passwords do not match.");
+        setLoading(false);
+        return;
+      }
+    
+      try {
+        await Axios.post(SummaryApi.auth.Signup.url, {
+          name,
+          email,
+          password,
+          confirmPassword,
+        });
+    
+        localStorage.setItem("userEmail", email);
+        toast.success("Signup successful! Please verify your email.");
+        navigate("/verification-email", { replace: true });
+      } catch (error) {
+        AxiosToastError(error);
+      } finally {
+        setLoading(false);
+      }
     };
+    
 
     return (
         <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -167,8 +160,10 @@ export function SignupForm({ className, ...props }: React.ComponentProps<"div">)
         </CardContent>
       </Card>
       <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
+        By clicking continue, you agree to our 
+        <Link to="/terms"> Terms of Service </Link> 
+        and 
+        <Link to="/privacy"> Privacy Policy </Link>.
       </div>
         </div>
     );

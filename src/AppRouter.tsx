@@ -17,7 +17,12 @@ import MenuItems from "./components/MenuItems";
 import Address from "./Pages/Adress";
 import AnalyticsDashboard from "./components/Dashboard";
 import Dashboard from "./components/dashboardpages";
+import { useAppSelector } from "./store/store";
 const AppRoute = () => {
+    
+    // Get user role from Redux store
+    const { role } = useAppSelector((state) => state.user);
+
     return( 
         <Routes>
             <Route 
@@ -95,53 +100,46 @@ const AppRoute = () => {
                 </Layout>
                 } 
                 />
-                
-                <Route 
-                    path="/manage-restaurant" 
-                    element={
-                    <Layout>
-                        <ManageRestaurantPage/>
-                    </Layout>
-                    } 
-                />
-                
-                <Route 
-                    path="/address" 
-                    element={
-                    <Layout>
-                        <Address/>
-                    </Layout>
-                    } 
-                />
-                
-                <Route 
-                    path="/menuItems" 
-                    element={
-                    <Layout>
-                        <MenuItems/>
-                    </Layout>
-                    } 
-                />
+            </Route>
+                <Route element={<ProtectedRoute requiredRole="RESTAURANT OWNER" />}>
+            
+                        <Route 
+                            path="/manage-restaurant" 
+                            element={
+                                <Layout>
+                                    <ManageRestaurantPage/>
+                                </Layout>
+                            } 
+                        />
+                        
+                        <Route 
+                            path="/menuItems" 
+                            element={
+                                <Layout>
+                                    <MenuItems/>
+                                </Layout>
+                            } 
+                        />
 
-                <Route 
-                    path="/analytical" 
-                    element={
-                    <Layout>
-                        <AnalyticsDashboard/>
-                    </Layout>
-                    } 
-                />
+                        <Route 
+                            path="/analytical" 
+                            element={
+                                <Layout>
+                                    <AnalyticsDashboard/>
+                                </Layout>
+                            } 
+                        />
 
-                <Route 
-                    path="/dashboard" 
-                    element={
-                    <Layout>
-                        <Dashboard/>
-                    </Layout>
-                    } 
-                />
+                        <Route 
+                            path="/dashboard" 
+                            element={
+                                <Layout>
+                                    <Dashboard/>
+                                </Layout>
+                            } 
+                        />
 
-                </Route>
+            </Route>
             
             
             <Route path ="*" element= {<Navigate to = "/" />} />

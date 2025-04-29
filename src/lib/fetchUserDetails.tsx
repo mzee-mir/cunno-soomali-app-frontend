@@ -3,22 +3,24 @@ import SummaryApi from "@/api/Userauth";
 import AxiosToastError from "@/lib/AxiosTost";
 import toast from 'react-hot-toast'
 
+// fetchUserDetails.tsx
 const fetchUserDetails = async () => {
   try {
-    const response = await Axios({
-      ...SummaryApi.user.userDetails,
-    });
-
-    const { data: responseData } = response;
-
-    if (responseData.success && responseData.data?._id) {
-      return responseData; // This will contain .data with user info
-    } else {
-      toast.error(responseData.message || "Failed to fetch user details");
+    const response = await Axios(SummaryApi.user.userDetails);
+    
+    if (response.data?.success) {
+      return {
+        ...response.data.data,
+        // Ensure role is properly typed
+        role: response.data.data.role || 'USER'
+      };
     }
+    
+    throw new Error(response.data.message);
+    
   } catch (error) {
     AxiosToastError(error);
-    return { data: null };
+    return null;
   }
 };
 

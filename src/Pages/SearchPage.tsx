@@ -7,6 +7,7 @@ import SearchResultsCard from "@/components/SearchResultsCard";
 import SortOptionDropdown from "@/components/SortOptionDropdown";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export type SearchState = {
     searchQuery: string;
@@ -66,13 +67,29 @@ const SearchPage =() => {
         }));
     }
 
-if(!results?.data || !city){
-    return <span>No Results Found</span>;
-}
+    if(isLoading){
+        return (
+            <div className="w-full h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-300">
+              <motion.div
+                className="w-20 h-20 bg-blue-600 rounded-full"
+                animate={{
+                  scale: [1, 1.2, 1],
+                  opacity: [0.8, 1, 0.8],
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            </div>
+          );
+    }
 
-if(isLoading){
-    return <span>No Results Found</span>;
-}
+    if(!results?.data || !city){
+        return <span>No Results Found</span>;
+    }
+
     return (
         <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5" >
             <div id="cuisines-list" > 

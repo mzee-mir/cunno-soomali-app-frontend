@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import Axios from "@/lib/Axios"; // Import Axios client
-import SummaryApi from "@/api/Userauth"; // Use structured API endpoints
-import AxiosToastError from "@/lib/AxiosTost"; // Handle errors with toast
+import Axios from "@/lib/Axios";
+import SummaryApi from "@/api/Userauth";
+import AxiosToastError from "@/lib/AxiosTost";
 import { toast } from "sonner";
 
 const ResetPassword = () => {
@@ -14,21 +14,16 @@ const ResetPassword = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // ✅ Get email from location state or localStorage
     const userEmail = location.state?.email || localStorage.getItem("userEmail");
-
-    // ✅ Get reset token from localStorage
     const resetToken = localStorage.getItem("resetToken");
 
-    // ✅ Redirect if no email or reset token is found
     useEffect(() => {
         if (!userEmail || !resetToken) {
             toast.error("Invalid request. Please start the password reset process again.");
-            navigate("/forgotPassword");
+            navigate("/forgot-Password");
         }
     }, [userEmail, resetToken, navigate]);
 
-    // ✅ Handle reset password form submission
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
@@ -40,7 +35,6 @@ const ResetPassword = () => {
         }
 
         try {
-            // ✅ Make API call using Axios and SummaryApi
             await Axios.put(SummaryApi.password.resetPassword.url, {
                 email: userEmail,
                 newPassword,
@@ -49,9 +43,9 @@ const ResetPassword = () => {
             });
 
             toast.success("Password reset successfully! You can now login.");
-            localStorage.removeItem("userEmail"); // ✅ Cleanup
-            localStorage.removeItem("resetToken"); // ✅ Cleanup
-            navigate("/Login-Page"); // ✅ Redirect to login
+            localStorage.removeItem("userEmail");
+            localStorage.removeItem("resetToken");
+            navigate("/Login-Page", { replace: true });
         } catch (error) {
             AxiosToastError(error);
         } finally {
@@ -73,7 +67,6 @@ const ResetPassword = () => {
                     </h2>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
-                        {/* New Password Input */}
                         <div>
                             <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700">
                                 New Password
@@ -89,7 +82,6 @@ const ResetPassword = () => {
                             />
                         </div>
 
-                        {/* Confirm Password Input */}
                         <div>
                             <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
                                 Confirm Password
@@ -105,7 +97,6 @@ const ResetPassword = () => {
                             />
                         </div>
 
-                        {/* Submit Button */}
                         <Button
                             type="submit"
                             disabled={loading}
@@ -115,12 +106,11 @@ const ResetPassword = () => {
                         </Button>
                     </form>
 
-                    {/* Back to Login Link */}
                     <p className="mt-4 text-center text-sm text-gray-600">
                         Remember your password?{" "}
-                        <a href="/Login-Page" className="text-blue-100 hover:text-blue-200">
+                        <Link to="/Login-Page" className="text-blue-100 hover:text-blue-200">
                             Login here
-                        </a>
+                        </Link>
                     </p>
                 </motion.div>
             </div>

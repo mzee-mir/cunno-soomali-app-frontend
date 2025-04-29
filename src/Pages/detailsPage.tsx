@@ -9,6 +9,7 @@ import { IMenuItem } from "@/store/menuItemSlice";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { motion } from "framer-motion";
 
 const DetailPage = () => {
     const { restaurantId } = useParams();
@@ -19,7 +20,22 @@ const DetailPage = () => {
 
 
     if (isLoadingRestaurant) {
-        return <div className="flex justify-center items-center min-h-screen">Loading restaurant details...</div>;
+        return (
+            <div className="w-full h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-300">
+              <motion.div
+                className="w-20 h-20 bg-blue-600 rounded-full"
+                animate={{
+                  scale: [1, 1.2, 1],
+                  opacity: [0.8, 1, 0.8],
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            </div>
+          );
     }
 
     if (!restaurant) {

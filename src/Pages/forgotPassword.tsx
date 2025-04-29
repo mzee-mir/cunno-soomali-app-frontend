@@ -16,23 +16,26 @@ const ForgotPassword = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
+  
     try {
-      // ✅ Make API call using Axios and SummaryApi
-      const response = await Axios.post(SummaryApi.password.forgotPassword.url, { email });
-
-      // ✅ Store email and reset token for later use
+      const response = await Axios({
+        method: SummaryApi.password.forgotPassword.method,
+        url: SummaryApi.password.forgotPassword.url,
+        data: { email },
+      });
+  
       localStorage.setItem("userEmail", email);
       localStorage.setItem("resetToken", response.data?.resetToken);
-
+  
       toast.success("OTP sent! Check your email.");
-      navigate("/resetPassword-Otp"); // ✅ Navigate to OTP verification page
+      navigate("/resetPassword-Otp", { replace: true });
     } catch (error) {
       AxiosToastError(error);
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="w-full flex items-center justify-center p-4">

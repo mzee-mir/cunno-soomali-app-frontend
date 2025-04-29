@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import Axios from "@/lib/Axios"; // ✅ Import Axios client
-import SummaryApi from "@/api/Userauth"; // ✅ Use structured API endpoints
-import AxiosToastError from "@/lib/AxiosTost"; // ✅ Handle errors with toast
+import Axios from "@/lib/Axios";
+import SummaryApi from "@/api/Userauth";
+import AxiosToastError from "@/lib/AxiosTost";
 import { toast } from "sonner";
 
 const VerifyResetPasswordOtp = () => {
@@ -14,21 +14,16 @@ const VerifyResetPasswordOtp = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // ✅ Get email from location state or localStorage
     const userEmail = location.state?.email || localStorage.getItem("userEmail");
-
-    // ✅ Get reset token from localStorage
     const resetToken = localStorage.getItem("resetToken");
 
-    // ✅ Redirect to forgot password page if resetToken is missing
     useEffect(() => {
         if (!userEmail || !resetToken) {
             toast.error("Invalid request. Please request a new password reset.");
-            navigate("/forgotPassword");
+            navigate("/forgot-Password");
         }
     }, [userEmail, resetToken, navigate]);
 
-    // ✅ Handle OTP input changes
     const handleChange = (index: number, value: string) => {
         if (value.length > 1) {
             handlePastedContent(value);
@@ -48,7 +43,6 @@ const VerifyResetPasswordOtp = () => {
         }
     };
 
-    // ✅ Handle OTP paste event
     const handlePastedContent = (value: string) => {
         const pastedCode = value
             .slice(0, 6)
@@ -67,31 +61,29 @@ const VerifyResetPasswordOtp = () => {
         inputRefs.current[lastIndex]?.focus();
     };
 
-    // ✅ Handle backspace navigation
     const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Backspace" && !code[index] && index > 0) {
             inputRefs.current[index - 1]?.focus();
         }
     };
 
-    // ✅ Submit OTP for verification
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!userEmail || !resetToken) return;
 
         setLoading(true);
-        const otpString = code.join(""); // ✅ Keep as string to avoid leading zero issues
+        const otpString = code.join("");
 
         try {
-            await Axios.post(SummaryApi.password.verifyForgotPasswordOtp.url, {
-                email: userEmail,
-                otp: otpString,
-                resetToken,
+            await Axios({
+                method: SummaryApi.password.verifyForgotPasswordOtp.method,
+                url: SummaryApi.password.verifyForgotPasswordOtp.url,
+                data: { email: userEmail, otp: otpString, resetToken },
             });
 
             toast.success("OTP verified successfully! You can now reset your password.");
-            localStorage.removeItem("userEmail"); // ✅ Cleanup
-            navigate("/resetPassword", { state: { email: userEmail } }); // ✅ Navigate to reset password page
+            localStorage.removeItem("userEmail");
+            navigate("/resetPassword", { state: { email: userEmail }, replace: true });
         } catch (error) {
             AxiosToastError(error);
             setCode(Array(6).fill(""));
@@ -101,7 +93,6 @@ const VerifyResetPasswordOtp = () => {
         }
     };
 
-    // ✅ Auto-submit when all OTP fields are filled
     useEffect(() => {
         if (code.every((digit) => digit !== "")) {
             const form = document.querySelector("form");
