@@ -1,10 +1,37 @@
 import { Link } from "react-router-dom"
 import { Button } from "./ui/button"
-import { useAuth0 } from "@auth0/auth0-react"
-
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import SummaryApi from "@/api/Userauth";
+import toast from "react-hot-toast";
+import AxiosToastError from "@/lib/AxiosTost";
+import { logout } from "@/store/userSlice";
+import Axios from "@/lib/Axios";
+import { useNavigate } from "react-router-dom";
 
 const MobileNavLinks=() => {
-    const{logout} = useAuth0();
+    const user = useSelector((state: RootState)=> state.user)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+ 
+    const handleLogout = async () => {
+      try {
+        const response = await Axios({
+          ...SummaryApi.auth.logout
+        });
+        
+        if (response.data.success) {
+          dispatch(logout());
+          localStorage.clear();
+          toast.success(response.data.message);
+          navigate("/");
+          window.location.reload(); // Add this to fully reset the app state
+        }
+      } catch (error) {
+        console.log(error);
+        AxiosToastError(error);
+      }
+    };
   return (
     <>
         <Link to="/order-status" className='flex bg-white items-center font-bold hover:text-blue-500'>

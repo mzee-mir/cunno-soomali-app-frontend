@@ -17,6 +17,10 @@ import OrderItemCardInfo from '@/components/orderItemCardInfo';
 import AnalyticsDashboard from '@/components/Dashboard';
 import Dashboard from '@/components/dashboardpages';
 import { Order } from '@/store/OrderSlice';
+import MobileManageRestaurantForm from "@/forms/manage-restautant-form/MobileManageRestaurantForm";
+import MobileMenuItems from "@/components/MobileMenuItems";
+import MobileOrderItemCardInfo from "@/components/MobileOrderItemCardInfo";
+import { useMediaQuery } from "@/utils/useMediaQuery";
 
 const ManageRestaurantPage = () => {
   const dispatch = useDispatch();
@@ -28,6 +32,8 @@ const ManageRestaurantPage = () => {
   const { menuItems } = useSelector((state: RootState) => state.menuItem); // Add this line
   const [activeTab, setActiveTab] = useState("manage-restaurant");
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   useEffect(() => {
     const fetchRestaurants = async () => {
@@ -127,9 +133,13 @@ const ManageRestaurantPage = () => {
 
             {/* Order Details Column */}
             <div className="lg:col-span-2">
-              {selectedOrder ? (
-                <OrderItemCardInfo order={selectedOrder} />
+            {selectedOrder ? (
+              isMobile ? (
+                <MobileOrderItemCardInfo order={selectedOrder} />
               ) : (
+                <OrderItemCardInfo order={selectedOrder} />
+              )
+            ) : (
                 <div className="flex items-center justify-center h-full bg-white rounded-lg p-8">
                   <div className="text-center">
                     <h3 className="text-xl font-medium text-gray-500">
@@ -146,19 +156,26 @@ const ManageRestaurantPage = () => {
         </TabsContent>
 
         <TabsContent value="manage-restaurant">
-          <div className="bg-gray-50 p-6 rounded-lg">
-            <h2 className="text-2xl font-bold mb-4">
-              {currentRestaurant?._id ? "Update Restaurant" : "Create Restaurant"}
-            </h2>
-            
-            <ManageRestaurantForm
-            />
-          </div>
-        </TabsContent>
+  <div className="bg-gray-50 p-4 md:p-6 rounded-lg">
+    <h2 className="text-xl md:text-2xl font-bold mb-4">
+      {currentRestaurant?._id ? "Update Restaurant" : "Create Restaurant"}
+    </h2>
+    
+    {isMobile ? (
+      <MobileManageRestaurantForm />
+    ) : (
+      <ManageRestaurantForm />
+    )}
+  </div>
+</TabsContent>
 
-        <TabsContent value="menuItems">
-            <MenuItems/>
-        </TabsContent>
+<TabsContent value="menuItems">
+  {isMobile ? (
+    <MobileMenuItems />
+  ) : (
+    <MenuItems />
+  )}
+</TabsContent>
 
         <TabsContent value="analytical">
             <AnalyticsDashboard/>

@@ -2,11 +2,23 @@ import { CircleUserRound, Menu } from 'lucide-react';
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from './ui/sheet';
 import { Button } from './ui/button';
 import { Separator } from '@radix-ui/react-separator';
-import { useAuth0 } from '@auth0/auth0-react';
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import MobileNavLinks from './MobileNavLinks';
+import { RootState } from "@/store/store";
 
  const MobileNav = () => {
-    const {loginWithRedirect,isAuthenticated,user} = useAuth0();
+    const navigate = useNavigate();
+      const user = useSelector((state: RootState) => state.user);
+
+      const handleLoginRedirect = () => {
+        navigate("/Login-Page");
+      };
+
+      const isRestaurantOwner = user.role === 'RESTAURANT OWNER';
+      const isAdmin = user.role === 'ADMIN';
+      const isAuthenticated = !!user._id;
+
   return (
     <Sheet>
         <SheetTrigger>
@@ -14,10 +26,12 @@ import MobileNavLinks from './MobileNavLinks';
         </SheetTrigger>
         <SheetContent className='space-y-3'>
             <SheetTitle>
-                {isAuthenticated ?(
+                {isAuthenticated ?(   
                 <span className="flex items-center font-bold gap-2">
-                    <CircleUserRound className="text-blue-500"/>
-                        {user?.email}
+                    <img alt={user.name}
+                 src={user.avatar}
+                 className='w-12 h-12 rounded-full object-cover' />
+                        {user?.name}
                 </span> ) : (
                 <span> Soo dhawoow macmiil</span>
                 )}
@@ -28,7 +42,7 @@ import MobileNavLinks from './MobileNavLinks';
                 {isAuthenticated ?( <MobileNavLinks/>
                  ) : (
                     <Button className='flex-1 font-bold bg-blue-500'
-                    onClick={() => loginWithRedirect()}
+                    onClick={handleLoginRedirect}
                 >Log In</Button> 
                 )}
 
