@@ -10,6 +10,7 @@ import store from './store/store';
 import Auth0ProvideWithNavigate from './auth/Auth0ProvideWithNavigate';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { GlobalProvider } from './Provider/Global';
+import { ThemeProvider } from './context/themeContext';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,6 +24,7 @@ const queryClient = new QueryClient({
 });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
+<ThemeProvider>
 <React.StrictMode>
 <Provider store={store}>
 <QueryClientProvider client={queryClient}>
@@ -37,4 +39,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   </QueryClientProvider>
 </Provider>
 </React.StrictMode>,
+</ThemeProvider>
 );

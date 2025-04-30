@@ -1,15 +1,24 @@
 import { Link } from "react-router-dom";
 import MobileNav from "./MobileNav";
 import MainNav from "./MainNav";
+import { useMediaQuery } from "@/utils/useMediaQuery";
 
 const Header = () => {
+
+    const isMobile = useMediaQuery("(max-width: 768px)");
+
     return(
         <div className="border-b-2 border-b-blue-500 py-6">
             <div className="container mx-auto flex justify-between item-center bg-blue">
-                <Link to="/"
+                {isMobile ? (<Link to="/"
                 className="text-3xl font-bold tracking-tight text-blue-500">
                 CunnoSomali.com
-                </Link>
+                </Link>): (
+                    <Link to="/"
+                    className="text-2xl font-bold tracking-tight text-blue-500">
+                    CunnoSomali.com
+                    </Link>
+                )}
                 <div className="md:hidden">
                     <MobileNav />
                 </div>
