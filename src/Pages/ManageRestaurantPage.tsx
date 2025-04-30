@@ -21,15 +21,16 @@ import MobileManageRestaurantForm from "@/forms/manage-restautant-form/MobileMan
 import MobileMenuItems from "@/components/MobileMenuItems";
 import MobileOrderItemCardInfo from "@/components/MobileOrderItemCardInfo";
 import { useMediaQuery } from "@/utils/useMediaQuery";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const ManageRestaurantPage = () => {
   const dispatch = useDispatch();
   const { currentRestaurant, loading, error } = useSelector(
     (state: RootState) => state.restaurant
   );
-  const { orders } = useSelector((state: RootState) => state.order); // Add this line
+  const { orders } = useSelector((state: RootState) => state.order);
   const { _id: userId } = useSelector((state: RootState) => state.user);
-  const { menuItems } = useSelector((state: RootState) => state.menuItem); // Add this line
+  const { menuItems } = useSelector((state: RootState) => state.menuItem);
   const [activeTab, setActiveTab] = useState("manage-restaurant");
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
 
@@ -96,20 +97,79 @@ const ManageRestaurantPage = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="mb-6">
-          <TabsTrigger value="orders">Orders</TabsTrigger>
-          <TabsTrigger value="manage-restaurant">Manage Restaurant</TabsTrigger>
-          <TabsTrigger value="menuItems">Menu Items</TabsTrigger>
-          <TabsTrigger value="analytical">Analytics</TabsTrigger>
-          <TabsTrigger value="dashboard">Dasboard</TabsTrigger>
-        </TabsList>
+    <div className="container mx-auto p-2 md:p-4">
+      {isMobile ? (
+        <div className="mb-4">
+          <Select value={activeTab} onValueChange={setActiveTab}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Select section" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="orders">📋 Orders</SelectItem>
+              <SelectItem value="manage-restaurant">🏠 Restaurant</SelectItem>
+              <SelectItem value="menuItems">🍽️ Menu</SelectItem>
+              <SelectItem value="analytical">📊 Analytics</SelectItem>
+              <SelectItem value="dashboard">📈 Dashboard</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      ) : (
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsList className="mb-6">
+            <TabsTrigger value="orders">Orders</TabsTrigger>
+            <TabsTrigger value="manage-restaurant">Manage Restaurant</TabsTrigger>
+            <TabsTrigger value="menuItems">Menu Items</TabsTrigger>
+            <TabsTrigger value="analytical">Analytics</TabsTrigger>
+            <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      )}
 
-        {loading && <LoadinButton />}
-        {error && <p className="text-red-500 text-center py-4">{error}</p>}
+      {loading && <LoadinButton />}
+      {error && <p className="text-red-500 text-center py-4">{error}</p>}
 
-        <TabsContent value="orders" className="bg-blue-50 rounded-lg">
+      {/* Mobile Content */}
+      {isMobile ? (
+        <div className="mt-2">
+          {activeTab === "orders" && (
+            <div className="space-y-4">
+              <h2 className="text-xl font-bold">Active Orders: {orders?.length}</h2>
+              <div className="space-y-3">
+                {orders?.map((order) => (
+                  <div 
+                    key={order._id}
+                    onClick={() => setSelectedOrder(order)}
+                    className={`p-3 rounded-lg ${selectedOrder?._id === order._id ? 'bg-blue-50' : 'bg-white'}`}
+                  >
+                    <OrderItemCard order={order} />
+                  </div>
+                ))}
+              </div>
+              {selectedOrder && (
+                <div className="mt-4 p-3 bg-white rounded-lg">
+                  <MobileOrderItemCardInfo order={selectedOrder} />
+                </div>
+              )}
+            </div>
+          )}
+
+          {activeTab === "manage-restaurant" && (
+            <div className="bg-gray-50 p-3 rounded-lg">
+              <h2 className="text-xl font-bold mb-3">
+                {currentRestaurant?._id ? "Update Restaurant" : "Create Restaurant"}
+              </h2>
+              <MobileManageRestaurantForm />
+            </div>
+          )}
+
+          {activeTab === "menuItems" && <MobileMenuItems />}
+          {activeTab === "analytical" && <AnalyticsDashboard />}
+          {activeTab === "dashboard" && <Dashboard />}
+        </div>
+      ) : (
+        /* Desktop Content (unchanged) */
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsContent value="orders" className="bg-blue-50 rounded-lg">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
             {/* Orders List Column */}
             <div className="lg:col-span-1 space-y-4">
@@ -133,13 +193,9 @@ const ManageRestaurantPage = () => {
 
             {/* Order Details Column */}
             <div className="lg:col-span-2">
-            {selectedOrder ? (
-              isMobile ? (
-                <MobileOrderItemCardInfo order={selectedOrder} />
-              ) : (
+              {selectedOrder ? (
                 <OrderItemCardInfo order={selectedOrder} />
-              )
-            ) : (
+              ) : (
                 <div className="flex items-center justify-center h-full bg-white rounded-lg p-8">
                   <div className="text-center">
                     <h3 className="text-xl font-medium text-gray-500">
@@ -154,37 +210,25 @@ const ManageRestaurantPage = () => {
             </div>
           </div>
         </TabsContent>
-
-        <TabsContent value="manage-restaurant">
-  <div className="bg-gray-50 p-4 md:p-6 rounded-lg">
-    <h2 className="text-xl md:text-2xl font-bold mb-4">
-      {currentRestaurant?._id ? "Update Restaurant" : "Create Restaurant"}
-    </h2>
-    
-    {isMobile ? (
-      <MobileManageRestaurantForm />
-    ) : (
-      <ManageRestaurantForm />
-    )}
-  </div>
-</TabsContent>
-
-<TabsContent value="menuItems">
-  {isMobile ? (
-    <MobileMenuItems />
-  ) : (
-    <MenuItems />
-  )}
-</TabsContent>
-
-        <TabsContent value="analytical">
+          <TabsContent value="manage-restaurant">
+            <div className="bg-gray-50 p-4 md:p-6 rounded-lg">
+              <h2 className="text-xl md:text-2xl font-bold mb-4">
+                {currentRestaurant?._id ? "Update Restaurant" : "Create Restaurant"}
+              </h2>
+              <ManageRestaurantForm />
+            </div>
+          </TabsContent>
+          <TabsContent value="menuItems">
+            <MenuItems />
+          </TabsContent>
+          <TabsContent value="analytical">
             <AnalyticsDashboard/>
-        </TabsContent>
-
-        <TabsContent value="dashboard">
+          </TabsContent>
+          <TabsContent value="dashboard">
             <Dashboard/>
-        </TabsContent>
-      </Tabs>
+          </TabsContent>
+        </Tabs>
+      )}
     </div>
   );
 };

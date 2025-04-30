@@ -45,7 +45,7 @@ const MobileNavLinks=() => {
             My Restaurent
         </Link>
         <Button className="flex items-center px-3 font-bold hover:bg-gray-500"
-        onClick={() => logout()}>
+        onClick={() => handleLogout()}>
             Log Out
         </Button>
     </>
