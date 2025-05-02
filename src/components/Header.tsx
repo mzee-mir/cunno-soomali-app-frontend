@@ -8,10 +8,10 @@ const Header = () => {
 
   return (
     <div className="border-b-2 border-b-primary py-6 bg-card">
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto flex justify-between items-center pl-2">
         <Link 
           to="/"
-          className={`${isMobile ? 'text-3xl' : 'text-2xl'} font-bold tracking-tight text-primary hover:text-input`}
+          className={`${isMobile ? 'text-3xl' : 'text-lg'} font-bold tracking-tight text-primary hover:text-input`}
         >
           CunnoSomali.com
         </Link>
