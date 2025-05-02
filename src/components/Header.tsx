@@ -11,7 +11,7 @@ const Header = () => {
       <div className="container mx-auto flex justify-between items-center pl-2">
         <Link 
           to="/"
-          className={`${isMobile ? 'text-3xl' : 'text-lg'} font-bold tracking-tight text-primary hover:text-input`}
+          className={`${isMobile ? 'text-2xl' : 'text-lg'} font-bold tracking-tight text-primary hover:text-input`}
         >
           CunnoSomali.com
         </Link>
