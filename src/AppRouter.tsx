@@ -100,6 +100,12 @@ const AppRoute = () => {
                 </Layout>
                 } 
                 />
+                <Route path ="/user-address" element= {
+                <Layout>
+                <Address/>
+                </Layout>
+                } 
+                />
             </Route>
                 <Route element={<ProtectedRoute requiredRole="RESTAURANT OWNER" />}>
             

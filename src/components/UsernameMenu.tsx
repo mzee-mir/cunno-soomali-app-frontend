@@ -34,6 +34,9 @@ const UsernameMenu = ( ) => {
         AxiosToastError(error);
       }
     };
+
+    const isRestaurantOwner = user.role === "RESTAURANT OWNER";
+    
     return(
         <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center px-3 font-bold hover:text-blue-500 gap-2">
@@ -49,9 +52,11 @@ const UsernameMenu = ( ) => {
 
             <DropdownMenuItem>
 
-            <Link to= "/manage-restaurant" className="font-bold hover:text-blue-500"> 
-                Manage Restaurant
-                </Link>
+            {isRestaurantOwner && (
+              <Link to="/manage-restaurant" className="flex bg-card items-center font-bold hover:text-blue-500">
+                My Restaurant
+              </Link>
+            )}
             </DropdownMenuItem>
 
             <DropdownMenuItem>

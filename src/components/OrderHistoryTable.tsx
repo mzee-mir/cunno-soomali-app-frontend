@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 import {
   ColumnFiltersState,
   SortingState,
@@ -9,20 +9,20 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table"
-import { ChevronDown } from "lucide-react"
-import { Button } from "@/components/ui/button"
+} from "@tanstack/react-table";
+import { ChevronDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
-import { columns } from "@/components/columns"
-import { Order } from "@/store/OrderSlice"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import ReviewInterface from "./ReviewInterface" // Make sure to import your ReviewInterface component
+} from "@/components/ui/dropdown-menu";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { columns } from "@/components/columns";
+import { Order } from "@/store/OrderSlice";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import ReviewInterface from "./ReviewInterface";
 
 interface OrderHistoryTableProps {
   orders: Order[];
@@ -30,12 +30,12 @@ interface OrderHistoryTableProps {
 }
 
 export function OrderHistoryTable({ orders, handleRemoveOrder }: OrderHistoryTableProps) {
-  const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
-  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = React.useState({})
-  const [selectedOrder, setSelectedOrder] = React.useState<Order | null>(null)
-  const [showReviewDialog, setShowReviewDialog] = React.useState(false)
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = React.useState({});
+  const [selectedOrder, setSelectedOrder] = React.useState<Order | null>(null);
+  const [showReviewDialog, setShowReviewDialog] = React.useState(false);
 
   const handleReviewClick = (orderId: string) => {
     const order = orders.find(o => o._id === orderId);
@@ -44,7 +44,6 @@ export function OrderHistoryTable({ orders, handleRemoveOrder }: OrderHistoryTab
       setShowReviewDialog(true);
     }
   };
-  
 
   const table = useReactTable({
     data: orders,
@@ -63,58 +62,56 @@ export function OrderHistoryTable({ orders, handleRemoveOrder }: OrderHistoryTab
       columnVisibility,
       rowSelection,
     },
-  })
-
-  
+  });
 
   const handleRowClick = (order: Order) => {
     console.log("Order selected:", order._id);
   };
 
   const handleReviewComplete = () => {
-    setShowReviewDialog(false)
-    setSelectedOrder(null)
-  }
+    setShowReviewDialog(false);
+    setSelectedOrder(null);
+  };
 
   return (
-    <div className="w-full">
+    <div className="w-full bg-background text-foreground">
       <div className="flex items-center py-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
+            <Button variant="outline" className="ml-auto border-border hover:bg-accent hover:text-accent-foreground">
               Columns <ChevronDown className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="end" className="bg-card border-border">
             {table
               .getAllColumns()
               .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                )
-              })}
+              .map((column) => (
+                <DropdownMenuCheckboxItem
+                  key={column.id}
+                  className="capitalize hover:bg-accent hover:text-accent-foreground"
+                  checked={column.getIsVisible()}
+                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                >
+                  {column.id}
+                </DropdownMenuCheckboxItem>
+              ))}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
-        <Paper>
-          <TableContainer className="bg-[#edf3fc]">
+      
+      <div className="rounded-md border border-border">
+        <Paper className="bg-card">
+          <TableContainer>
             <Table>
-              <TableHead>
+              <TableHead className="bg-accent/80">
                 {table.getHeaderGroups().map((headerGroup) => (
-                  <TableRow key={headerGroup.id}>
+                  <TableRow key={headerGroup.id} >
                     {headerGroup.headers.map((header) => (
-                      <TableCell key={header.id}>
+                      <TableCell 
+                        key={header.id}
+                        
+                      >
                         {header.isPlaceholder
                           ? null
                           : flexRender(
@@ -129,29 +126,31 @@ export function OrderHistoryTable({ orders, handleRemoveOrder }: OrderHistoryTab
               <TableBody>
                 {table.getRowModel().rows?.length ? (
                   table.getRowModel().rows.map((row) => {
-                    const order = row.original as Order
+                    const order = row.original as Order;
                     return (
                       <TableRow
                         key={row.id}
                         data-state={row.getIsSelected() && "selected"}
-                        className={`hover:bg-[#f5f5f5] cursor-pointer ${
-                          order.status === "delivered" ? "hover:bg-blue-50" : ""
-                        }`}
+                        className={`
+                          hover:bg-accent/10 cursor-pointer transition-colors
+                          ${order.status === "delivered" ? "hover:bg-primary/5" : ""}
+                          ${row.getIsSelected() ? "bg-primary/10" : ""}
+                        `}
                         onClick={() => handleRowClick(order)}
                       >
                         {row.getVisibleCells().map((cell) => (
-                          <TableCell key={cell.id}>
+                          <TableCell key={cell.id} className="text-foreground">
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                           </TableCell>
                         ))}
                       </TableRow>
-                    )
+                    );
                   })
                 ) : (
                   <TableRow>
                     <TableCell
                       colSpan={columns.length}
-                      className="h-24 text-center"
+                      className="h-24 text-center text-muted-foreground"
                     >
                       No results.
                     </TableCell>
@@ -162,6 +161,7 @@ export function OrderHistoryTable({ orders, handleRemoveOrder }: OrderHistoryTab
           </TableContainer>
         </Paper>
       </div>
+      
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
@@ -172,6 +172,7 @@ export function OrderHistoryTable({ orders, handleRemoveOrder }: OrderHistoryTab
           size="sm"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
+          className="border-border hover:bg-accent hover:text-accent-foreground"
         >
           Previous
         </Button>
@@ -180,6 +181,7 @@ export function OrderHistoryTable({ orders, handleRemoveOrder }: OrderHistoryTab
           size="sm"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
+          className="border-border hover:bg-accent hover:text-accent-foreground"
         >
           Next
         </Button>
@@ -187,9 +189,9 @@ export function OrderHistoryTable({ orders, handleRemoveOrder }: OrderHistoryTab
 
       {/* Review Dialog */}
       <Dialog open={showReviewDialog} onOpenChange={setShowReviewDialog}>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[425px] bg-accent border-border">
           <DialogHeader>
-            <DialogTitle>Order Review</DialogTitle>
+            <DialogTitle className="text-foreground">Order Review</DialogTitle>
           </DialogHeader>
           {selectedOrder && (
             <div className="py-4">
@@ -202,5 +204,5 @@ export function OrderHistoryTable({ orders, handleRemoveOrder }: OrderHistoryTab
         </DialogContent>
       </Dialog>
     </div>
-  )
+  );
 }

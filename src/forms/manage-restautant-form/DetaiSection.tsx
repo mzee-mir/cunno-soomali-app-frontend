@@ -22,7 +22,7 @@ const DetailSection = () => {
           <FormItem>
             <FormLabel>Restaurant Name</FormLabel>
             <FormControl>
-              <Input {...field} className="bg-white" />
+              <Input {...field} className="bg-input/40" />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -36,7 +36,7 @@ const DetailSection = () => {
           <FormItem>
             <FormLabel>Description</FormLabel>
             <FormControl>
-              <Input {...field} className="bg-white" />
+              <Input {...field} className="bg-input/40" />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -50,7 +50,7 @@ const DetailSection = () => {
           <FormItem>
             <FormLabel>Address</FormLabel>
             <FormControl>
-              <Input {...field} className="bg-white" />
+              <Input {...field} className="bg-input/40" />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -65,7 +65,7 @@ const DetailSection = () => {
             <FormItem>
               <FormLabel>City</FormLabel>
               <FormControl>
-                <Input {...field} className="bg-white" />
+                <Input {...field} className="bg-input/40" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -79,7 +79,7 @@ const DetailSection = () => {
             <FormItem>
               <FormLabel>Country</FormLabel>
               <FormControl>
-                <Input {...field} className="bg-white" />
+                <Input {...field} className="bg-input/40" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -95,7 +95,7 @@ const DetailSection = () => {
             <FormItem>
               <FormLabel>Phone Number</FormLabel>
               <FormControl>
-                <Input {...field} className="bg-white" />
+                <Input {...field} className="bg-input/40" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -109,7 +109,7 @@ const DetailSection = () => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input {...field} className="bg-white" type="email" />
+                <Input {...field} className="bg-input/40" type="email" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -123,7 +123,7 @@ const DetailSection = () => {
             <FormItem>
               <FormLabel>Opening Hours</FormLabel>
               <FormControl>
-                <Input {...field} className="bg-white" placeholder="9:00 AM - 10:00 PM" />
+                <Input {...field} className="bg-input/40" placeholder="9:00 AM - 10:00 PM" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -139,7 +139,7 @@ const DetailSection = () => {
             <FormItem>
               <FormLabel>Delivery Price ($)</FormLabel>
               <FormControl>
-                <Input {...field} className="bg-white" type="number" />
+                <Input {...field} className="bg-input/40" type="number" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -153,7 +153,7 @@ const DetailSection = () => {
             <FormItem>
               <FormLabel>Estimated Delivery Time (minutes)</FormLabel>
               <FormControl>
-                <Input {...field} className="bg-white" type="number" />
+                <Input {...field} className="bg-input/40" type="number" />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -49,7 +49,7 @@ const MenuItemsList = memo(({
   }
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 ">
       {/* Clear selection button - only shown when an item is selected */}
       {selectedItemId && (
         <button
@@ -72,17 +72,17 @@ const MenuItemsList = memo(({
             aria-label={`Menu item: ${item.name}, Price: $${item.price.toFixed(2)}`}
             onClick={() => onSelectItem(item._id)}
             onKeyDown={(e) => handleKeyDown(e, item._id)}
-            className={`p-3 border rounded-lg cursor-pointer transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+            className={`p-3 border rounded-lg cursor-pointer transition-all duration-200 focus:outline-none focus:ring-2 bg-input/20 focus:ring-blue-500 ${
               selectedItemId === item._id
                 ? "bg-blue-50 border-blue-300 shadow-sm"
-                : "hover:bg-gray-50 hover:shadow-sm"
+                : "hover:bg-input/70 hover:shadow-sm"
             }`}
           >
-            <div className="flex justify-between items-start">
+            <div className="flex justify-between items-start ">
               <div>
-                <h3 className="font-medium text-gray-900">{item.name}</h3>
+                <h3 className="font-medium text-foregroundT">{item.name}</h3>
                 <div className="flex items-center mt-1 space-x-2">
-                  <span className="text-sm font-medium text-gray-600">
+                  <span className="text-sm font-medium text-foregroundT/10">
                     ${item.price.toFixed(2)}
                   </span>
                   {item.discount && item.discount > 0 && (
@@ -92,7 +92,7 @@ const MenuItemsList = memo(({
                   )}
                 </div>
               </div>
-              <div className="flex space-x-2">
+              <div className="flex space-x-2 mt-7">
                 <span
                   className={`text-xs px-1.5 py-0.5 rounded-full ${
                     item.stock

@@ -79,14 +79,14 @@ const Dashboard: React.FC = () => {
         {/* Revenue Card */}
         <Grid item xs={12} sm={6} md={3}>
           <Card>
-            <CardContent>
-              <Typography color="textSecondary" gutterBottom>
+            <CardContent className="bg-accent text-foreground">
+              <Typography  gutterBottom>
                 Total Revenue
               </Typography>
               <Typography variant="h5">
                 ${data?.totalRevenue?.toFixed(2) || '0.00'}
               </Typography>
-              <Typography variant="body2" color="textSecondary">
+              <Typography variant="body2" >
                 {timePeriod === 'day' ? 'Today' : timePeriod === 'week' ? 'This Week' : 'This Month'}
               </Typography>
             </CardContent>
@@ -96,14 +96,14 @@ const Dashboard: React.FC = () => {
         {/* Orders Card */}
         <Grid item xs={12} sm={6} md={3}>
           <Card>
-            <CardContent>
-              <Typography color="textSecondary" gutterBottom>
+            <CardContent className="bg-accent text-foreground">
+              <Typography  gutterBottom>
                 Total Orders
               </Typography>
               <Typography variant="h5">
                 {data?.totalOrders || 0}
               </Typography>
-              <Typography variant="body2" color="textSecondary">
+              <Typography variant="body2" >
                 {timePeriod === 'day' ? 'Today' : timePeriod === 'week' ? 'This Week' : 'This Month'}
               </Typography>
             </CardContent>
@@ -113,14 +113,14 @@ const Dashboard: React.FC = () => {
         {/* Customers Card */}
         <Grid item xs={12} sm={6} md={3}>
           <Card>
-            <CardContent>
-              <Typography color="textSecondary" gutterBottom>
+          <CardContent className="bg-accent text-foreground">
+              <Typography  gutterBottom>
                 Regular Customers
               </Typography>
               <Typography variant="h5">
                 {data?.regularCustomers || 0}
               </Typography>
-              <Typography variant="body2" color="textSecondary">
+              <Typography variant="body2" >
                 Ordered more than 5 times
               </Typography>
             </CardContent>
@@ -130,14 +130,14 @@ const Dashboard: React.FC = () => {
         {/* Completion Rate Card */}
         <Grid item xs={12} sm={6} md={3}>
           <Card>
-            <CardContent>
-              <Typography color="textSecondary" gutterBottom>
+          <CardContent className="bg-accent text-foreground">
+              <Typography gutterBottom>
                 Order Completion
               </Typography>
               <Typography variant="h5">
                 {data?.orderCompletionRate?.toFixed(1) || '0'}%
               </Typography>
-              <Typography variant="body2" color="textSecondary">
+              <Typography variant="body2" >
                 Successfully delivered
               </Typography>
             </CardContent>
@@ -152,14 +152,14 @@ const Dashboard: React.FC = () => {
         {/* Growth Rate Section */}
         <Grid item xs={12} md={6}>
           <Card>
-            <CardContent>
+          <CardContent className="bg-accent text-foreground">
               <Typography variant="h6" gutterBottom>
                 Growth Rate
               </Typography>
               <Typography variant="h3" color={data?.growthRate && data.growthRate >= 0 ? 'success.main' : 'error.main'}>
                 {data?.growthRate?.toFixed(1) || '0'}%
               </Typography>
-              <Typography variant="body2" color="textSecondary">
+              <Typography variant="body2">
                 Compared to previous {timePeriod === 'day' ? 'day' : timePeriod === 'week' ? 'week' : 'month'}
               </Typography>
             </CardContent>
@@ -169,7 +169,7 @@ const Dashboard: React.FC = () => {
         {/* Recent Orders Section - You can connect this to your orderService */}
         <Grid item xs={12} md={6}>
           <Card>
-            <CardContent>
+          <CardContent className="bg-accent text-foreground">
               <Typography variant="h6" gutterBottom>
                 Quick Actions
               </Typography>

@@ -1,9 +1,13 @@
 import hero from '../assets/hero (1).png'
 
-const Hero=() => {
+const Hero = () => {
   return (
-    <div>
-        <img src={hero} alt="" className='w-full max-h-[600px] object-cover'/>
+    <div className="border-b border-border">
+      <img 
+        src={hero} 
+        alt="Somali cuisine showcase" 
+        className='w-full max-h-[600px] object-cover'
+      />
     </div>
   )
 }

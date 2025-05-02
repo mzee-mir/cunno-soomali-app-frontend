@@ -171,7 +171,7 @@ const MobileManageRestaurantForm = () => {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <Accordion type="single" collapsible className="w-full">
               {/* Basic Information Section */}
-              <AccordionItem value="basic-info">
+              <AccordionItem value="basic-info ">
                 <AccordionTrigger className="text-lg font-medium">
                   Basic Information
                 </AccordionTrigger>
@@ -181,6 +181,7 @@ const MobileManageRestaurantForm = () => {
                     <Input
                       {...form.register("name")}
                       placeholder="Restaurant name"
+                      className="bg-input/40"
                     />
                     {form.formState.errors.name && (
                       <p className="text-red-500 text-sm">
@@ -194,6 +195,7 @@ const MobileManageRestaurantForm = () => {
                     <Textarea
                       {...form.register("description")}
                       placeholder="About your restaurant"
+                      className="bg-input/40"
                       rows={3}
                     />
                     {form.formState.errors.description && (
@@ -232,6 +234,7 @@ const MobileManageRestaurantForm = () => {
                     <Input
                       {...form.register("address")}
                       placeholder="Street address"
+                      className="bg-input/40"
                     />
                     {form.formState.errors.address && (
                       <p className="text-red-500 text-sm">
@@ -243,7 +246,8 @@ const MobileManageRestaurantForm = () => {
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label>City</Label>
-                      <Input {...form.register("city")} placeholder="City" />
+                      <Input {...form.register("city")} placeholder="City" 
+                      className="bg-input/40" />
                       {form.formState.errors.city && (
                         <p className="text-red-500 text-sm">
                           {form.formState.errors.city.message}
@@ -253,7 +257,8 @@ const MobileManageRestaurantForm = () => {
 
                     <div className="space-y-2">
                       <Label>Country</Label>
-                      <Input {...form.register("country")} placeholder="Country" />
+                      <Input {...form.register("country")} placeholder="Country"
+                      className="bg-input/40" />
                       {form.formState.errors.country && (
                         <p className="text-red-500 text-sm">
                           {form.formState.errors.country.message}
@@ -267,6 +272,7 @@ const MobileManageRestaurantForm = () => {
                     <Input
                       {...form.register("phone")}
                       placeholder="Phone number"
+                      className="bg-input/40"
                       type="tel"
                     />
                     {form.formState.errors.phone && (
@@ -282,6 +288,7 @@ const MobileManageRestaurantForm = () => {
                       {...form.register("email")}
                       placeholder="Email"
                       type="email"
+                      className="bg-input/40"
                     />
                     {form.formState.errors.email && (
                       <p className="text-red-500 text-sm">
@@ -296,6 +303,7 @@ const MobileManageRestaurantForm = () => {
                       {...form.register("website")}
                       placeholder="Website URL"
                       type="url"
+                      className="bg-input/40"
                     />
                   </div>
                 </AccordionContent>
@@ -314,6 +322,7 @@ const MobileManageRestaurantForm = () => {
                       placeholder="0.00"
                       type="number"
                       step="0.01"
+                      className="bg-input/40"
                     />
                     {form.formState.errors.deliveryPrice && (
                       <p className="text-red-500 text-sm">
@@ -328,6 +337,7 @@ const MobileManageRestaurantForm = () => {
                       {...form.register("estimatedDeliveryTime")}
                       placeholder="30"
                       type="number"
+                      className="bg-input/40"
                     />
                     {form.formState.errors.estimatedDeliveryTime && (
                       <p className="text-red-500 text-sm">
@@ -341,6 +351,7 @@ const MobileManageRestaurantForm = () => {
                     <Input
                       {...form.register("openingHours")}
                       placeholder="e.g. 9:00 AM - 10:00 PM"
+                      className="bg-input/40"
                     />
                     {form.formState.errors.openingHours && (
                       <p className="text-red-500 text-sm">

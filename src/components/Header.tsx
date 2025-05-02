@@ -4,30 +4,26 @@ import MainNav from "./MainNav";
 import { useMediaQuery } from "@/utils/useMediaQuery";
 
 const Header = () => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
-    const isMobile = useMediaQuery("(max-width: 768px)");
-
-    return(
-        <div className="border-b-2 border-b-blue-500 py-6">
-            <div className="container mx-auto flex justify-between item-center bg-blue">
-                {isMobile ? (<Link to="/"
-                className="text-3xl font-bold tracking-tight text-blue-500">
-                CunnoSomali.com
-                </Link>): (
-                    <Link to="/"
-                    className="text-2xl font-bold tracking-tight text-blue-500">
-                    CunnoSomali.com
-                    </Link>
-                )}
-                <div className="md:hidden">
-                    <MobileNav />
-                </div>
-                <div className="hidden md:block">
-                    <MainNav/>
-                </div>
-            </div>
+  return (
+    <div className="border-b-2 border-b-primary py-6 bg-card">
+      <div className="container mx-auto flex justify-between items-center">
+        <Link 
+          to="/"
+          className={`${isMobile ? 'text-3xl' : 'text-2xl'} font-bold tracking-tight text-primary hover:text-input`}
+        >
+          CunnoSomali.com
+        </Link>
+        <div className="md:hidden">
+          <MobileNav />
         </div>
-    );
+        <div className="hidden md:block">
+          <MainNav />
+        </div>
+      </div>
+    </div>
+  );
 };
 
-export default Header
+export default Header;

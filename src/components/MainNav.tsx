@@ -8,6 +8,7 @@ import { useState } from "react";
 import CartSidebar from "./displaycartmenuItem";
 import { useGlobalContext } from "@/Provider/Global";
 import NotificationBell from "./NotificationBell";
+import { ThemeToggle } from './ThemeToggle';
 
 const MainNav = () => {
   const navigate = useNavigate();
@@ -49,20 +50,14 @@ const MainNav = () => {
       icon: <FaUtensils className="h-4 w-4" />,
       text: "Restaurant"
     },
-    {
-      to: "/analytical",
-      icon: <FaChartLine className="h-4 w-4" />,
-      text: "Analytics"
-    },
-    {
-      to: "/dashboard",
-      icon: <FaTachometerAlt className="h-4 w-4" />,
-      text: "Dashboard"
-    }
+    
   ];
 
   return (
     <div className="flex items-center gap-4">
+
+      <ThemeToggle />
+
       {/* Cart Icon with Badge */}
       {isAuthenticated && (
         <button 

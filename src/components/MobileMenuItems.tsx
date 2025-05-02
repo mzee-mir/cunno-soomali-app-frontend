@@ -182,22 +182,22 @@ const MobileMenuItems = () => {
 
   return (
     <div className="">
-      <div className="bg-white shadow-lg px-2 py-2 flex justify-between gap-4 items-center">
+      <div className="bg-card shadow-lg px-2 py-2 flex justify-between gap-4 items-center">
         <h2 className="font-semibold text-ellipsis line-clamp-1">Menu Items</h2>
         <button 
           onClick={() => {
             setEditData(null);
             setOpenForm(true);
           }} 
-          className="border border-primary-200 text-primary-200 px-3 hover:bg-primary-200 hover:text-black py-1 rounded-full"
+          className="border border-primary-200 text-primary-200 px-3 hover:bg-primary-200 hover:text-foreground/50 py-1 rounded-full"
         >
           Add Menu Item
         </button>
       </div>
 
-      <div className="bg-blue-50 p-2 grid gap-4">
+      <div className="bg-card p-2 grid gap-4">
         {menuItems.map((item) => (
-          <div key={item._id} className="border rounded p-3 flex gap-3 bg-white">
+          <div key={item._id} className="border rounded p-3 flex gap-3 bg-input/40">
             <div className="w-full">
               <div className="flex items-center gap-2 mb-2">
                 {item.imageUrl && (
@@ -217,7 +217,7 @@ const MobileMenuItems = () => {
                   )}
                 </div>
               </div>
-              <p className="text-sm text-gray-600">{item.description}</p>
+              <p className="text-sm text-foreground/70">{item.description}</p>
               <div className="flex gap-2 mt-2">
                 <span className={`text-xs px-1.5 py-0.5 rounded-full ${
                   item.stock ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
@@ -237,13 +237,13 @@ const MobileMenuItems = () => {
                   setEditData(item);
                   setOpenForm(true);
                 }} 
-                className="bg-green-200 p-1 rounded hover:text-white hover:bg-green-600"
+                className="bg-green-300 p-1 rounded hover:text-white hover:bg-green-600"
               >
                 <MdEdit size={20}/>
               </button>
               <button 
                 onClick={() => handleDelete(item._id)}
-                className="bg-red-200 p-1 rounded hover:text-white hover:bg-red-600"
+                className="bg-red-300 p-1 rounded hover:text-white hover:bg-red-600"
               >
                 <MdDelete size={20}/>
               </button>
@@ -256,7 +256,7 @@ const MobileMenuItems = () => {
             setEditData(null);
             setOpenForm(true);
           }} 
-          className="h-16 bg-blue-50 border-2 border-dashed flex justify-center items-center cursor-pointer"
+          className="h-16 bg-input/40 border-2 border-dashed flex justify-center items-center cursor-pointer"
         >
           Add menu item
         </div>
@@ -265,7 +265,7 @@ const MobileMenuItems = () => {
       {/* Menu Item Form Modal */}
       {openForm && (
         <section className="bg-black fixed top-0 left-0 right-0 bottom-0 z-50 bg-opacity-70 h-screen overflow-auto">
-          <div className="bg-white p-4 w-full max-w-lg mt-8 mx-auto rounded">
+          <div className="bg-card p-4 w-full max-w-lg mt-8 mx-auto rounded">
             <div className="flex justify-between items-center gap-4">
               <h2 className="font-semibold">
                 {editData ? "Edit Menu Item" : "Add Menu Item"}
@@ -304,6 +304,7 @@ const MobileMenuItems = () => {
                     <Input
                       {...form.register("name")}
                       placeholder="Item name"
+                      className="bg-input/20"
                     />
                     {form.formState.errors.name && (
                       <p className="text-red-500 text-sm">
@@ -319,6 +320,7 @@ const MobileMenuItems = () => {
                       step="0.01"
                       {...form.register("price")}
                       placeholder="0.00"
+                      className="bg-input/20"
                     />
                     {form.formState.errors.price && (
                       <p className="text-red-500 text-sm">
@@ -333,6 +335,7 @@ const MobileMenuItems = () => {
                       {...form.register("description")}
                       placeholder="Item description"
                       rows={3}
+                      className="bg-input/20"
                     />
                     {form.formState.errors.description && (
                       <p className="text-red-500 text-sm">
@@ -347,6 +350,7 @@ const MobileMenuItems = () => {
                       type="number"
                       min="0"
                       max="100"
+                      className="bg-input/20"
                       {...form.register("discount")}
                     />
                     {form.formState.errors.discount && (
@@ -380,7 +384,8 @@ const MobileMenuItems = () => {
 
                   <button 
                     type="submit" 
-                    className="bg-primary-200 w-full py-2 font-semibold mt-4 hover:bg-primary-100"
+                    className="bg-primary w-full py-2 font-semibold
+                    borderadius-e mt-4 hover:bg-primary/20"
                     disabled={loading}
                   >
                     {loading ? (

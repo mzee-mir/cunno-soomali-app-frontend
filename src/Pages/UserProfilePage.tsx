@@ -15,7 +15,6 @@ import fetchUserDetails from "@/lib/fetchUserDetails";
 import UserProfileAvatarEdit from "@/components/UserProfileAvatarEdit";
 import { RootState } from '@/store/store';
 
-// Define form schema with validation
 const formSchema = z.object({
     name: z.string().min(1, "Name is required"),
     email: z.string().email("Invalid email address").optional(),
@@ -50,10 +49,6 @@ const UserProfileForm = () => {
         });
     }, [user, form]);
 
-    console.log("loogingForm", form);
-    
-    console.log("logging user",user);
-
     const onSubmit = async (formData: UserFormData) => {
         try {
             setIsLoading(true);
@@ -76,10 +71,10 @@ const UserProfileForm = () => {
     };
 
     return (
-        <div className="p-4 space-y-6">
+        <div className="p-4 space-y-6 bg-background text-foreground">
             {/* Avatar Section */}
             <div className="flex flex-col items-start gap-4">
-                <div className="w-24 h-24 bg-gray-200 flex items-center justify-center rounded-full overflow-hidden drop-shadow-sm">
+                <div className="w-24 h-24 bg-secondarys flex items-center justify-center rounded-full overflow-hidden drop-shadow-sm border border-borde">
                     {user.avatar ? (
                         <img 
                             alt={user.name}
@@ -87,13 +82,14 @@ const UserProfileForm = () => {
                             className="w-full h-full object-cover"
                         />
                     ) : (
-                        <FaRegUserCircle size={65} className="text-gray-400" />
+                        <FaRegUserCircle size={65} className="text-muted-foreground" />
                     )}
                 </div>
                 <Button 
                     variant="outline" 
                     size="sm"
                     onClick={() => setProfileAvatarEdit(true)}
+                    className=" bg-input/10 hover:text-primarys-foreground"
                 >
                     Edit Avatar
                 </Button>
@@ -105,54 +101,51 @@ const UserProfileForm = () => {
 
             {/* Profile Form */}
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 bg-gray-50 rounded-lg p-6">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 bg-card rounded-lg p-6 border border-borde">
                     <div>
-                        <h2 className="text-2xl font-bold">User Profile</h2>
-                        <FormDescription>
+                        <h2 className="text-2xl font-bold text-foregroundT">User Profile</h2>
+                        <FormDescription className="text-muted-foreground">
                             View and change your profile information
                         </FormDescription>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {/* Name */}
                         <FormField 
                             control={form.control}
                             name="name"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Name</FormLabel>
+                                    <FormLabel className="text-foreground">Name</FormLabel>
                                     <FormControl>
-                                        <Input {...field} className="bg-white" />
+                                        <Input {...field} className="bg-input border-borde" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
 
-                        {/* Email */}
                         <FormField 
                             control={form.control}
                             name="email"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Email</FormLabel>
+                                    <FormLabel className="text-foregroundT">Email</FormLabel>
                                     <FormControl>
-                                        <Input {...field} disabled className="bg-white" />
+                                        <Input {...field} disabled className="bg-input border-borde" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
 
-                        {/* Mobile */}
                         <FormField 
                             control={form.control}
                             name="mobile"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Mobile</FormLabel>
+                                    <FormLabel className="text-foregroundT">Mobile</FormLabel>
                                     <FormControl>
-                                        <Input {...field} className="bg-white" />
+                                        <Input {...field} className="bg-input border-borde" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -162,16 +155,16 @@ const UserProfileForm = () => {
 
                     {/* Address Section */}
                     <div className="space-y-2">
-                        <h3 className="font-medium">Address Information</h3>
+                        <h3 className="font-medium text-foregroundT">Address Information</h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <FormField 
                                 control={form.control}
                                 name="addressLine1"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Address Line 1</FormLabel>
+                                        <FormLabel className="text-foregroundT">Address Line 1</FormLabel>
                                         <FormControl>
-                                            <Input {...field} className="bg-white" />
+                                            <Input {...field} className="bg-input border-borde" />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -183,9 +176,9 @@ const UserProfileForm = () => {
                                 name="city"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>City</FormLabel>
+                                        <FormLabel className="text-foregroundT">City</FormLabel>
                                         <FormControl>
-                                            <Input {...field} className="bg-white" />
+                                            <Input {...field} className="bg-input border-borde" />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -197,9 +190,9 @@ const UserProfileForm = () => {
                                 name="country"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Country</FormLabel>
+                                        <FormLabel className="text-foregroundT">Country</FormLabel>
                                         <FormControl>
-                                            <Input {...field} className="bg-white" />
+                                            <Input {...field} className="bg-input border-borde" />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -210,7 +203,7 @@ const UserProfileForm = () => {
 
                     <Button 
                         type="submit" 
-                        className="bg-blue-500 hover:bg-blue-600"
+                        className="bg-input hover:bg-input/40 text-primarys-foreground"
                         disabled={isLoading}
                     >
                         {isLoading ? "Saving..." : "Save Changes"}

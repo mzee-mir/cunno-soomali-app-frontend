@@ -115,7 +115,7 @@ export const columns = (
           <Button 
             variant="ghost" 
             size="sm"
-            className="text-blue-600 hover:text-blue-800"
+            className="text-blue-600 text-blue-800"
             onClick={(e) => {
               e.stopPropagation();
               if (handleReviewClick) {

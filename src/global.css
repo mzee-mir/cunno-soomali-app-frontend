@@ -2,96 +2,110 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-  @layer base {
-    :root {
-      --background: 0 0% 100%;
-      --foreground: 222.2 84% 4.9%;
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --foregroundT: 222.2 84% 4.9%;
+    --card: 210 89% 92.8%;
+    --card-foreground: 222.2 84% 4.9%;
+    --ci: 181 64% 94.9%;
+    --form: 181 15.3% 100%;
+    --form-foreground: 222.2 84% 4.9%;
+    --popover: 181 9% 85.2%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 214 93% 59%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 223 100% 80.5%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --primarys: 214 89.9% 54.3%;
+    --primarys-foreground: 210 40% 98%;
 
-      --card: 0 0% 100%;
-      --card-foreground: 222.2 84% 4.9%;
+    --secondarys: 223 10.8% 88.8%;
+    --secondarys-foreground: 222.2 47.4% 11.2%;
+    --muted: 233 100% 67.3%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 360 100% 59.5%;
+    --destructive-foreground: 210 40% 98%;
+    --borde: 214.3 43% 81.1%;
+    --input: 214.3 100% 89.3%;
+    --ci: 181 64% 94.9%;
+    --grant: 123 100% 60.9%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+  }
 
-      --popover: 0 0% 100%;
-      --popover-foreground: 222.2 84% 4.9%;
+  .dark {
+    --background: 201 57.1% 11.3%;
+    --foreground: 210 40% 98%;
+    --foregroundT: 222.2 84% 4.9%;
+  
+    --card: 217 68.5% 20.3%;
+    --ci: 214.3 15% 25%;
+  
+    --popover: 210 40% 20%;
+    --popover-foreground: 210 40% 98%;
 
-      --primary: 222.2 47.4% 11.2%;
-      --primary-foreground: 210 40% 98%;
+    --primarys: 214 89.9% 54.3%;
+    --primary-foreground: 222.2 84% 4.9%;
 
-      --secondary: 210 40% 96.1%;
-      --secondary-foreground: 222.2 47.4% 11.2%;
-
-      --muted: 210 40% 96.1%;
-      --muted-foreground: 215.4 16.3% 46.9%;
-
-      --accent: 210 40% 96.1%;
-      --accent-foreground: 222.2 47.4% 11.2%;
-
-      --destructive: 0 84.2% 60.2%;
-      --destructive-foreground: 210 40% 98%;
-
-      --border: 214.3 31.8% 91.4%;
-      --input: 214.3 31.8% 91.4%;
-      --ring: 222.2 84% 4.9%;
-
-      --radius: 0.5rem;
-    }
-
-    .dark {
-      --background: 222.2 84% 4.9%;
-      --foreground: 210 40% 98%;
-
-      --card: 222.2 84% 4.9%;
-      --card-foreground: 210 40% 98%;
-
-      --popover: 222.2 84% 4.9%;
-      --popover-foreground: 210 40% 98%;
-
-      --primary: 210 40% 98%;
-      --primary-foreground: 222.2 47.4% 11.2%;
-
-      --secondary: 217.2 32.6% 17.5%;
-      --secondary-foreground: 210 40% 98%;
-
-      --muted: 217.2 32.6% 17.5%;
-      --muted-foreground: 215 20.2% 65.1%;
-
-      --accent: 217.2 32.6% 17.5%;
-      --accent-foreground: 210 40% 98%;
-
-      --destructive: 0 62.8% 30.6%;
-      --destructive-foreground: 210 40% 98%;
-
-      --border: 217.2 32.6% 17.5%;
-      --input: 217.2 32.6% 17.5%;
-      --ring: 212.7 26.8% 83.9%;
-    }
+    --secondarys: 223 8.8% 25.1%;
+    --secondary-foreground: 222.2 84% 4.9%;
+  
+    --primary: 214 89.9% 54.3%;
+    --primary-foreground: 222.2 84% 4.9%;
+  
+    --secondary: 223 100% 65%;
+    --secondary-foreground: 222.2 84% 4.9%;
+  
+    --muted: 223 23.3% 64.8%;
+    --muted-foreground: 215.4 16.3% 80%;
+  
+    --accent: 210 20% 20%;
+    --accent-foreground: 210 40% 98%;
+  
+    --destructive: 360 100% 50%;
+    --destructive-foreground: 210 40% 98%;
+  
+    --borde: 214.3 19% 30%;
+    --input: 214.3 15% 25%;
+   
+  
+    --grant: 123 100% 45%;
+    --ring: 214 93% 69%;
   }
   
-  .menu-item-image:hover {
-    transform: scale(1.05);
+
+  * {
+    border: 1px solid hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    transition: background-color 0.3s, color 0.3s;
+  }
 }
 
-  @layer base {
-    * {
-      border: 1px solid var(--border-color);
-    }
-    body {
-      background-color: var(--background);
-      color: var(--foreground);
-      transition: background-color 0.3s, color 0.3s;
-    }
+@layer utilities {
+  .menu-item-image:hover {
+    transform: scale(1.05);
   }
+}
 
-  @keyframes sparkle {
-    0% {
-      transform: scale(0) rotate(0deg);
-      opacity: 0;
-    }
-    50% {
-      transform: scale(1) rotate(180deg);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(0) rotate(360deg);
-      opacity: 0;
-    }
+@keyframes sparkle {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
   }
+  50% {
+    transform: scale(1) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0) rotate(360deg);
+    opacity: 0;
+  }
+}

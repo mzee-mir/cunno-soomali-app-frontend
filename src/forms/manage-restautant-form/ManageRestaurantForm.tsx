@@ -183,6 +183,7 @@ const ManageRestaurantForm = () => {
   );
 
   return (
+    <div className="bg-card">
     <FormProvider {...form}>
       <Form {...form}>
         {renderImageSection()}
@@ -197,7 +198,7 @@ const ManageRestaurantForm = () => {
         
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 bg-gray-50 p-10 rounded-lg"
+          className="space-y-8 bg-card p-10 rounded-lg"
         >
           <DetailSection />
           <Separator />
@@ -214,6 +215,7 @@ const ManageRestaurantForm = () => {
         </form>
       </Form>
     </FormProvider>
+    </div>
   );
 };
 
