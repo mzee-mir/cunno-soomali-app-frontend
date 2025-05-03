@@ -190,10 +190,7 @@ const ManageRestaurantPage = () => {
               <h2 className="text-xl font-bold mb-3">
                 {currentRestaurant?._id ? "Update Restaurant" : "Create Restaurant"}
               </h2>
-              <MobileManageRestaurantForm 
-                onSave={handleSaveRestaurant}
-                onDelete={handleDeleteRestaurant}
-              />
+              <MobileManageRestaurantForm />
             </div>
           )}
 
@@ -251,10 +248,7 @@ const ManageRestaurantPage = () => {
               <h2 className="text-2xl font-bold mb-4">
                 {currentRestaurant?._id ? "Update Restaurant" : "Create Restaurant"}
               </h2>
-              <ManageRestaurantForm 
-                onSave={handleSaveRestaurant}
-                onDelete={handleDeleteRestaurant}
-              />
+              <ManageRestaurantForm />
             </div>
           </TabsContent>
 
