@@ -70,7 +70,7 @@ const SearchBar = ({ onSubmit, onReset, placeHolder, searchQuery }: Props) => {
 
         <Button 
         type = "submit" 
-        className="rounded-full bg-blue-500" > Search 
+        className="rounded-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-400 hover:to-blue-600 transition-all duration-300" > Search 
         </Button>
         </form>
     </Form>

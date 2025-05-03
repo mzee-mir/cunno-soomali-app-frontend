@@ -203,7 +203,7 @@ const UserProfileForm = () => {
 
                     <Button 
                         type="submit" 
-                        className="bg-input hover:bg-input/40 text-primarys-foreground"
+                        className="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-400 hover:to-blue-600 transition-all duration-300 text-primarys-foreground"
                         disabled={isLoading}
                     >
                         {isLoading ? "Saving..." : "Save Changes"}

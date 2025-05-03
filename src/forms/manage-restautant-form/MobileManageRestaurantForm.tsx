@@ -366,7 +366,7 @@ const MobileManageRestaurantForm = () => {
             <div className="pt-6">
               <Button
                 type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3"
+                className="w-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-400 hover:to-blue-600 transition-all duration-300 text-white py-3"
                 disabled={loading}
               >
                 {loading ? (

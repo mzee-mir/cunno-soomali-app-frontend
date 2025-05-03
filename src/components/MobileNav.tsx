@@ -78,7 +78,7 @@ const MobileNav = () => {
                             <MobileNavLinks/>
                         ) : (
                             <Button 
-                                className='flex-1 font-bold bg-blue-500'
+                                className='flex-1 font-bold bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-400 hover:to-blue-600 transition-all duration-300'
                                 onClick={handleLoginRedirect}
                             >
                                 Log In

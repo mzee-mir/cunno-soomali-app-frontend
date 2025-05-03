@@ -204,7 +204,7 @@ const ManageRestaurantForm = () => {
           <Separator />
           <CuisinesSection />
           
-          <div className="flex justify-end">
+          <div className="flex justify-end ">
             <SubmitButton 
               isSubmitting={loading} 
               hasRestaurant={!!currentRestaurant?._id} 

@@ -25,7 +25,7 @@ export default function LoginPage() {
       {/* Left Side: Tabs for Signin and Signup */}
       <div className="flex flex-col items-center justify-center p-6 md:p-10">
         <Tabs defaultValue="Signin" className="w-full max-w-xs">
-          <TabsList className="grid w-full grid-cols-2">
+          <TabsList className="grid w-full grid-cols-2  bg-card">
             <TabsTrigger value="Signin">Signin</TabsTrigger>
             <TabsTrigger value="Signup">Register</TabsTrigger>
           </TabsList>

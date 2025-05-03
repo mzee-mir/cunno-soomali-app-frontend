@@ -24,11 +24,11 @@ const OrderItemCard: React.FC<Props> = ({ order }) => {
     <Card className="shadow-sm hover:shadow-md transition-shadow">
       <CardHeader className="pb-2">
         <CardTitle className="flex justify-between items-center">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 text-foreground">
             <Avatar src={order.user.avatar} alt={order.user.name} sx={{ width: 40, height: 40 }} />
             <div>
-              <div className="font-semibold">{order.deliveryDetails?.name || "Customer"}</div>
-              <div className="text-sm text-muted-foreground">{order.deliveryDetails?.email}</div>
+              <div className="font-semibold text-foreground">{order.deliveryDetails?.name || "Customer"}</div>
+              <div className="text-sm text-foreground">{order.deliveryDetails?.email}</div>
             </div>
           </div>
           <div className="text-sm text-muted-foreground">{getTime()}</div>
@@ -37,19 +37,19 @@ const OrderItemCard: React.FC<Props> = ({ order }) => {
 
       <CardContent className="pt-0 flex justify-between items-center text-sm">
         <div>
-          <div>
-            <span className="font-medium">Items:</span> {order.cartItems.length}
+          <div className="text-gray-300">
+            <span className="font-medium text-foreground">Items:</span> {order.cartItems.length}
           </div>
-          <div>
-            <span className="font-medium">Status:</span> {order.status}
+          <div className="text-gray-300">
+            <span className="font-medium text-foreground">Status:</span> {order.status}
           </div>
         </div>
-        <div className="text-right">
+        <div className="text-right text-gray-300">
           <div>
-            <span className="font-medium">Total:</span> ${(order.totalAmount / 100).toFixed(2)}
+            <span className="font-medium text-foreground">Total:</span> ${(order.totalAmount / 100).toFixed(2)}
           </div>
-          <div>
-            <span className="font-medium">ID:</span> {order._id.slice(-6)}
+          <div className="text-gray-300">
+            <span className="font-medium text-foreground">ID:</span> {order._id.slice(-6)}
           </div>
         </div>
       </CardContent>

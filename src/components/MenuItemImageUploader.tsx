@@ -6,6 +6,7 @@ import { MenuItemService } from '@/lib/menuItemservice';
 import toast from "react-hot-toast";
 import LoadinButton from "@/components/LoadinButton";
 import { RootState } from '@/store/store';
+import { Button } from './ui/button';
 
 interface MenuItemImageUploaderProps {
   restaurantId: string;
@@ -115,9 +116,9 @@ const MenuItemImageUploader = ({
                 className='hidden'
                 disabled={loading}
               />
-              <div className='bg-blue-600 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-700 transition-colors'>
+              <Button className=' bg-gradient-to-r from-blue-600 to-blue-800 text-white px-4 py-2 rounded-lg cursor-pointer hover:from-blue-400 hover:to-blue-600 transition-all duration-300 '>
                 {loading ? <LoadinButton /> : 'Upload Image'}
-              </div>
+              </Button>
             </label>
           </div>
         </div>

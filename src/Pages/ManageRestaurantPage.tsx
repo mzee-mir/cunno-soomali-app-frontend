@@ -19,7 +19,7 @@ import Dashboard from '@/components/dashboardpages';
 import { Order } from '@/store/OrderSlice';
 import MobileManageRestaurantForm from "@/forms/manage-restautant-form/MobileManageRestaurantForm";
 import MobileMenuItems from "@/components/MobileMenuItems";
-import MobileOrderItemCardInfo from "@/components/MobileOrderItemCardInfo";
+import MobileOrdersList from "@/components/MobileOrdersList";
 import { useMediaQuery } from "@/utils/useMediaQuery";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from 'react-hot-toast';
@@ -159,31 +159,8 @@ const ManageRestaurantPage = () => {
       {/* Mobile Content */}
       {isMobile ? (
         <div className="mt-2">
-          {activeTab === "orders" && (
-            <div className="space-y-4">
-              <h2 className="text-xl font-bold">Active Orders: {orders?.length}</h2>
-              <div className="space-y-3">
-                {orders?.map((order) => (
-                  <div 
-                    key={order._id}
-                    onClick={() => setSelectedOrder(order)}
-                    className={`p-3 rounded-lg transition-colors ${
-                      selectedOrder?._id === order._id 
-                        ? 'bg-primary/10 ring-1 ring-primary' 
-                        : 'bg-card hover:bg-accent/10'
-                    }`}
-                  >
-                    <OrderItemCard order={order} />
-                  </div>
-                ))}
-              </div>
-              {selectedOrder && (
-                <div className="mt-4 p-3 bg-card rounded-lg border border-border">
-                  <MobileOrderItemCardInfo order={selectedOrder} />
-                </div>
-              )}
-            </div>
-          )}
+          {activeTab === "orders" && <MobileOrdersList orders={orders} />
+          }
 
           {activeTab === "manage-restaurant" && (
             <div className="bg-card p-3 rounded-lg border border-border">

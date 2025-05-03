@@ -67,7 +67,7 @@ const MobileOrderItemCardInfo: React.FC<Props> = ({ order }) => {
               {order.user.name.charAt(0)}
             </Avatar>
             <div>
-              <CardTitle className="text-sm font-semibold">{order.user.name}</CardTitle>
+              <CardTitle className="text-sm font-semibold text-foreground">{order.user.name}</CardTitle>
               <p className="text-xs text-gray-500">
                 {format(new Date(order.createdAt), "MMM dd, h:mm a")}
               </p>
@@ -89,16 +89,16 @@ const MobileOrderItemCardInfo: React.FC<Props> = ({ order }) => {
           <CardContent className="p-4">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <Label htmlFor="order-status" className="text-sm">Status:</Label>
+                <Label htmlFor="order-status" className="text-sm text-foreground">Status:</Label>
                 <Select
                   value={status}
                   onValueChange={handleStatusChange}
                   disabled={isUpdating}
                 >
-                  <SelectTrigger className="w-[150px]">
+                  <SelectTrigger className="w-[150px] bg-input/40 text-foreground">
                     <SelectValue placeholder="Select status" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-input/100">
                     {ORDER_STATUS.map((status) => (
                       <SelectItem key={status.value} value={status.value}>
                         {status.label}
@@ -109,10 +109,10 @@ const MobileOrderItemCardInfo: React.FC<Props> = ({ order }) => {
               </div>
 
               <div>
-                <h3 className="font-medium text-sm mb-2">Order Items</h3>
-                <div className="space-y-3">
+                <h3 className="font-medium text-sm mb-2 text-foreground">Order Items</h3>
+                <div className="space-y-3 ">
                   {order.cartItems.map((item) => (
-                    <div key={item.menuItemId} className="flex items-start gap-3">
+                    <div key={item.menuItemId} className="flex items-start text-foreground gap-3">
                       <div className="w-12">
                         <AspectRatio ratio={1}>
                           <img
@@ -141,13 +141,13 @@ const MobileOrderItemCardInfo: React.FC<Props> = ({ order }) => {
           <CardFooter className="p-4 border-t flex flex-col gap-3">
             <div className="w-full">
               <p className="text-xs text-gray-500">Delivery to:</p>
-              <p className="font-medium text-sm">{order.deliveryDetails?.name}</p>
-              <p className="font-medium text-sm">{order.deliveryDetails?.mobile}</p>
-              <p className="font-medium text-sm">{order.deliveryDetails?.address}</p>
+              <p className="font-medium text-sm text-foreground">{order.deliveryDetails?.name}</p>
+              <p className="font-medium text-sm text-foreground">{order.deliveryDetails?.mobile}</p>
+              <p className="font-medium text-sm text-foreground">{order.deliveryDetails?.address}</p>
             </div>
             <div className="w-full text-right">
               <p className="text-xs text-gray-500">Total</p>
-              <p className="text-lg font-bold">
+              <p className="text-lg font-bold text-foreground">
                 ${(order.totalAmount / 100).toFixed(2)}
               </p>
             </div>

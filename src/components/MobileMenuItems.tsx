@@ -3,7 +3,6 @@ import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { RootState } from "@/store/store";
 import { MenuItemService } from "@/lib/menuItemservice";
@@ -385,7 +384,7 @@ const MobileMenuItems = () => {
                   <button 
                     type="submit" 
                     className="bg-primary w-full py-2 font-semibold
-                    borderadius-e mt-4 hover:bg-primary/20"
+                    borderadius-e mt-4 bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-400 hover:to-blue-600 transition-all duration-300"
                     disabled={loading}
                   >
                     {loading ? (
