@@ -14,8 +14,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { IAddress } from "@/store/addressSlice";
 import { useGetRestaurant } from "@/api/RestaurentApi";
 import { useParams } from "react-router-dom";
-import { ICartMenuItem } from "@/store/cartMenuItem";
-import toast from "react-hot-toast";
 
 type Props = {
     disabled?: boolean;
@@ -68,34 +66,28 @@ const CheckoutButton = ({ disabled }: Props) => {
     }, [open, user, addresses.length, fetchAddress]);
 
     const handleCheckout = async () => {
-        if (!selectedAddress && !customAddress) {
-            toast.error("Please select or enter a delivery address.");
-            return;
-        }
-    
-        // Find the selected address details
-        const addressDetails = addresses.find(addr => addr._id === selectedAddress);
+        const deliveryAddress = selectedAddress 
+            ? addresses.find(addr => addr._id === selectedAddress)?.address_line || ""
+            : customAddress;
     
         const checkoutData = {
             cartItems: cartItems.map(item => ({
                 menuItemId: item.menuItemId._id,
-                quantity: item.quantity.toString(), // Convert to string
                 name: item.menuItemId.name,
+                imageUrl: item.menuItemId.imageUrl,
                 price: item.menuItemId.price,
-                imageUrl:item.menuItemId.imageUrl
+                quantity: item.quantity.toString(),
+
             })),
             deliveryDetails: {
-                email: email,
-                name: name,
-                mobile: mobile,
-                address: addressDetails 
-                    ? `${addressDetails.address_line}, ${addressDetails.city}, ${addressDetails.country}`
-                    : customAddress
+                name,
+                email,
+                mobile: user.mobile,
+                address: deliveryAddress,
             },
-            restaurantId: restaurantId!,
+            restaurantId,
         };
     
-        
         try {
             const response = await createCheckoutSession(checkoutData);
             const url = response?.data?.url;
@@ -106,10 +98,9 @@ const CheckoutButton = ({ disabled }: Props) => {
                 console.error("No URL returned from checkout session", response);
             }
         } catch (error) {
-          console.error("Checkout failed:", error);
+            console.error("Checkout failed:", error);
         }
-      };
-      
+    };
     
     
     

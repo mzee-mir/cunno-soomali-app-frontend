@@ -61,10 +61,16 @@ export const useGetMyOrders = () => {
 };
 
 interface CheckoutSessionRequest {
-  cartItems: ICartMenuItem[];
+  cartItems: {
+    menuItemId: string;
+    quantity: string;
+    name: string;
+  }[];
   deliveryDetails: {
-    addressId: string;
-    instructions?: string;
+    email: string;
+    name: string;
+    mobile: string;
+    address: string;
   };
   restaurantId: string;
 }
