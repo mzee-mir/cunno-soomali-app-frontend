@@ -1,0 +1,17 @@
+{
+    "addToCart": "Ku dar Gaadhiga",
+    "outOfStock": "Dhamaadka Bukaanka",
+    "items": "alab",
+    "viewCart": "Arag Gaadhiga",
+    "cartTitle": "Gaadhiga Suuqa",
+    "emptyCart": "Gaadhigaagu waa madhan",
+    "startShopping": "Bilow ku darida cuntooyin macaan!",
+    "shopNow": "Hadda Suuqo",
+    "subtotal": "Wadarta",
+    "proceedToCheckout": "Sii Wad Lacag Bixinta",
+    "continueShopping": "Sii Suuqo",
+    "deliveryOptions": {
+    "free": "BILAASH",
+    "charged": "Lacag Gaarsiin"
+    }
+  }

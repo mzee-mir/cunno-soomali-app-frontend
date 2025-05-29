@@ -1,0 +1,7 @@
+{
+    "customer": "Customer",
+    "items": "Items: {count}",
+    "status": "Status: {status}",
+    "total": "Total: {amount}",
+    "id": "ID: {id}"
+  }

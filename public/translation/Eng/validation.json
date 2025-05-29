@@ -1,0 +1,4 @@
+{
+    "required": "{{field}} is required",
+    "invalidEmail": "Invalid email address"
+  }

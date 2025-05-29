@@ -1,9 +1,10 @@
-import { SigninForm } from "@/components/SigninForm";
+import {SigninForm}  from "@/components/SigninForm";
 import { SignupForm } from "@/components/SignupForm"; // Assuming you have a RegisterForm component
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { GalleryVerticalEnd } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion"; // Import Framer Motion
 import loginimahe from '../assets/loginimahe.jpg'
+import { useState } from "react";
 
 // Reusable Logo Component
 function Logo() {
@@ -20,47 +21,53 @@ function Logo() {
 }
 
 export default function LoginPage() {
+  const [tab, setTab] = useState("Signin");
+
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
-      {/* Left Side: Tabs for Signin and Signup */}
+      {/* Left Side */}
       <div className="flex flex-col items-center justify-center p-6 md:p-10">
-        <Tabs defaultValue="Signin" className="w-full max-w-xs">
-          <TabsList className="grid w-full grid-cols-2  bg-card">
-            <TabsTrigger value="Signin">Signin</TabsTrigger>
-            <TabsTrigger value="Signup">Register</TabsTrigger>
-          </TabsList>
+        <div className="w-full max-w-xs">
+          <Tabs defaultValue="Signin" className="w-full" onValueChange={setTab}>
+            <TabsList className="grid w-full grid-cols-2 bg-card">
+              <TabsTrigger value="Signin">Signin</TabsTrigger>
+              <TabsTrigger value="Signup">Register</TabsTrigger>
+            </TabsList>
+          </Tabs>
 
-          <AnimatePresence mode="wait">
-            <TabsContent value="Signin" className="mt-6">
+          <AnimatePresence mode="wait" initial={false}>
+            {tab === "Signin" && (
               <motion.div
-                key="signin" // Unique key for AnimatePresence
-                initial={{ x: -100, opacity: 0 }} // Start off-screen to the left
-                animate={{ x: 0, opacity: 1 }} // Animate to the center
-                exit={{ x: 100, opacity: 0 }} // Exit to the right
-                transition={{ type: "spring", stiffness: 100, damping: 20 }} // Spring animation
+                key="signin"
+                initial={{ x: -100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: 100, opacity: 0 }}
+                transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                className="mt-6"
               >
                 <Logo />
                 <SigninForm />
               </motion.div>
-            </TabsContent>
+            )}
 
-            <TabsContent value="Signup" className="mt-6">
+            {tab === "Signup" && (
               <motion.div
-                key="signup" // Unique key for AnimatePresence
-                initial={{ x: 100, opacity: 0 }} // Start off-screen to the right
-                animate={{ x: 0, opacity: 1 }} // Animate to the center
-                exit={{ x: -100, opacity: 0 }} // Exit to the left
-                transition={{ type: "spring", stiffness: 100, damping: 20 }} // Spring animation
+                key="signup"
+                initial={{ x: 100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: -100, opacity: 0 }}
+                transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                className="mt-6"
               >
                 <Logo />
-                <SignupForm /> {/* Replace with your RegisterForm component */}
+                <SignupForm />
               </motion.div>
-            </TabsContent>
+            )}
           </AnimatePresence>
-        </Tabs>
+        </div>
       </div>
 
-      {/* Right Side: Image */}
+      {/* Right Side */}
       <div className="relative hidden bg-muted lg:block">
         <img
           src={loginimahe}

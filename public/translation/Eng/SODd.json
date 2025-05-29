@@ -1,0 +1,6 @@
+{
+    "sort.bestMatch": "Best match",
+    "sort.deliveryPrice": "Delivery price",
+    "sort.estimatedDeliveryTime": "Estimated delivery time",
+    "sort.buttonLabel": "Sort by: {{label}}"
+  }

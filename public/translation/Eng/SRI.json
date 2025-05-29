@@ -1,0 +1,4 @@
+{
+    "searchResult.results": "{{count}} restaurants found",
+  "searchResult.noResults": "No restaurants found for your search."
+}

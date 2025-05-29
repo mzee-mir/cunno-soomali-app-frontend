@@ -1,0 +1,17 @@
+{
+    "addToCart": "Add to Cart",
+    "outOfStock": "Out of Stock",
+    "items": "items",
+    "viewCart": "View Cart",
+    "cartTitle": "Shopping Cart",
+    "emptyCart": "Your cart is empty",
+    "startShopping": "Start adding some delicious items!",
+    "shopNow": "Shop Now",
+    "subtotal": "Subtotal",
+    "proceedToCheckout": "Proceed to Checkout",
+    "continueShopping": "Continue Shopping",
+  "deliveryOptions": {
+    "free": "FREE",
+    "charged": "Delivery"
+  }
+  }

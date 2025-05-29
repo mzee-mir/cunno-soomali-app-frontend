@@ -1,0 +1,9 @@
+{
+    "activeOrders": "Active Orders: {count}",
+    "items": "Items:",
+    "status": "Status:",
+    "total": "Total:",
+    "orderDetails": "Order Details",
+    "deliveryInfo": "Delivery Information",
+    "orderId": "Order ID"
+  }

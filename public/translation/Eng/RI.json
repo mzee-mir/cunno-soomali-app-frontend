@@ -1,0 +1,4 @@
+{
+    "location": "{{city}}, {{country}}",
+    "cuisine_separator": "•"
+  }

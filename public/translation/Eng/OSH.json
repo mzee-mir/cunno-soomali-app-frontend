@@ -1,0 +1,5 @@
+{
+    "orderStatus": "Order status: {status}",
+    "expectedBy": "Expected by: {time}",
+    "orderDate": "Order Date: {date}"
+  }

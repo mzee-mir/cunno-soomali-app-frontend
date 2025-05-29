@@ -1,0 +1,12 @@
+{
+    "header": {
+      "title": "Cunno Somali App",
+      "login": "Login",
+      "register": "Register"
+    },
+    "language": {
+      "en": "English",
+      "es": "Spanish",
+      "so": "Somali"
+    }
+  }

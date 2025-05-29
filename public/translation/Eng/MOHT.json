@@ -1,0 +1,12 @@
+{
+    "noOrders": "No orders found",
+    "orderNumber": "Order #{orderNumber}",
+    "items": "Items:",
+    "deliveryAddress": "Delivery Address:",
+    "remove": "Remove",
+    "review": "Review",
+    "confirmRemoval": "Confirm Order Removal",
+    "removalMessage": "Are you sure you want to remove this order from your history?",
+    "cancel": "Cancel",
+    "removeOrder": "Remove Order"
+  }

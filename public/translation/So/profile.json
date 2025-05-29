@@ -1,0 +1,22 @@
+{
+    "title": "Bogga Isticmaalka",
+    "description": "Arag oo beddel macluumaadkaaga",
+    "fields": {
+      "name": "Magaca",
+      "email": "Iimaylka",
+      "mobile": "Taleefanka",
+      "address": "Macluumaadka Cinwaanka",
+      "addressLine1": "Qodobka 1aad ee Cinwaanka",
+      "city": "Magaalada",
+      "country": "Dalka"
+    },
+    "buttons": {
+      "editAvatar": "Wax ka beddel sawirkaaga",
+      "saveChanges": "Keydso isbedelada",
+      "saving": "Keydsanaya..."
+    },
+    "messages": {
+      "updateSuccess": "Macluumaadkaaga waa la cusboonaysiiyay",
+      "updateError": "Khalad ayaa dhacay markii la cusboonaysiinayay"
+    }
+  }

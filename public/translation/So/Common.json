@@ -1,0 +1,24 @@
+{
+    "header": {
+      "title": "Cunno Somali App",
+      "login": "geli akoonka",
+      "register": "Isdiwaamgali",
+        "loading": "Loading...",
+        "notFound": "lama helin",
+        "success": "Guul!",
+        "error": "Guul daro!",
+        "required": "Loo baahan yahay",
+        "invalid": "khalad",
+        "actions": {
+          "submit": "Xaray",
+          "cancel": "Jooji",
+          "edit": "Wax ka badal",
+          "delete": "Tirtir",
+          "confirm": "Xaqiiji"
+        }
+      },
+    "language": {
+      "en": "English",
+      "so": "Somali"
+    }
+  }

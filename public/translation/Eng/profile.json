@@ -1,0 +1,22 @@
+{
+    "title": "User Profile",
+    "description": "View and change your profile information",
+    "fields": {
+      "name": "Name",
+      "email": "Email",
+      "mobile": "Mobile",
+      "address": "Address Information",
+      "addressLine1": "Address Line 1",
+      "city": "City",
+      "country": "Country"
+    },
+    "buttons": {
+      "editAvatar": "Edit Avatar",
+      "saveChanges": "Save Changes",
+      "saving": "Saving..."
+    },
+    "messages": {
+      "updateSuccess": "Profile updated successfully",
+      "updateError": "Failed to update profile"
+    }
+  }

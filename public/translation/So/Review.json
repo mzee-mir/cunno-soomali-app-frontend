@@ -1,0 +1,14 @@
+{
+    "reviews": {
+      "add_review": "Ku dar Faallo",
+      "write_review": "Qor Faallo",
+      "submit": "Gudbi Faallo",
+      "your_review": "Fikradaada",
+      "no_reviews": "Faallooyin ma jiraan. Noqo qofka ugu horreeya!",
+      "thank_you": "Waad ku mahadsan tahay jawaabtaada!",
+      "loading": "Faallooyin ayaa soo dhacaya...",
+      "customer_reviews": "Faallooyinka Macaamiisha",
+      "error": "Waxaa dhacay qalad xagga helitaanka faallooyinka."
+    }
+  }
+  

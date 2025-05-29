@@ -1,0 +1,9 @@
+{
+    "noResults": "No Results Found",
+    "searchPlaceholder": "Search by cuisine or restaurant name",
+    "sortOptions": {
+      "bestMatch": "Best Match",
+      "deliveryPrice": "Delivery Price",
+      "estimatedDeliveryTime": "Estimated Delivery"
+    }
+  }

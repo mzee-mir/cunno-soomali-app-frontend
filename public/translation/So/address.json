@@ -1,0 +1,20 @@
+{
+    "title": "Cinwaan",
+    "addButton": "Ku dar Cinwaan",
+    "noAddress": "Lama helin cinwaan",
+    "actions": {
+      "edit": "Wax ka beddel",
+      "delete": "Tirtir"
+    },
+    "form": {
+        "addressLine": "Layinka Cinwaanka",
+        "city": "Magaalada",
+        "state": "Gobolka",
+        "pincode": "Koodhka Boostada",
+        "country": "Dalka",
+        "mobile": "Lambarka Taleefanka"
+    },
+    "messages": {
+      "deleteSuccess": "Cinwaankii waa la tirtiray"
+    }
+  }

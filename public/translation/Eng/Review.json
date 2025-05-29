@@ -1,0 +1,11 @@
+{
+    "add_review": "Add Your Review",
+    "write_review": "Write a Review",
+    "submit": "Submit Review",
+    "your_review": "Your Review",
+    "no_reviews": "No reviews yet. Be the first to review!",
+    "thank_you": "Thank you for your feedback!",
+    "loading": "Loading reviews...",
+    "customer_reviews": "Customer Reviews",
+    "error": "An error occurred while fetching reviews."
+  }

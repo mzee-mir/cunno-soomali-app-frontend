@@ -1,0 +1,13 @@
+{
+    "loading": "Soo dejineynaa macluumaadka makan...",
+    "notFound": "Makan lama helin",
+    "menu": {
+      "title": "Menu-ga",
+      "empty": "Wax cunto ah majiraan"
+    },
+    "order": {
+      "summary": "Warbixinta dalabka",
+      "checkout": "Sii wad dalabka",
+      "empty": "Gaadhigaaga waa madhan"
+    }
+  }
