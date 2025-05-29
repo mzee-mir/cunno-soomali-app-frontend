@@ -4,16 +4,16 @@ import { useCreateCheckoutSession } from "@/api/OrderApi";
 import { RootState } from "@/store/store";
 import {
     Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger,
-} from "./ui/dialog";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
-import { Label } from "./ui/label";
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 import { Loader2 } from "lucide-react";
 import { useGlobalContext } from "@/Provider/Global";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { IAddress } from "@/store/addressSlice";
-import { useGetRestaurant } from "@/api/RestaurentApi";
 import { useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 
 type Props = {
     disabled?: boolean;
@@ -66,28 +66,34 @@ const CheckoutButton = ({ disabled }: Props) => {
     }, [open, user, addresses.length, fetchAddress]);
 
     const handleCheckout = async () => {
-        const deliveryAddress = selectedAddress 
-            ? addresses.find(addr => addr._id === selectedAddress)?.address_line || ""
-            : customAddress;
+        if (!selectedAddress && !customAddress) {
+            toast.error("Please select or enter a delivery address.");
+            return;
+        }
+    
+        // Find the selected address details
+        const addressDetails = addresses.find(addr => addr._id === selectedAddress);
     
         const checkoutData = {
             cartItems: cartItems.map(item => ({
                 menuItemId: item.menuItemId._id,
+                quantity: item.quantity.toString(), // Convert to string
                 name: item.menuItemId.name,
-                imageUrl: item.menuItemId.imageUrl,
                 price: item.menuItemId.price,
-                quantity: item.quantity.toString(),
-
+                imageUrl:item.menuItemId.imageUrl
             })),
             deliveryDetails: {
-                name,
-                email,
-                mobile: user.mobile,
-                address: deliveryAddress,
+                email: email,
+                name: name,
+                mobile: mobile,
+                address: addressDetails 
+                    ? `${addressDetails.address_line}, ${addressDetails.city}, ${addressDetails.country}`
+                    : customAddress
             },
-            restaurantId,
+            restaurantId: restaurantId!,
         };
     
+        
         try {
             const response = await createCheckoutSession(checkoutData);
             const url = response?.data?.url;
@@ -98,9 +104,10 @@ const CheckoutButton = ({ disabled }: Props) => {
                 console.error("No URL returned from checkout session", response);
             }
         } catch (error) {
-            console.error("Checkout failed:", error);
+          console.error("Checkout failed:", error);
         }
-    };
+      };
+      
     
     
     
