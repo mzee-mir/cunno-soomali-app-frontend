@@ -12,9 +12,7 @@ import { Loader2 } from "lucide-react";
 import { useGlobalContext } from "@/Provider/Global";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { IAddress } from "@/store/addressSlice";
-import { useGetRestaurant } from "@/api/RestaurentApi";
 import { useParams } from "react-router-dom";
-import { ICartMenuItem } from "@/store/cartMenuItem";
 import toast from "react-hot-toast";
 
 type Props = {
