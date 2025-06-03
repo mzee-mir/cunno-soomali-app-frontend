@@ -11,7 +11,6 @@ type LanguageContextType = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-console.log('Initializing language:', language);
 
 i18n
   .use(initReactI18next)
