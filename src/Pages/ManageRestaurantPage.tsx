@@ -23,8 +23,10 @@ import MobileOrdersList from "@/components/MobileOrdersList";
 import { useMediaQuery } from "@/utils/useMediaQuery";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 const ManageRestaurantPage = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { currentRestaurant, loading, error } = useSelector(
     (state: RootState) => state.restaurant
@@ -34,7 +36,6 @@ const ManageRestaurantPage = () => {
   const { menuItems } = useSelector((state: RootState) => state.menuItem);
   const [activeTab, setActiveTab] = useState("manage-restaurant");
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
-
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   useEffect(() => {
@@ -43,10 +44,10 @@ const ManageRestaurantPage = () => {
         dispatch(setRestaurantLoading(true));
         if (userId) {
           await RestaurantService.getUserRestaurants(dispatch, userId);
-          toast.success("Restaurant data loaded successfully");
+          toast.success(t("manageRestaurant.messages.success.loaded"));
         }
       } catch (error) {
-        const errorMessage = error instanceof Error ? error.message : "Failed to fetch restaurants";
+        const errorMessage = error instanceof Error ? error.message : t("manageRestaurant.messages.error.fetch");
         dispatch(setRestaurantError(errorMessage));
         toast.error(errorMessage);
       } finally {
@@ -55,7 +56,7 @@ const ManageRestaurantPage = () => {
     };
 
     fetchRestaurants();
-  }, [dispatch, userId]);
+  }, [dispatch, userId, t]);
 
   const handleSaveRestaurant = async (formData: any) => {
     try {
@@ -81,7 +82,7 @@ const ManageRestaurantPage = () => {
         toast.success("Restaurant created successfully");
       }
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : "Failed to save restaurant";
+      const errorMessage = error instanceof Error ? error.message : t("manageRestaurant.messages.error.fetch");
       dispatch(setRestaurantError(errorMessage));
       toast.error(errorMessage);
     } finally {
@@ -109,46 +110,46 @@ const ManageRestaurantPage = () => {
       {isMobile ? (
         <div className="mb-4">
           <Select value={activeTab} onValueChange={setActiveTab}>
-            <SelectTrigger className=" bg-accent w-full border-border">
-              <SelectValue placeholder="Select section" />
+            <SelectTrigger className="bg-accent w-full border-border">
+              <SelectValue placeholder={t("manageRestaurant.mobileTabs.selectPrompt")} />
             </SelectTrigger>
             <SelectContent className="bg-accent border-border">
-              <SelectItem value="orders" className="hover:bg-accent hover:text-accent-foreground">
-                📋 Orders
-              </SelectItem>
-              <SelectItem value="manage-restaurant" className="hover:bg-accent hover:text-accent-foreground">
-                🏠 Restaurant
-              </SelectItem>
-              <SelectItem value="menuItems" className="hover:bg-accent hover:text-accent-foreground">
-                🍽️ Menu
-              </SelectItem>
-              <SelectItem value="analytical" className="hover:bg-accent hover:text-accent-foreground">
-                📊 Analytics
-              </SelectItem>
-              <SelectItem value="dashboard" className="hover:bg-accent hover:text-accent-foreground">
-                📈 Dashboard
-              </SelectItem>
+              {Object.entries({
+                "orders": t("manageRestaurant.mobileTabs.orders"),
+                "manage-restaurant": t("manageRestaurant.mobileTabs.manage"),
+                "menuItems": t("manageRestaurant.mobileTabs.menu"),
+                "analytical": t("manageRestaurant.mobileTabs.analytics"),
+                "dashboard": t("manageRestaurant.mobileTabs.dashboard")
+              }).map(([value, label]) => (
+                <SelectItem 
+                  key={value} 
+                  value={value}
+                  className="hover:bg-accent hover:text-accent-foreground"
+                >
+                  {label}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>
       ) : (
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="mb-6 bg-card border-border">
-            <TabsTrigger value="orders" className="hover:bg-accent hover:text-accent-foreground">
-              Orders
-            </TabsTrigger>
-            <TabsTrigger value="manage-restaurant" className="hover:bg-accent hover:text-accent-foreground">
-              Manage Restaurant
-            </TabsTrigger>
-            <TabsTrigger value="menuItems" className="hover:bg-accent hover:text-accent-foreground">
-              Menu Items
-            </TabsTrigger>
-            <TabsTrigger value="analytical" className="hover:bg-accent hover:text-accent-foreground">
-              Analytics
-            </TabsTrigger>
-            <TabsTrigger value="dashboard" className="hover:bg-accent hover:text-accent-foreground">
-              Dashboard
-            </TabsTrigger>
+            {Object.entries({
+              "orders": t("manageRestaurant.tabs.orders"),
+              "manage-restaurant": t("manageRestaurant.tabs.manage"),
+              "menuItems": t("manageRestaurant.tabs.menu"),
+              "analytical": t("manageRestaurant.tabs.analytics"),
+              "dashboard": t("manageRestaurant.tabs.dashboard")
+            }).map(([value, label]) => (
+              <TabsTrigger 
+                key={value}
+                value={value}
+                className="hover:bg-accent hover:text-accent-foreground"
+              >
+                {label}
+              </TabsTrigger>
+            ))}
           </TabsList>
         </Tabs>
       )}
@@ -159,18 +160,17 @@ const ManageRestaurantPage = () => {
       {/* Mobile Content */}
       {isMobile ? (
         <div className="mt-2">
-          {activeTab === "orders" && <MobileOrdersList orders={orders} />
-          }
-
+          {activeTab === "orders" && <MobileOrdersList orders={orders} />}
           {activeTab === "manage-restaurant" && (
             <div className="bg-card p-3 rounded-lg border border-border">
               <h2 className="text-xl font-bold mb-3">
-                {currentRestaurant?._id ? "Update Restaurant" : "Create Restaurant"}
+                {currentRestaurant?._id 
+                  ? t("manageRestaurant.formTitles.update")
+                  : t("manageRestaurant.formTitles.create")}
               </h2>
               <MobileManageRestaurantForm />
             </div>
           )}
-
           {activeTab === "menuItems" && <MobileMenuItems />}
           {activeTab === "analytical" && <AnalyticsDashboard />}
           {activeTab === "dashboard" && <Dashboard />}
@@ -180,9 +180,10 @@ const ManageRestaurantPage = () => {
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsContent value="orders" className="bg-accent/10 rounded-lg border border-border">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
-              {/* Orders List Column */}
               <div className="lg:col-span-1 space-y-4">
-                <h2 className="text-2xl font-bold">Active Orders: {orders?.length}</h2>
+                <h2 className="text-2xl font-bold">
+                  {t("manageRestaurant.orders.active", { count: orders?.length })}
+                </h2>
                 <div className="space-y-4 max-h-[calc(100vh-200px)] overflow-y-auto">
                   {orders?.map((order) => (
                     <div 
@@ -200,7 +201,6 @@ const ManageRestaurantPage = () => {
                 </div>
               </div>
 
-              {/* Order Details Column */}
               <div className="lg:col-span-2">
                 {selectedOrder ? (
                   <OrderItemCardInfo order={selectedOrder} />
@@ -208,10 +208,10 @@ const ManageRestaurantPage = () => {
                   <div className="flex items-center justify-center h-full bg-card rounded-lg p-8 border border-border">
                     <div className="text-center text-muted-foreground">
                       <h3 className="text-xl font-medium">
-                        Select an order to view details
+                        {t("manageRestaurant.orders.selectPrompt")}
                       </h3>
                       <p className="text-sm mt-2">
-                        Click on any order from the list to see its full details
+                        {t("manageRestaurant.orders.selectDescription")}
                       </p>
                     </div>
                   </div>
@@ -223,7 +223,9 @@ const ManageRestaurantPage = () => {
           <TabsContent value="manage-restaurant">
             <div className="bg-card p-6 rounded-lg border border-border">
               <h2 className="text-2xl font-bold mb-4">
-                {currentRestaurant?._id ? "Update Restaurant" : "Create Restaurant"}
+                {currentRestaurant?._id 
+                  ? t("manageRestaurant.formTitles.update")
+                  : t("manageRestaurant.formTitles.create")}
               </h2>
               <ManageRestaurantForm />
             </div>

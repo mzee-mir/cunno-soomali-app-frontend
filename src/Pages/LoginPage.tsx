@@ -1,26 +1,28 @@
-import {SigninForm}  from "@/components/SigninForm";
-import { SignupForm } from "@/components/SignupForm"; // Assuming you have a RegisterForm component
+import {SigninForm} from "@/components/SigninForm";
+import { SignupForm } from "@/components/SignupForm";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { GalleryVerticalEnd } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion"; // Import Framer Motion
+import { motion, AnimatePresence } from "framer-motion";
 import loginimahe from '../assets/loginimahe.jpg'
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
-// Reusable Logo Component
 function Logo() {
+  const { t } = useTranslation();
   return (
     <div className="flex justify-center gap-2 md:justify-start">
       <a href="#" className="flex items-center gap-2 font-medium">
         <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
           <GalleryVerticalEnd className="size-4" />
         </div>
-        Acme Inc.
+        {t("nav.logo")}
       </a>
     </div>
   );
 }
 
 export default function LoginPage() {
+  const { t } = useTranslation();
   const [tab, setTab] = useState("Signin");
 
   return (
@@ -30,8 +32,8 @@ export default function LoginPage() {
         <div className="w-full max-w-xs">
           <Tabs defaultValue="Signin" className="w-full" onValueChange={setTab}>
             <TabsList className="grid w-full grid-cols-2 bg-card">
-              <TabsTrigger value="Signin">Signin</TabsTrigger>
-              <TabsTrigger value="Signup">Register</TabsTrigger>
+              <TabsTrigger value="Signin">{t("loginPage.tabs.signin")}</TabsTrigger>
+              <TabsTrigger value="Signup">{t("loginPage.tabs.signup")}</TabsTrigger>
             </TabsList>
           </Tabs>
 

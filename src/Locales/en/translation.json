@@ -1,0 +1,547 @@
+{
+    "addAddress": {
+      "title": "Add Address",
+      "addressLine": "Address Line",
+      "city": "City",
+      "state": "State",
+      "pincode": "Pincode",
+      "country": "Country",
+      "mobile": "Mobile No.",
+      "submit": "Submit"
+    },
+    "addToCart": {
+      "add": "Add to Cart",
+      "outOfStock": "Out of Stock",
+      "removeItem": "removed from cart",
+      "updateError": "Failed to update quantity",
+      "removeError": "Failed to remove item",
+      "alreadyInCart": "Item is already in cart",
+      "addError": "Failed to add item to cart"
+    },
+    "cartMobile": {
+      "items": "items",
+      "viewCart": "View Cart"
+    },
+    "checkout": {
+      "title": "Enter Delivery Info",
+      "button": {
+        "checkout": "Checkout",
+        "confirmPay": "Confirm & Pay"
+      },
+      "name": "Full Name",
+      "email": "Email",
+      "mobile": "Mobile No.",
+      "savedAddresses": "Saved Addresses",
+      "selectAddress": "Select a saved address",
+      "newAddress": "Or enter a new address",
+      "deliveryAddress": "Delivery Address",
+      "confirmPay": "Confirm & Pay",
+      "addressRequired": "Please select or enter a delivery address."
+    },
+    "orderTable": {
+      "status": "Status",
+      "restaurant": "Restaurant",
+      "orderDate": "Order Date",
+      "amount": "Amount",
+      "review": "Review",
+      "actions": "Actions",
+      "confirmDelete": "Confirm Deletion",
+      "deleteQuestion": "Are you sure you want to delete this order?",
+      "no": "No",
+      "yes": "Yes"
+    },
+    "cuisineFilter": {
+      "title": "Filter By Cuisine",
+      "reset": "Reset Filters",
+      "viewMore": "View More",
+      "viewLess": "View Less"
+    },
+    "dashboard": {
+      "title":"Dashboard",
+      "performance": "Performance Metrics",
+      "revenueDescription": "Showing revenue and orders data from dashboard",
+      "revenue": "Revenue",
+      "orders": "Orders",
+      "totalRevenue": "Total Revenue",
+      "totalOrders": "Total Orders",
+      "regularCustomers": "Regular Customers",
+      "orderCompletion": "Order Completion",
+      "growthRate": "Growth Rate",
+      "quickActions": "Quick Actions",
+      "today": "Today",
+      "thisWeek": "This Week",
+      "thisMonth": "This Month",
+      "orderedMore": "Ordered more than 5 times",
+      "successfullyDelivered": "Successfully delivered",
+      "comparedToPrevious": "Compared to previous"
+      
+    },
+    "cart": {
+        "title": "Shopping Cart",
+        "emptyTitle": "Your cart is empty",
+        "emptyMessage": "Start adding some delicious items!",
+        "shopNow": "Shop Now",
+        "subtotal": "Subtotal",
+        "discount": "Discount",
+        "delivery": "Delivery",
+        "free": "FREE",
+        "total": "Total",
+        "continueShopping": "Continue Shopping",
+        "qty": "Qty"
+      },
+      "editAddress": {
+        "editTitle": "Edit Address"
+      },
+      "footer": {
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service"
+      },
+      "nav": {
+        "orders": "Orders",
+        "restaurant": "Restaurant",
+        "adminDashboard": "Admin Dashboard",
+        "login": "Log in"
+      },
+      "menuItem": {
+        "discount": "(-{percent}%)" 
+      },
+      "loading": "Loading",
+      "menuItemUploader": {
+        "title": "Add Menu Item Image",
+        "upload": "Upload Image",
+        "invalidFile": "Please upload an image file",
+        "fileTooLarge": "Image size should be less than 2MB",
+        "success": "Menu item image uploaded successfully",
+        "error": "Failed to upload menu item image"
+      },
+      "menuItemList": {
+        "noItems": "No menu items yet",
+        "clearSelection": "Clear Selection",
+        "inStock": "In stock",
+        "outOfStock": "Out of stock",
+        "published": "Published",
+        "hidden": "Hidden",
+        "discount": "{percent}% off"
+      },
+      "menuItems": {
+        "title": "Menu Items",
+        "addItem": "Add Menu Item",
+        "editItem": "Edit Menu Item",
+        "createItem": "Create Menu Item",
+        "updateItem": "Update Menu Item",
+        "deleteConfirm": "Are you sure you want to delete this menu item?",
+        "deleteSuccess": "Menu item deleted successfully",
+        "deleteError": "Failed to delete menu item",
+        "noRestaurant": "No restaurant selected",
+        "success": "Menu item created successfully",
+        "update": "Menu item updated successfully" ,
+        "error": "Operation failed",
+        "name": "Name",
+        "price": "Price",
+        "description": "Description",
+        "discount": "Discount (%)",
+        "stock": "In Stock",
+        "publish": "Publish",
+        "image": "Menu Item Image"
+      },
+      "mobileMenuItems": {
+        "addItem": "Add Menu Item",
+        "myRestaurant": "My Restaurant"
+      },
+      "mobileNav": {
+        "welcome": "Welcome customer",
+        "orderStatus": "Order Status",
+        "userProfile": "User Profile",
+        "address": "Address",
+        "logout": "Log Out"
+      },
+      "mobileOrders": {
+        "noOrders": "No orders found",
+        "order": "Order #{id}",
+        "items": "Items",
+        "status": "Status",
+        "total": "Total",
+        "deliveryTo": "Delivery to",
+        "orderDetails": "Order Details",
+        "orderId": "Order ID",
+        "activeOrders": "Active Orders: {count}"
+      },
+      "notifications": {
+        "title": "Notifications",
+        "noNotifications": "No notifications",
+        "clearRead": "Clear Read",
+        "delete": "×",
+        "loading": "Loading..."
+      },
+      "orderHistory": {
+        "columns": "Columns",
+        "noResults": "No results",
+        "selectedCount": "{selected} of {total} row(s) selected",
+        "previous": "Previous",
+        "next": "Next",
+        "orderReview": "Order Review"
+      },
+      "orderInfo": {
+        "orderDate": "Order Date",
+        "restaurant": "Restaurant"
+      },
+      "orderItemCardInfo": {
+    "status": "Status:",
+    "selectStatusPlaceholder": "Select status",
+    "orderItems": "Order Items",
+    "deliveryTo": "Delivery to:",
+    "updateError": "Failed to update order status",
+    "total": "Total"
+  },
+  "orderItemCard": {
+    "customer": "Customer",
+    "items": "Items:",
+    "status": "Status:",
+    "total": "Total:",
+    "id": "ID:"
+  },
+  "orderStatusDetail": {
+    "deliveringTo": "Delivering to:",
+    "yourOrder": "Your Order",
+    "total": "Total"
+  },
+  "orderStatusFilter":{
+    "status": "All Statuses"
+  },
+  "orderStatusHeader": {
+    "orderStatus": "Order status:",
+    "expectedBy": "Expected by:",
+    "orderDate": "Order Date:"
+  },
+  "orderSummary": {
+    "yourOrder": "Your Order",
+    "delivery": "Delivery"
+  },
+  "restaurantCard": {
+    "phone": "Phone:",
+    "hours": "Hours:",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "restaurantInfo": {
+    "cityCountry": "{city}, {country}"
+  },
+  "commons": {
+    "currencyFormat": "${amount}",
+    "dateFormats": {
+      "short": "MMM dd, yyyy h:mm a",
+      "timeWithDate": "HH:mm - MMM d, yyyy",
+      "dayMonthYear": "d-M-yyyy"
+    }
+  },
+  "review": {
+    "restaurantReviews": {
+      "customerReviews": "Customer Reviews",
+      "reviewError": "Failed to submit review:",
+      "writeReview": "Write a Review",
+      "noReviews": "No reviews yet. Be the first to review!",
+      "loadingReviews": "Loading reviews...",
+      "reviewsCount": "({count} reviews)",
+      "addYourReview": "Add Your Review",
+      "yourReview": "Your Review",
+      "submitReview": "Submit Review",
+      "submitting": "Submitting...",
+      "thankYou": "Thank you for your feedback!",
+      "ratingRequired": "Please select a rating"
+    },
+    "reviewForm": {
+      "leaveReview": "Leave a Review",
+      "placeholder": "How was your order experience?",
+      "submit": "Submit",
+      "servicesPlaceholder": "How was your services"
+    },
+    "reviewList": {
+      "reviews": "Reviews"
+    }
+  },
+  "search": {
+    "searchBar": {
+      "reset": "Reset",
+      "search": "Search",
+      "requiredError": "Restaurant name is required"
+    },
+    "searchResults": {
+      "restaurantsFound": "Restaurant found in",
+      "changeLocation": "Change Location",
+      "loading": "Loading restaurant details...",
+      "error": "Error loading restaurant:"
+    },
+    "sortOptions": {
+      "bestMatch": "Best match",
+      "deliveryPrice": "Delivery price",
+      "estimatedDeliveryTime": "Estimated delivery time",
+      "sortBy": "Sort by: "
+    }
+  },
+  "Auth": {
+    "signIn": {
+      "title": "Welcome back",
+      "subtitle": "Enter your email below to login to your account",
+      "email": "Email",
+      "password": "Password",
+      "forgot": "Forgot password?",
+      "button": "Login",
+      "loading": "Logging in...",
+      "info": "Don't have an account?",
+      "terms": "By clicking continue, you agree to our Terms of Service and Privacy Policy."
+    },
+    "signUp": {
+      "title": "Welcome",
+      "subtitle": "Create your account",
+      "username": "Username",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "button": "Sign Up",
+      "loading": "Creating Account...",
+      "terms": "By clicking continue, you agree to our Terms of Service and Privacy Policy.",
+      "passwordMismatch": "Passwords do not match."
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error: {error}",
+    "deliveryPrice": "Delivery Price",
+    "deliveryTime": "{minutes} mins"
+  },
+  "user": {
+    "menu": {
+      "myRestaurant": "My Restaurant",
+      "userProfile": "User Profile",
+      "address": "Address",
+      "logOut": "Log Out"
+    },
+    "avatar": {
+      "updateTitle": "Update Profile Picture",
+      "selectImage": "Select Image",
+      "uploading": "Uploading...",
+      "fileRequirements": "JPG, PNG up to 2MB",
+      "success": "Avatar updated successfully",
+      "error": {
+        "fileType": "Please upload an image file",
+        "fileSize": "Image size should be less than 2MB",
+        "uploadFailed": "Failed to upload avatar"
+      }
+    }
+  },
+  "restaurant": {
+    "image": {
+      "addTitle": "Add Restaurant Image",
+      "selectImage": "Select Image",
+      "addImage": "Add Image",
+      "uploading": "Uploading...",
+      "fileRequirements": "JPG, PNG up to 2MB",
+      "success": "Restaurant image uploaded successfully",
+      "error": {
+        "fileType": "Please upload an image file",
+        "fileSize": "Image size should be less than 2MB",
+        "uploadFailed": "Failed to upload restaurant image"
+      }
+    }
+  },
+  "imageUploader": {
+    "title": "Upload Image",
+    "selectImage": "Select Image",
+    "uploading": "Uploading...",
+    "fileRequirements": "JPG, PNG up to 2MB",
+    "success": "Image uploaded successfully",
+    "error": {
+      "fileType": "Please upload an image file",
+      "fileSize": "Image size should be less than 2MB",
+      "uploadFailed": "Failed to upload image"
+    }
+  },
+  "theme": {
+    "toggleLabel": "Toggle theme"
+  },
+  "address": {
+    "title": "Address",
+    "addAddress": "Add Address",
+    "removeSuccess": "Address Removed",
+    "fields": {
+      "addressLine": "Address Line",
+      "city": "City",
+      "state": "State",
+      "country": "Country",
+      "pincode": "Pincode",
+      "mobile": "Mobile"
+    }
+  },
+  "auth": {
+    "callback": {
+      "verifying": "Verifying and redirecting...",
+      "checkingAccount": "Checking your account..."
+    }
+  },
+  "checkouts": {
+    "title": "Enter Delivery Info",
+    "button": {
+      "checkout": "Checkout",
+      "confirmPay": "Confirm & Pay"
+    },
+    "fields": {
+      "name": "Full Name",
+      "email": "Email",
+      "mobile": "Mobile No.",
+      "address": {
+        "saved": "Saved Addresses",
+        "new": "Or enter a new address",
+        "delivery": "Delivery Address",
+        "selectPlaceholder": "Select a saved address",
+        "placeholder": "123 Street Name, City",
+        "error": "Please select or enter a delivery address"
+      }
+    }
+  },
+  "detailsPage": {
+    "loading": "Loading...",
+    "notFound": "Restaurant not found"
+  },
+  "emailVerification": {
+    "title": "Verify Your Email",
+    "description": "Enter the 6-digit code sent to {email}",
+    "button": {
+      "verify": "Verify Email",
+      "verifying": "Verifying..."
+    },
+    "error": "No email found. Please sign up first."
+  },
+  "forgotPassword": {
+    "title": "Forgot Password",
+    "button": {
+      "reset": "Reset Password",
+      "sending": "Sending OTP..."
+    },
+    "success": "OTP sent! Check your email.",
+    "loginLink": "Remember your password? Login here"
+  },
+  "homePage": {
+    "title": "Kacun meel waliba aad joogto cunno Somali ah.",
+    "subtitle": "Hadaba maxaad sugaysaa!",
+    "searchPlaceholder": "Search by City or Town",
+    "appSection": {
+      "title": "Dhaqso dalbo",
+      "subtitle": "la soodag App-ka si aad cunadaada u hesho dhaqso"
+    }
+  },
+  "loginPage": {
+    "tabs": {
+      "signin": "Signin",
+      "signup": "Register"
+    }
+  },
+  "manageRestaurant": {
+    "tabs": {
+      "orders": "Orders",
+      "manage": "Manage Restaurant",
+      "menu": "Menu Items",
+      "analytics": "Analytics",
+      "dashboard": "Dashboard"
+    },
+    "mobileTabs": {
+      "orders": "📋 Orders",
+      "manage": "🏠 Restaurant",
+      "menu": "🍽️ Menu",
+      "analytics": "📊 Analytics",
+      "dashboard": "📈 Dashboard"
+    },
+    "formTitles": {
+      "create": "Create Restaurant",
+      "update": "Update Restaurant"
+    },
+    "orders": {
+      "active": "Active Orders: {count}",
+      "selectPrompt": "Select an order to view details",
+      "selectDescription": "Click on any order from the list to see its full details"
+    },
+    "messages": {
+      "loading": "Loading restaurant data...",
+      "success": {
+        "loaded": "Restaurant data loaded successfully",
+        "created": "Restaurant created successfully",
+        "updated": "Restaurant updated successfully",
+        "deleted": "Restaurant deleted successfully"
+      },
+      "error": {
+        "fetch": "Failed to fetch restaurants",
+        "save": "Failed to save restaurant",
+        "delete": "Failed to delete restaurant"
+      }
+    }
+  },
+  "orderStatus": {
+    "loading": "Loading...",
+    "noOrders": "No orders found"
+  },
+  "resetPassword": {
+    "title": "Reset Password",
+    "fields": {
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password"
+    },
+    "button": {
+      "reset": "Reset Password",
+      "resetting": "Resetting Password..."
+    },
+    "messages": {
+      "success": "Password reset successfully! You can now login.",
+      "error": {
+        "invalidRequest": "Invalid request. Please start the password reset process again.",
+        "mismatch": "Passwords do not match."
+      },
+      "loginLink": "Remember your password? Login here"
+    }
+  },
+  "resetPasswordVerification": {
+    "title": "Verify OTP",
+    "description": "Enter the 6-digit code sent to {email}",
+    "button": {
+      "verify": "Verify OTP",
+      "verifying": "Verifying..."
+    },
+    "messages": {
+      "success": "OTP verified successfully! You can now reset your password.",
+      "error": "Invalid request. Please request a new password reset."
+    }
+  },
+  "searchPage": {
+    "loading": "Loading...",
+    "noResults": "No Results Found",
+    "searchPlaceholder": "Search by cuisine or restaurant name"
+  },
+  "userProfile": {
+    "title": "User Profile",
+    "description": "View and change your profile information",
+    "avatar": {
+      "edit": "Edit Avatar"
+    },
+    "sections": {
+      "address": "Address Information"
+    },
+    "fields": {
+      "name": "Name",
+      "email": "Email",
+      "mobile": "Mobile",
+      "addressLine1": "Address Line 1",
+      "city": "City",
+      "country": "Country"
+    },
+    "button": {
+      "save": "Save Changes",
+      "saving": "Saving..."
+    },
+    "messages": {
+      "success": "Profile updated successfully",
+      "error": "Failed to update profile",
+      "validation": {
+        "required": "{field} is required",
+        "email": "Invalid email address"
+      }
+    }
+  }
+}

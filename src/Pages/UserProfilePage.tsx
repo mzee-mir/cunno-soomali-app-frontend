@@ -14,6 +14,7 @@ import { setUserDetails } from "@/store/userSlice";
 import fetchUserDetails from "@/lib/fetchUserDetails";
 import UserProfileAvatarEdit from "@/components/UserProfileAvatarEdit";
 import { RootState } from '@/store/store';
+import { useTranslation } from 'react-i18next';
 
 const formSchema = z.object({
     name: z.string().min(1, "Name is required"),
@@ -27,6 +28,7 @@ const formSchema = z.object({
 export type UserFormData = z.infer<typeof formSchema>;
 
 const UserProfileForm = () => {
+    const { t } = useTranslation();
     const user = useSelector((state: RootState) => state.user);
     const dispatch = useDispatch();
     const [openProfileAvatarEdit, setProfileAvatarEdit] = useState(false);
@@ -58,12 +60,12 @@ const UserProfileForm = () => {
             });
 
             if (response.data.success) {
-                toast.success(response.data.message);
+                toast.success(t("userProfile.messages.success"));
                 const userData = await fetchUserDetails();
                 dispatch(setUserDetails(userData.data));
             }
         } catch (error) {
-            toast.error("Failed to update profile");
+            toast.error(t("userProfile.messages.error"));
             console.error(error);
         } finally {
             setIsLoading(false);
@@ -89,9 +91,9 @@ const UserProfileForm = () => {
                     variant="outline" 
                     size="sm"
                     onClick={() => setProfileAvatarEdit(true)}
-                    className=" bg-input/10 hover:text-primarys-foreground"
+                    className="bg-input/10 hover:text-primarys-foreground"
                 >
-                    Edit Avatar
+                    {t("userProfile.avatar.editTitle")}
                 </Button>
                 
                 {openProfileAvatarEdit && (
@@ -103,9 +105,11 @@ const UserProfileForm = () => {
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 bg-card rounded-lg p-6 border border-borde">
                     <div>
-                        <h2 className="text-2xl font-bold text-foregroundT">User Profile</h2>
+                        <h2 className="text-2xl font-bold text-foregroundT">
+                            {t("userProfile.title")}
+                        </h2>
                         <FormDescription className="text-muted-foreground">
-                            View and change your profile information
+                            {t("userProfile.description")}
                         </FormDescription>
                     </div>
 
@@ -115,7 +119,9 @@ const UserProfileForm = () => {
                             name="name"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-foreground">Name</FormLabel>
+                                    <FormLabel className="text-foreground">
+                                        {t("userProfile.fields.name")}
+                                    </FormLabel>
                                     <FormControl>
                                         <Input {...field} className="bg-input border-borde" />
                                     </FormControl>
@@ -129,7 +135,9 @@ const UserProfileForm = () => {
                             name="email"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-foregroundT">Email</FormLabel>
+                                    <FormLabel className="text-foregroundT">
+                                        {t("userProfile.fields.email")}
+                                    </FormLabel>
                                     <FormControl>
                                         <Input {...field} disabled className="bg-input border-borde" />
                                     </FormControl>
@@ -143,7 +151,9 @@ const UserProfileForm = () => {
                             name="mobile"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-foregroundT">Mobile</FormLabel>
+                                    <FormLabel className="text-foregroundT">
+                                        {t("userProfile.fields.mobile")}
+                                    </FormLabel>
                                     <FormControl>
                                         <Input {...field} className="bg-input border-borde" />
                                     </FormControl>
@@ -155,14 +165,18 @@ const UserProfileForm = () => {
 
                     {/* Address Section */}
                     <div className="space-y-2">
-                        <h3 className="font-medium text-foregroundT">Address Information</h3>
+                        <h3 className="font-medium text-foregroundT">
+                            {t("userProfile.sections.address")}
+                        </h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <FormField 
                                 control={form.control}
                                 name="addressLine1"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="text-foregroundT">Address Line 1</FormLabel>
+                                        <FormLabel className="text-foregroundT">
+                                            {t("userProfile.fields.addressLine1")}
+                                        </FormLabel>
                                         <FormControl>
                                             <Input {...field} className="bg-input border-borde" />
                                         </FormControl>
@@ -176,7 +190,9 @@ const UserProfileForm = () => {
                                 name="city"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="text-foregroundT">City</FormLabel>
+                                        <FormLabel className="text-foregroundT">
+                                            {t("userProfile.fields.city")}
+                                        </FormLabel>
                                         <FormControl>
                                             <Input {...field} className="bg-input border-borde" />
                                         </FormControl>
@@ -190,7 +206,9 @@ const UserProfileForm = () => {
                                 name="country"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="text-foregroundT">Country</FormLabel>
+                                        <FormLabel className="text-foregroundT">
+                                            {t("userProfile.fields.country")}
+                                        </FormLabel>
                                         <FormControl>
                                             <Input {...field} className="bg-input border-borde" />
                                         </FormControl>
@@ -206,7 +224,7 @@ const UserProfileForm = () => {
                         className="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-400 hover:to-blue-600 transition-all duration-300 text-primarys-foreground"
                         disabled={isLoading}
                     >
-                        {isLoading ? "Saving..." : "Save Changes"}
+                        {isLoading ? t("userProfile.button.saving") : t("userProfile.button.save")}
                     </Button>
                 </form>
             </Form>

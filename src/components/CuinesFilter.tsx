@@ -3,6 +3,7 @@ import { Label } from "./ui/label";
 import { Check, ChevronDown, ChevronUp } from "lucide-react";
 import { ChangeEvent } from "react";
 import { Button } from "./ui/button";
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   onChange: (cuisines: string[]) => void;
@@ -18,7 +19,8 @@ const CuisineFilter = ({
   onExpandedClick,
 }: Props) => {
 
-    
+  const { t } = useTranslation();
+
   const handleCuisinesChange = (event: ChangeEvent<HTMLInputElement>) => {
     const clickedCuisine = event.target.value;
     const isChecked = event.target.checked;
@@ -35,12 +37,12 @@ const CuisineFilter = ({
   return (
     <>
       <div className="flex justify-between items-center px-2">
-        <div className="text-md font-semibold mb-2">Filter By Cuisine</div>
+        <div className="text-md font-semibold mb-2">{t("cuisineFilter.title")}</div>
         <div
           onClick={handleCuisinesReset}
           className="text-sm font-semibold mb-2 underline cursor-pointer text-blue-500"
         >
-          Reset Filters
+          {t("cuisineFilter.reset")}
         </div>
       </div>
 
@@ -81,11 +83,11 @@ const CuisineFilter = ({
         >
           {isExpanded ? (
             <span className="flex flex-row items-center">
-              View Less <ChevronUp />
+              {t("cuisineFilter.viewLess")} <ChevronUp />
             </span>
           ) : (
             <span className="flex flex-row items-center">
-              View More <ChevronDown />
+              {t("cuisineFilter.viewMore")} <ChevronDown />
             </span>
           )}
         </Button>

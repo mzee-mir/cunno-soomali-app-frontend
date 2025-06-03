@@ -12,8 +12,10 @@ import { useGlobalContext } from '@/Provider/Global';
 import { useState } from 'react';
 import NotificationBell from './NotificationBell';
 import { ThemeToggle } from './ThemeToggle';
+import { useTranslation } from 'react-i18next';
 
 const MobileNav = () => {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const user = useSelector((state: RootState) => state.user);
     const { totalQty } = useGlobalContext();
@@ -35,6 +37,7 @@ const MobileNav = () => {
                     <button 
                         className="relative hover:text-primary-500 transition-colors"
                         onClick={() => setIsCartOpen(true)}
+                        aria-label={t('cart.title')}
                     >
                         <FaShoppingCart className="h-6 w-6" />
                         {totalQty > 0 && (
@@ -69,7 +72,7 @@ const MobileNav = () => {
                                 {user?.name}
                             </span> 
                         ) : (
-                            <span>Soo dhawoow macmiil</span>
+                            <span>{t('mobileNav.welcome')}</span>
                         )}
                     </SheetTitle>
                     <Separator />
@@ -81,7 +84,7 @@ const MobileNav = () => {
                                 className='flex-1 font-bold bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-400 hover:to-blue-600 transition-all duration-300'
                                 onClick={handleLoginRedirect}
                             >
-                                Log In
+                                {t('nav.login')}
                             </Button> 
                         )}
                     </SheetDescription>

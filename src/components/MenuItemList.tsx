@@ -1,6 +1,7 @@
 import React, { memo, useCallback } from "react";
 import { IMenuItem } from "@/store/menuItemSlice"; // Assuming you have a MenuItem type
 import { X } from "lucide-react"; // Import an icon for the clear button
+import { useTranslation } from 'react-i18next';
 
 interface MenuItemsListProps {
   items: IMenuItem[];
@@ -15,6 +16,7 @@ const MenuItemsList = memo(({
   onSelectItem,
   loading 
 }: MenuItemsListProps) => {
+  const { t } = useTranslation();
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent, id: string | null) => {
       if (e.key === "Enter" || e.key === " ") {
@@ -43,7 +45,7 @@ const MenuItemsList = memo(({
   if (items.length === 0) {
     return (
       <div className="text-center py-8">
-        <p className="text-gray-500">No menu items yet</p>
+        <p className="text-gray-500">{t("menuItemList.noItems")}</p>
       </div>
     );
   }
@@ -100,7 +102,7 @@ const MenuItemsList = memo(({
                       : "bg-red-100 text-red-800"
                   }`}
                 >
-                  {item.stock ? "In stock" : "Out of stock"}
+                  {item.stock ? (t("menuItemList.inStock")) : (t("menuItemList.outOfStock"))}
                 </span>
                 <span
                   className={`text-xs px-1.5 py-0.5 rounded-full ${
@@ -109,7 +111,7 @@ const MenuItemsList = memo(({
                       : "bg-yellow-100 text-yellow-800"
                   }`}
                 >
-                  {item.publish ? "Published" : "Hidden"}
+                  {item.publish ? (t("menuItemList.published")) : (t("menuItemList.hidden"))}
                 </span>
               </div>
             </div>

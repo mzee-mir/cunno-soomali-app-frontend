@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import "./global.css";
-
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoute from './AppRouter';
 import { Toaster } from 'sonner';
@@ -11,6 +10,7 @@ import Auth0ProvideWithNavigate from './auth/Auth0ProvideWithNavigate';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { GlobalProvider } from './Provider/Global';
 import { ThemeProvider } from './context/themeContext';
+import { LanguageProvider } from './context/LanguageProvider';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,6 +26,7 @@ const queryClient = new QueryClient({
 ReactDOM.createRoot(document.getElementById('root')!).render(
 <ThemeProvider>
 <React.StrictMode>
+<LanguageProvider>
 <Provider store={store}>
 <QueryClientProvider client={queryClient}>
   <Router>  
@@ -38,6 +39,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   </Router>
   </QueryClientProvider>
 </Provider>
+</LanguageProvider>
 </React.StrictMode>,
 </ThemeProvider>
 );

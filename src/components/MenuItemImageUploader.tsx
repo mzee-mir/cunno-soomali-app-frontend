@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import LoadinButton from "@/components/LoadinButton";
 import { RootState } from '@/store/store';
 import { Button } from './ui/button';
+import { useTranslation } from 'react-i18next';
 
 interface MenuItemImageUploaderProps {
   restaurantId: string;
@@ -29,6 +30,7 @@ const MenuItemImageUploader = ({
   const [loading, setLoading] = useState(false);
   const { menuItems } = useSelector((state: RootState) => state.menuItem);
   const currentMenuItem = menuItems.find(item => item._id === menuItemId);
+  const { t } = useTranslation();
 
   const handleUploadMenuItemImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -39,12 +41,12 @@ const MenuItemImageUploader = ({
 
     // Validate file type and size
     if (!file.type.startsWith('image/')) {
-      toast.error('Please upload an image file');
+      toast.error((t("menuItemUploader.invalidFile")));
       return;
     }
 
     if (file.size > 2 * 1024 * 1024) { // 2MB limit
-      toast.error('Image size should be less than 2MB');
+      toast.error((t("menuItemUploader.fileTooLarge")));
       return;
     }
 
@@ -59,14 +61,14 @@ const MenuItemImageUploader = ({
           menuItemId,
           file
         );
-        toast.success('Menu item image uploaded successfully');
+        toast.success((t("menuItemUploader.success")));
         if (onClose) onClose();
       } else if (onImageUpload) {
         // New menu item - pass the file to parent
         onImageUpload(file);
       }
     } catch (error) {
-      toast.error('Failed to upload menu item image');
+      toast.error((t("menuItemUploader.error")));
       console.error(error);
     } finally {
       setLoading(false);
@@ -78,7 +80,7 @@ const MenuItemImageUploader = ({
       <section className='fixed inset-0 bg-neutral-900 bg-opacity-60 p-4 flex items-center justify-center z-50'>
         <div className='bg-white max-w-sm w-full rounded-lg p-6 shadow-lg'>
           <div className='flex justify-between items-center mb-4'>
-            <h3 className='text-lg font-semibold'>Add Menu Item Image</h3>
+            <h3 className='text-lg font-semibold'>{t("menuItemUploader.title")}</h3>
             {onClose && (
               <button 
                 onClick={onClose} 
@@ -117,7 +119,7 @@ const MenuItemImageUploader = ({
                 disabled={loading}
               />
               <Button className=' bg-gradient-to-r from-blue-600 to-blue-800 text-white px-4 py-2 rounded-lg cursor-pointer hover:from-blue-400 hover:to-blue-600 transition-all duration-300 '>
-                {loading ? <LoadinButton /> : 'Upload Image'}
+                {loading ? <LoadinButton /> : (t("menuItemUploader.upload"))}
               </Button>
             </label>
           </div>
@@ -151,7 +153,7 @@ const MenuItemImageUploader = ({
           disabled={loading}
         />
         <div className='bg-blue-600 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-700 transition-colors'>
-          {loading ? <LoadinButton /> : 'Upload Image'}
+          {loading ? <LoadinButton /> : (t("menuItemUploader.upload"))}
         </div>
       </label>
     </div>

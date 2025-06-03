@@ -10,11 +10,15 @@ import toast from "react-hot-toast";
 import AxiosToastError from "@/lib/AxiosTost";
 import { logout } from "@/store/userSlice";
 import Axios from "@/lib/Axios";
+import LanguageSelector from "./LanguageSelector";
+import { useTranslation } from 'react-i18next';
+
 
 const UsernameMenu = ( ) => {
     const user = useSelector((state: RootState)=> state.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const { t } = useTranslation()
  
     const handleLogout = async () => {
       try {
@@ -54,7 +58,7 @@ const UsernameMenu = ( ) => {
 
             {isRestaurantOwner && (
               <Link to="/manage-restaurant" className="flex bg-card items-center font-bold hover:text-blue-500">
-                My Restaurant
+                {t('mobileMenuItems.myRestaurant')}
               </Link>
             )}
             </DropdownMenuItem>
@@ -62,15 +66,25 @@ const UsernameMenu = ( ) => {
             <DropdownMenuItem>
 
             <Link to= "/user-profile" className="font-bold hover:text-blue-500"> 
-                User Profile
+            {t('mobileNav.userProfile')}
                 </Link>
             </DropdownMenuItem>
 
             <DropdownMenuItem>
 
-            <Link to= "/address" className="font-bold hover:text-blue-500"> 
-                Address
+            <Link to= "/user-address" className="font-bold hover:text-blue-500"> 
+            {t('mobileNav.address')}
                 </Link>
+            </DropdownMenuItem>
+            
+            <DropdownMenuItem>
+            <Link to= "/order-status" className="font-bold hover:text-blue-500"> 
+              {t('mobileNav.orderStatus')}
+                </Link>
+            </DropdownMenuItem>
+
+            <DropdownMenuItem>
+              <LanguageSelector />
             </DropdownMenuItem>
 
             <Separator/>

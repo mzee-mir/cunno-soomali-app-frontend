@@ -7,6 +7,7 @@ import ReviewInterface from "./ReviewInterface";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { Star, Trash } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 interface MobileOrderHistoryTableProps {
   orders: Order[];
@@ -19,6 +20,7 @@ export function MobileOrderHistoryTable({
   handleRemoveOrder,
   handleReviewClick 
 }: MobileOrderHistoryTableProps) {
+  const { t } = useTranslation();
   const [selectedOrder, setSelectedOrder] = React.useState<Order | null>(null);
   const [showReviewDialog, setShowReviewDialog] = React.useState(false);
   const [deleteConfirmOpen, setDeleteConfirmOpen] = React.useState(false);
@@ -52,7 +54,7 @@ export function MobileOrderHistoryTable({
   if (!orders?.length) {
     return (
       <div className="p-4 text-center text-muted-foreground">
-        <p>No orders found</p>
+        <p>{t('mobileOrders.noOrders')}</p>
       </div>
     );
   }
@@ -70,7 +72,7 @@ export function MobileOrderHistoryTable({
               <div className="flex flex-col items-start w-full space-y-1">
                 <div className="flex justify-between w-full items-center">
                   <span className="font-medium text-sm text-foregroundT">
-                    Order #{order._id.slice(-6).toUpperCase()}
+                    {t('mobileOrders.order', { id: order._id.slice(-6).toUpperCase() })}
                   </span>
                   <Badge 
                     variant={
@@ -87,7 +89,7 @@ export function MobileOrderHistoryTable({
                     {format(new Date(order.createdAt), "MMM dd, yyyy")}
                   </span>
                   <span className="font-medium text-foreground">
-                    ${order.totalAmount.toFixed(2)}
+                    {t('commons.currencyFormat', { amount: order.totalAmount.toFixed(2) })}
                   </span>
                 </div>
               </div>
@@ -96,7 +98,7 @@ export function MobileOrderHistoryTable({
             <AccordionContent className="px-3 py-2 bg-accent/5">
               <div className="space-y-3">
                 <div className="text-sm space-y-1">
-                  <p className="font-medium text-foreground">Items:</p>
+                  <p className="font-medium text-foreground">{t('orderItemCard.items')}</p>
                   <ul className="list-disc pl-5 space-y-1">
                     {order.cartItems.slice(0, 3).map((item, index) => (
                       <li key={index} className="text-muted-foreground">
@@ -110,7 +112,7 @@ export function MobileOrderHistoryTable({
                 </div>
                 
                 <div className="text-sm">
-                  <p className="font-medium text-foreground">Delivery Address:</p>
+                  <p className="font-medium text-foreground">{t('orderItemCardInfo.deliveryTo')}</p>
                   <p className="text-muted-foreground">{order.deliveryDetails?.address}</p>
                 </div>
                 
@@ -122,7 +124,7 @@ export function MobileOrderHistoryTable({
                     className="flex-1 text-xs gap-1 border-border bg-input hover:bg-destructive/10 hover:text-destructive"
                   >
                     <Trash className="h-4 w-4"/>
-                    Remove
+                    {t('orderTable.actions')}
                   </Button>
                   {order.status === "delivered" && (
                     <Button
@@ -131,7 +133,7 @@ export function MobileOrderHistoryTable({
                       className="flex-1 text-xs gap-1 bg-input hover:bg-input/60"
                     >
                       <Star className="h-4 w-4" />
-                      Review
+                      {t('orderTable.review')}
                     </Button>
                   )}
                 </div>
@@ -146,7 +148,7 @@ export function MobileOrderHistoryTable({
         <DialogContent className="max-w-[95vw] rounded-lg bg-card border-border">
           <DialogHeader>
             <DialogTitle className="text-center text-foreground">
-              Review Order #{selectedOrder?._id.slice(-6).toUpperCase()}
+              {t('review.reviewForm.leaveReview')} #{selectedOrder?._id.slice(-6).toUpperCase()}
             </DialogTitle>
           </DialogHeader>
           {selectedOrder && (
@@ -163,11 +165,11 @@ export function MobileOrderHistoryTable({
         <DialogContent className="max-w-[95vw] rounded-lg bg-card border-border">
           <DialogHeader>
             <DialogTitle className="text-foreground">
-              Confirm Order Removal
+              {t('orderTable.confirmDelete')}
             </DialogTitle>
           </DialogHeader>
           <div className="text-muted-foreground">
-            Are you sure you want to remove this order from your history?
+            {t('orderTable.deleteQuestion')}
           </div>
           <div className="flex justify-end space-x-2 mt-4">
             <Button 
@@ -175,13 +177,13 @@ export function MobileOrderHistoryTable({
               onClick={() => setDeleteConfirmOpen(false)}
               className="border-border"
             >
-              Cancel
+              {t('orderTable.no')}
             </Button>
             <Button 
               variant="destructive"
               onClick={confirmDelete}
             >
-              Remove Order
+              {t('orderTable.yes')}
             </Button>
           </div>
         </DialogContent>

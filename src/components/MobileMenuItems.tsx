@@ -16,6 +16,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useTranslation } from 'react-i18next';
 
 const menuItemFormSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -40,6 +41,7 @@ const MobileMenuItems = () => {
   const [openForm, setOpenForm] = useState(false);
   const [editData, setEditData] = useState<any>(null);
   const [newItemImage, setNewItemImage] = useState<File | null>(null);
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const { currentRestaurant } = useSelector(
@@ -78,7 +80,7 @@ const MobileMenuItems = () => {
   const onSubmit = async (formData: MenuItemFormData) => {
     try {
       if (!currentRestaurant?._id) {
-        toast.error("No restaurant selected");
+        toast.error(t("menuItems.noRestaurant"));
         return;
       }
 
@@ -110,7 +112,7 @@ const MobileMenuItems = () => {
           }
         }
 
-        toast.success("Menu item updated successfully");
+        toast.success(t("menuItems.update"));
       } else {
         // Create new menu item
         const newMenuItem = await MenuItemService.createMenuItem(
@@ -140,7 +142,7 @@ const MobileMenuItems = () => {
           }
         }
 
-        toast.success("Menu item created successfully");
+        toast.success(t("menuItems.success"));
       }
 
       setOpenForm(false);
@@ -155,7 +157,7 @@ const MobileMenuItems = () => {
     } catch (error) {
       const errorMessage = error instanceof Error 
         ? error.message 
-        : "Operation failed";
+        : t("menuItems.error");
       toast.error(errorMessage);
     } finally {
       dispatch(setMenuItemLoading(false));
@@ -164,9 +166,9 @@ const MobileMenuItems = () => {
 
   const handleDelete = async (menuItemId: string) => {
     try {
-      if (window.confirm("Are you sure you want to delete this menu item?")) {
+      if (window.confirm(t("menuItems.deleteConfirm"))) {
         await MenuItemService.softDeleteMenuItem(dispatch, menuItemId);
-        toast.success("Menu item deleted successfully");
+        toast.success(t("menuItems.deleteSuccess"));
         if (editData?._id === menuItemId) {
           setEditData(null);
         }
@@ -174,7 +176,7 @@ const MobileMenuItems = () => {
     } catch (error) {
       const errorMessage = error instanceof Error 
         ? error.message 
-        : "Failed to delete menu item";
+        : t("menuItems.deleteError");
       toast.error(errorMessage);
     }
   };
@@ -182,7 +184,9 @@ const MobileMenuItems = () => {
   return (
     <div className="">
       <div className="bg-card shadow-lg px-2 py-2 flex justify-between gap-4 items-center">
-        <h2 className="font-semibold text-ellipsis line-clamp-1">Menu Items</h2>
+        <h2 className="font-semibold text-ellipsis line-clamp-1">
+          {t("menuItems.title")}
+        </h2>
         <button 
           onClick={() => {
             setEditData(null);
@@ -190,7 +194,7 @@ const MobileMenuItems = () => {
           }} 
           className="border border-primary-200 text-primary-200 px-3 hover:bg-primary-200 hover:text-foreground/50 py-1 rounded-full"
         >
-          Add Menu Item
+          {t("menuItems.addItem")}
         </button>
       </div>
 
@@ -208,10 +212,10 @@ const MobileMenuItems = () => {
                 )}
                 <div>
                   <p className="font-medium">{item.name}</p>
-                  <p>${item.price.toFixed(2)}</p>
+                  <p>{t("commons.currencyFormat", { amount: item.price.toFixed(2) })}</p>
                   {item.discount && item.discount > 0 && (
                     <span className="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded-full">
-                      {item.discount}% off
+                      {t("menuItemList.discount", { percent: item.discount })}
                     </span>
                   )}
                 </div>
@@ -221,12 +225,12 @@ const MobileMenuItems = () => {
                 <span className={`text-xs px-1.5 py-0.5 rounded-full ${
                   item.stock ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
                 }`}>
-                  {item.stock ? "In Stock" : "Out of Stock"}
+                  {item.stock ? t("menuItemList.inStock") : t("menuItemList.outOfStock")}
                 </span>
                 <span className={`text-xs px-1.5 py-0.5 rounded-full ${
                   item.publish ? "bg-blue-100 text-blue-800" : "bg-yellow-100 text-yellow-800"
                 }`}>
-                  {item.publish ? "Published" : "Hidden"}
+                  {item.publish ? t("menuItemList.published") : t("menuItemList.hidden")}
                 </span>
               </div>
             </div>
@@ -257,7 +261,7 @@ const MobileMenuItems = () => {
           }} 
           className="h-16 bg-input/40 border-2 border-dashed flex justify-center items-center cursor-pointer"
         >
-          Add menu item
+          {t("menuItems.addItem")}
         </div>
       </div>
 
@@ -267,7 +271,7 @@ const MobileMenuItems = () => {
           <div className="bg-card p-4 w-full max-w-lg mt-8 mx-auto rounded">
             <div className="flex justify-between items-center gap-4">
               <h2 className="font-semibold">
-                {editData ? "Edit Menu Item" : "Add Menu Item"}
+                {editData ? t("menuItems.editItem") : t("menuItems.addItem")}
               </h2>
               <button 
                 onClick={() => {
@@ -288,7 +292,7 @@ const MobileMenuItems = () => {
                   className="mt-4 grid gap-4"
                 >
                   <div className="grid gap-1">
-                    <Label>Menu Item Image</Label>
+                    <Label>{t("menuItems.image")}</Label>
                     <MenuItemImageUploader
                       restaurantId={currentRestaurant?._id || ""}
                       menuItemId={editData?._id || undefined}
@@ -299,10 +303,10 @@ const MobileMenuItems = () => {
                   </div>
 
                   <div className="grid gap-1">
-                    <Label>Name</Label>
+                    <Label>{t("menuItems.name")}</Label>
                     <Input
                       {...form.register("name")}
-                      placeholder="Item name"
+                      placeholder={t("menuItems.name")}
                       className="bg-input/20"
                     />
                     {form.formState.errors.name && (
@@ -313,7 +317,7 @@ const MobileMenuItems = () => {
                   </div>
 
                   <div className="grid gap-1">
-                    <Label>Price ($)</Label>
+                    <Label>{t("menuItems.price")}</Label>
                     <Input
                       type="number"
                       step="0.01"
@@ -329,10 +333,10 @@ const MobileMenuItems = () => {
                   </div>
 
                   <div className="grid gap-1">
-                    <Label>Description</Label>
+                    <Label>{t("menuItems.description")}</Label>
                     <Textarea
                       {...form.register("description")}
-                      placeholder="Item description"
+                      placeholder={t("menuItems.description")}
                       rows={3}
                       className="bg-input/20"
                     />
@@ -344,7 +348,7 @@ const MobileMenuItems = () => {
                   </div>
 
                   <div className="grid gap-1">
-                    <Label>Discount (%)</Label>
+                    <Label>{t("menuItems.discount")}</Label>
                     <Input
                       type="number"
                       min="0"
@@ -367,7 +371,7 @@ const MobileMenuItems = () => {
                         form.setValue("stock", checked)
                       }
                     />
-                    <Label htmlFor="stock">In Stock</Label>
+                    <Label htmlFor="stock">{t("menuItems.stock")}</Label>
                   </div>
 
                   <div className="flex items-center space-x-2">
@@ -378,7 +382,7 @@ const MobileMenuItems = () => {
                         form.setValue("publish", checked)
                       }
                     />
-                    <Label htmlFor="publish">Publish</Label>
+                    <Label htmlFor="publish">{t("menuItems.publish")}</Label>
                   </div>
 
                   <button 
@@ -390,9 +394,9 @@ const MobileMenuItems = () => {
                     {loading ? (
                       <LoadinButton />
                     ) : editData ? (
-                      "Update Menu Item"
+                      t("menuItems.updateItem")
                     ) : (
-                      "Create Menu Item"
+                      t("menuItems.createItem")
                     )}
                   </button>
                 </form>

@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Axios from "@/lib/Axios"; // Import Axios client
+import { useTranslation } from 'react-i18next';
 import SummaryApi from "@/api/Userauth"; // Use structured API endpoints
 import AxiosToastError from "@/lib/AxiosTost"; // Handle errors with toast
 import { useDispatch } from "react-redux";
@@ -20,6 +21,7 @@ export function SigninForm({ className, ...props }: React.ComponentProps<"div">)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation();
 
   // Handle login form submission
   const handleLogin = async (e: React.FormEvent) => {
@@ -35,6 +37,8 @@ export function SigninForm({ className, ...props }: React.ComponentProps<"div">)
         return;
       }
       
+      console.log("Translated title:", t("title"));
+
       // Store tokens correctly
       localStorage.setItem("accessToken", response.data.data.accessToken);
       localStorage.setItem("refreshToken", response.data.data.refreshToken);
@@ -69,13 +73,13 @@ export function SigninForm({ className, ...props }: React.ComponentProps<"div">)
           <form className="p-6 md:p-8" onSubmit={handleLogin}>
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
-                <h1 className="text-2xl font-bold">Welcome back</h1>
-                <p className="text-muted-foreground">Login to your account</p>
+                <h1 className="text-2xl font-bold">{t("Auth.signIn.title")}</h1>
+                <p className="text-muted-foreground">{t("Auth.signIn.subtitle")}</p>
               </div>
 
               {/* Email Input */}
               <div className="grid gap-2">
-                <Label htmlFor="email" className="text-foreground">Email</Label>
+                <Label htmlFor="email" className="text-foreground">{t("Auth.signIn.email")}</Label>
                 <Input
                   id="email"
                   type="email"
@@ -90,9 +94,9 @@ export function SigninForm({ className, ...props }: React.ComponentProps<"div">)
               {/* Password Input */}
               <div className="grid gap-2">
                 <div className="flex items-center">
-                  <Label htmlFor="password" className="text-foreground">Password</Label>
+                  <Label htmlFor="password" className="text-foreground">{t("Auth.signIn.password")}</Label>
                   <a href="/forgot-Password" className="ml-auto text-sm underline-offset-2 hover:underline text-foreground">
-                    Forgot password?
+                  {t("Auth.signIn.forgot")}
                   </a>
                 </div>
                 <div className="relative">
@@ -116,13 +120,13 @@ export function SigninForm({ className, ...props }: React.ComponentProps<"div">)
 
               {/* Submit Button */}
               <Button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-blue-800" disabled={!isFormValid || loading}>
-                {loading ? "Logging in..." : "Login"}
+                {loading ? t("Auth.signIn.loading") : t("Auth.signIn.button")}
               </Button>
 
               {/* Signup Link */}
               <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
                 <span className="relative z-10 bg-gradient-to-r from-card to-input px-2 text-muted-foreground">
-                  Or continue with
+                {t("Auth.signIn.info")}
                 </span>
               </div>
               <div className="grid grid-cols-3 gap-4">
@@ -160,8 +164,7 @@ export function SigninForm({ className, ...props }: React.ComponentProps<"div">)
         </CardContent>
       </Card>
       <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
+        {t("Auth.signIn.terms")}
       </div>
     </div>
   );

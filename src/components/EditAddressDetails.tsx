@@ -6,6 +6,7 @@ import toast from 'react-hot-toast'
 import AxiosToastError from '@/lib/AxiosTost'
 import { IoClose } from "react-icons/io5";
 import { useGlobalContext } from '@/Provider/Global'
+import { useTranslation } from 'react-i18next';
 
 interface EditAddressDetailsProps {
     close: () => void;
@@ -36,6 +37,7 @@ interface EditAddressDetailsProps {
     });
   
     const { fetchAddress } = useGlobalContext();
+    const { t } = useTranslation();
   
     const onSubmit = async (formData: typeof data) => {
       try {
@@ -77,7 +79,7 @@ interface EditAddressDetailsProps {
             </div>
             <form className='mt-4 grid gap-4' onSubmit={handleSubmit(onSubmit)}>
                 <div className='grid gap-1'>
-                    <label htmlFor='addressline'>Address Line :</label>
+                    <label htmlFor='addressline'>{t("addAddress.addressLine")} :</label>
                     <input
                         type='text'
                         id='addressline' 
@@ -86,7 +88,7 @@ interface EditAddressDetailsProps {
                     />
                 </div>
                 <div className='grid gap-1'>
-                    <label htmlFor='city'>City :</label>
+                    <label htmlFor='city'>{t("addAddress.city")} :</label>
                     <input
                         type='text'
                         id='city' 
@@ -95,7 +97,7 @@ interface EditAddressDetailsProps {
                     />
                 </div>
                 <div className='grid gap-1'>
-                    <label htmlFor='state'>State :</label>
+                    <label htmlFor='state'>{t("addAddress.state")} :</label>
                     <input
                         type='text'
                         id='state' 
@@ -104,7 +106,7 @@ interface EditAddressDetailsProps {
                     />
                 </div>
                 <div className='grid gap-1'>
-                    <label htmlFor='pincode'>Pincode :</label>
+                    <label htmlFor='pincode'>{t("addAddress.pincode")} :</label>
                     <input
                         type='text'
                         id='pincode' 
@@ -113,7 +115,7 @@ interface EditAddressDetailsProps {
                     />
                 </div>
                 <div className='grid gap-1'>
-                    <label htmlFor='country'>Country :</label>
+                    <label htmlFor='country'>{t("addAddress.country")} :</label>
                     <input
                         type='text'
                         id='country' 
@@ -122,7 +124,7 @@ interface EditAddressDetailsProps {
                     />
                 </div>
                 <div className='grid gap-1'>
-                    <label htmlFor='mobile'>Mobile No. :</label>
+                    <label htmlFor='mobile'>{t("addAddress.mobile")} :</label>
                     <input
                         type='text'
                         id='mobile' 
@@ -131,7 +133,7 @@ interface EditAddressDetailsProps {
                     />
                 </div>
 
-                <button type='submit' className='bg-primary-200 w-full  py-2 font-semibold mt-4 hover:bg-primary-100'>Submit</button>
+                <button type='submit' className='bg-primary-200 w-full  py-2 font-semibold mt-4 hover:bg-primary-100'>{t("addAddress.submit")}</button>
             </form>
         </div>
     </section>

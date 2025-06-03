@@ -8,8 +8,10 @@ import AxiosToastError from "@/lib/AxiosTost";
 import { logout } from "@/store/userSlice";
 import Axios from "@/lib/Axios";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const MobileNavLinks = () => {
+  const { t } = useTranslation();
   const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -37,29 +39,41 @@ const MobileNavLinks = () => {
 
   return (
     <>
-      <Link to="/order-status" className="flex bg-card items-center font-bold hover:text-blue-500">
-        Order Status
+      <Link 
+        to="/order-status" 
+        className="flex bg-card items-center font-bold hover:text-blue-500"
+      >
+        {t('mobileNav.orderStatus')}
       </Link>
 
-      <Link to="/user-profile" className="flex bg-card items-center font-bold hover:text-blue-500">
-        User Profile
+      <Link 
+        to="/user-profile" 
+        className="flex bg-card items-center font-bold hover:text-blue-500"
+      >
+        {t('mobileNav.userProfile')}
       </Link>
 
       {isRestaurantOwner && (
-        <Link to="/manage-restaurant" className="flex bg-card items-center font-bold hover:text-blue-500">
-          My Restaurant
+        <Link 
+          to="/manage-restaurant" 
+          className="flex bg-card items-center font-bold hover:text-blue-500"
+        >
+          {t('mobileMenuItems.myRestaurant')}
         </Link>
       )}
 
-      <Link to="/user-address" className="flex bg-card items-center font-bold hover:text-blue-500">
-        Address
+      <Link 
+        to="/user-address" 
+        className="flex bg-card items-center font-bold hover:text-blue-500"
+      >
+        {t('mobileNav.address')}
       </Link>
 
       <Button 
         className="flex items-center px-3 font-bold bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-400 hover:to-blue-600 transition-all duration-300"
         onClick={handleLogout}
       >
-        Log Out
+        {t('mobileNav.logout')}
       </Button>
     </>
   );

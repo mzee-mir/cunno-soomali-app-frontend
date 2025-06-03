@@ -6,12 +6,14 @@ import { Badge } from "./ui/badge";
 import { Trash } from "lucide-react";
 import { Separator } from "./ui/separator";
 import { IRestaurant } from "@/store/restaurantSlice";
+import { useTranslation } from 'react-i18next';
 
 type Props = {
     restaurant: IRestaurant;
 };
 
 const OrderSummary = ({ restaurant }: Props) => {
+    const { t } = useTranslation();
     const { deleteCartItem, fetchCartItem } = useGlobalContext();
     const { cartItems } = useSelector((state: RootState) => state.cartMenuItem);
 
@@ -37,7 +39,7 @@ const OrderSummary = ({ restaurant }: Props) => {
         <>
             <CardHeader>
                 <CardTitle className="text-2xl font-bold tracking-tight flex justify-between">
-                    <span>Your Order</span>
+                    <span>{t('orderSummary.yourOrder')}</span>
                     <span>${getTotalCost()}</span>
                 </CardTitle>
             </CardHeader>
@@ -62,7 +64,7 @@ const OrderSummary = ({ restaurant }: Props) => {
                 ))}
                 <Separator />
                 <div className="flex justify-between">
-                    <span>Delivery</span>
+                    <span>{t('orderSummary.delivery')}</span>
                     <span>${restaurant.deliveryPrice }</span>
                 </div>
                 <Separator />

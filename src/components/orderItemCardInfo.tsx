@@ -21,6 +21,7 @@ import { useAppDispatch } from "@/store/store";
 import { Order, OrderStatus } from "@/store/OrderSlice";
 import { OrderService } from "@/lib/orderService";
 import { ORDER_STATUS } from "@/config/order-status-config";
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   order: Order;
@@ -30,6 +31,7 @@ const OrderItemCardInfo: React.FC<Props> = ({ order }) => {
   const dispatch = useAppDispatch();
   const [status, setStatus] = useState<OrderStatus>(order.status);
   const [isUpdating, setIsUpdating] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setStatus(order.status);
@@ -41,7 +43,7 @@ const OrderItemCardInfo: React.FC<Props> = ({ order }) => {
       await OrderService.updateRestaurantOrderStatus(dispatch, order._id, newStatus);
       setStatus(newStatus);
     } catch (err) {
-      console.error("Failed to update order status", err);
+      console.error(t('orderItemCardInfo.updateError'), err);
     } finally {
       setIsUpdating(false);
     }
@@ -71,14 +73,14 @@ const OrderItemCardInfo: React.FC<Props> = ({ order }) => {
             </div>
           </div>
           <div className="flex items-center space-x-2">
-            <Label htmlFor="order-status">Status:</Label>
+            <Label htmlFor="order-status">{t('orderItemCardInfo.status')}:</Label>
             <Select
               value={status}
               onValueChange={handleStatusChange}
               disabled={isUpdating}
             >
               <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select status" />
+                <SelectValue placeholder={t('orderItemCardInfo.selectStatusPlaceholder')} />
               </SelectTrigger>
               <SelectContent>
                 {ORDER_STATUS.map((status) => (
@@ -94,7 +96,7 @@ const OrderItemCardInfo: React.FC<Props> = ({ order }) => {
 
       <CardContent className="p-6">
         <div className="space-y-4">
-          <h3 className="font-medium">Order Items</h3>
+          <h3 className="font-medium">{t('orderItemCardInfo.orderItems')}</h3>
           <div className="space-y-6">
             {order.cartItems.map((item) => {
               return (
@@ -127,13 +129,13 @@ const OrderItemCardInfo: React.FC<Props> = ({ order }) => {
 
       <CardFooter className="border-t p-6 flex justify-between items-center">
         <div className="space-y-1">
-          <p className="text-sm text-gray-500">Delivery to:</p>
+          <p className="text-sm text-gray-500">{t('orderItemCardInfo.deliveryTo')}:</p>
           <p className="font-medium">{order.deliveryDetails?.name}</p>
           <p className="font-medium">{order.deliveryDetails?.mobile}</p>
           <p className="font-medium">{order.deliveryDetails?.address}</p>
         </div>
         <div className="text-right">
-          <p className="text-sm text-gray-500">Total</p>
+          <p className="text-sm text-gray-500">{t('orderItemCardInfo.total')}</p>
           <p className="text-2xl font-bold">
             ${(order.totalAmount / 100).toFixed(2)}
           </p>

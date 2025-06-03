@@ -1,6 +1,11 @@
 {
-    "signin.title": "Soo gal",
-  "signin.email": "Cinwaanka Emailka",
-  "signin.password": "Furaha",
-  "signin.button": "Soo gal"
+  "title": "Ku soo dhawoow",
+  "subtitle": "Geli xogta ciwaankaaga",
+  "tab": "Soo gal",
+  "email": "Cinwaanka Emailka",
+  "password": "Furaha",
+  "button": "Soo gal",
+  "loading": "Waa lagu galin...",
+  "forgot": "Waam ilaaway Furaha Cinwaanka?",
+  "info": "Ama ku isticmaal"
 }

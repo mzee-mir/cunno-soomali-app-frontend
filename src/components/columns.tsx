@@ -8,6 +8,7 @@ import { useState } from "react";
 import OrderInfo from "@/components/OrderInfo"; // Import the OrderInfo component
 import { Order } from "@/store/OrderSlice";
 import { Star } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 const getOrderDateInfo = (createdAt: string | undefined) => {
   if (!createdAt) return "No date";
@@ -36,10 +37,13 @@ const getStatusColor = (status: string) => {
 export const columns = (
   handleRemoveOrder: (orderId: string) => void,
   handleReviewClick?: (orderId: string) => void // Make this optional
-): ColumnDef<Order>[] => [
-  {
-    id: "select",
-    header: ({ table }) => (
+): ColumnDef<Order>[] => {
+  const { t } = useTranslation();
+  return [
+
+    {
+      id: "select",
+      header: ({ table }) => (
       <Checkbox
         checked={table.getIsAllPageRowsSelected()}
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
@@ -58,7 +62,7 @@ export const columns = (
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: t("orderTable.status"),
     cell: ({ row }) => {
       const status = row.getValue("status") as string;
       return (
@@ -93,12 +97,12 @@ export const columns = (
   },
   {
     accessorKey: "createdAt",
-    header: "Order Date",
+    header: t("orderTable.orderDate"),
     cell: ({ row }) => <div>{getOrderDateInfo(row.getValue("createdAt"))}</div>,
   },
   {
     accessorKey: "totalAmount",
-    header: "Amount",
+    header: t("orderTable.amount"),
     cell: ({ row }) => {
       const amount = row.getValue<number>("totalAmount");
       return <div className="text-left">${(amount / 100).toFixed(2)}</div>;
@@ -107,7 +111,7 @@ export const columns = (
 
   {
     id: "review",
-    header: "Review",
+    header: t("orderTable.review"),
     cell: ({ row }) => {
       const order = row.original;
       return (
@@ -135,7 +139,7 @@ export const columns = (
   
   {
     id: "actions",
-    header: "Actions",
+    header: t("orderTable.actions"),
     cell: ({ row }) => {
       const order = row.original;
       const [open, setOpen] = useState(false);
@@ -146,6 +150,7 @@ export const columns = (
         handleRemoveOrder(order._id);
         handleClose();
       };
+      
 
       return (
         <div className="flex space-x-2">
@@ -158,16 +163,16 @@ export const columns = (
           />
 
           <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Confirm Deletion</DialogTitle>
+            <DialogTitle>{t("orderTable.confirmDelete")}</DialogTitle>
             <DialogContent>
-              Are you sure you want to delete this order?
+              {t("orderTable.deleteQuestion")}
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose} color="primary">
-                No
+                {t("orderTable.no")}
               </Button>
               <Button onClick={handleConfirm} color="error" autoFocus>
-                Yes
+                {t("orderTable.yes")}
               </Button>
             </DialogActions>
           </Dialog>
@@ -178,3 +183,4 @@ export const columns = (
     enableHiding: false,
   },
 ];
+};

@@ -23,12 +23,14 @@ import { OrderService } from "@/lib/orderService";
 import { ORDER_STATUS } from "@/config/order-status-config";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   order: Order;
 };
 
 const MobileOrderItemCardInfo: React.FC<Props> = ({ order }) => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const [status, setStatus] = useState<OrderStatus>(order.status);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -89,14 +91,16 @@ const MobileOrderItemCardInfo: React.FC<Props> = ({ order }) => {
           <CardContent className="p-4">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <Label htmlFor="order-status" className="text-sm text-foreground">Status:</Label>
+                <Label htmlFor="order-status" className="text-sm text-foreground">
+                  {t('orderItemCardInfo.status')}
+                </Label>
                 <Select
                   value={status}
                   onValueChange={handleStatusChange}
                   disabled={isUpdating}
                 >
                   <SelectTrigger className="w-[150px] bg-input/40 text-foreground">
-                    <SelectValue placeholder="Select status" />
+                    <SelectValue placeholder={t('orderItemCardInfo.selectStatusPlaceholder')} />
                   </SelectTrigger>
                   <SelectContent className="bg-input/100">
                     {ORDER_STATUS.map((status) => (
@@ -109,7 +113,9 @@ const MobileOrderItemCardInfo: React.FC<Props> = ({ order }) => {
               </div>
 
               <div>
-                <h3 className="font-medium text-sm mb-2 text-foreground">Order Items</h3>
+                <h3 className="font-medium text-sm mb-2 text-foreground">
+                  {t('orderItemCardInfo.orderItems')}
+                </h3>
                 <div className="space-y-3 ">
                   {order.cartItems.map((item) => (
                     <div key={item.menuItemId} className="flex items-start text-foreground gap-3">
@@ -125,11 +131,11 @@ const MobileOrderItemCardInfo: React.FC<Props> = ({ order }) => {
                       <div className="flex-1">
                         <h4 className="font-medium text-sm">{item.name}</h4>
                         <p className="text-xs text-gray-500">
-                          ${(item.price / 100).toFixed(2)} × {item.quantity}
+                          {t('commons.currencyFormat', { amount: (item.price / 100).toFixed(2) })} × {item.quantity}
                         </p>
                       </div>
                       <div className="font-medium text-sm">
-                        ${((item.price * item.quantity) / 100).toFixed(2)}
+                        {t('commons.currencyFormat', { amount: ((item.price * item.quantity) / 100).toFixed(2) })}
                       </div>
                     </div>
                   ))}
@@ -140,15 +146,15 @@ const MobileOrderItemCardInfo: React.FC<Props> = ({ order }) => {
 
           <CardFooter className="p-4 border-t flex flex-col gap-3">
             <div className="w-full">
-              <p className="text-xs text-gray-500">Delivery to:</p>
+              <p className="text-xs text-gray-500">{t('orderItemCardInfo.deliveryTo')}</p>
               <p className="font-medium text-sm text-foreground">{order.deliveryDetails?.name}</p>
               <p className="font-medium text-sm text-foreground">{order.deliveryDetails?.mobile}</p>
               <p className="font-medium text-sm text-foreground">{order.deliveryDetails?.address}</p>
             </div>
             <div className="w-full text-right">
-              <p className="text-xs text-gray-500">Total</p>
+              <p className="text-xs text-gray-500">{t('orderItemCardInfo.total')}</p>
               <p className="text-lg font-bold text-foreground">
-                ${(order.totalAmount / 100).toFixed(2)}
+                {t('commons.currencyFormat', { amount: (order.totalAmount / 100).toFixed(2) })}
               </p>
             </div>
           </CardFooter>

@@ -1,20 +1,22 @@
 import { Order } from "@/store/OrderSlice";
 import { Separator } from "@radix-ui/react-separator";
+import { useTranslation } from 'react-i18next';
 
 type Props = {
     order:Order;
 }
 
 const OrderStatusDetail = ({order}:Props) => {
+    const { t } = useTranslation();
     
   return <div className="space-y-5">
     <div className="flex flex-col">
-        <span className="font-bold">Delivering to:</span>
+        <span className="font-bold">{t('orderStatusDetail.deliveringTo')}:</span>
         <span>{order.deliveryDetails?.name}</span>
         <span>{order.deliveryDetails?.address}</span>
     </div>
     <div className="flex flex-col">
-        <span className="font-bold">Your Order</span>
+        <span className="font-bold">{t('orderStatusDetail.yourOrder')}</span>
         <ul>
             {order.cartItems.map((item)=> (
                 <li key={item.menuItemId || `${item.name}-${item.quantity}`}>
@@ -25,7 +27,7 @@ const OrderStatusDetail = ({order}:Props) => {
     </div>
     <Separator/>
     <div className="flex fle-col">
-        <span className="font-bold">Total</span>
+        <span className="font-bold">{t('orderStatusDetail.total')}</span>
         <span>${(order.totalAmount/ 100).toFixed(2)}</span>
         
     </div>

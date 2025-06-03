@@ -18,10 +18,12 @@ import {
 import { fetchDashboardData, setTimePeriod } from '@/store/dashboardSlice';
 import { DashboardLineChart } from './dashboardLineChart';
 import type { SelectChangeEvent } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 const Dashboard: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
     const { data, loading, error, timePeriod } = useSelector((state: RootState) => state.dashboard);
+    const { t } = useTranslation();
   
     useEffect(() => {
       dispatch(fetchDashboardData(timePeriod));
@@ -58,17 +60,17 @@ const Dashboard: React.FC = () => {
   return (
     <div style={{ padding: '20px' }}>
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
-        <Typography variant="h4">Dashboard</Typography>
+        <Typography variant="h4">{t("dashboard.title")}</Typography>
         <FormControl variant="outlined" style={{ minWidth: 120 }}>
-          <InputLabel>Time Period</InputLabel>
+          <InputLabel>{t("dashboard.timePeriod")}</InputLabel>
           <Select
             value={timePeriod}
             onChange={handleTimePeriodChange}
             label="Time Period"
           >
-            <MenuItem value="day">Today</MenuItem>
-            <MenuItem value="week">This Week</MenuItem>
-            <MenuItem value="month">This Month</MenuItem>
+            <MenuItem value="day">{t("dashboard.today")}</MenuItem>
+            <MenuItem value="week">{t("dashboard.thisWeek")}</MenuItem>
+            <MenuItem value="month">{t("dashboard.thisMonth")}</MenuItem>
           </Select>
         </FormControl>
       </Box>
@@ -81,13 +83,13 @@ const Dashboard: React.FC = () => {
           <Card>
             <CardContent className="bg-accent text-foreground">
               <Typography  gutterBottom>
-                Total Revenue
+                {t("dashboard.totalRevenue")}
               </Typography>
               <Typography variant="h5">
                 ${data?.totalRevenue?.toFixed(2) || '0.00'}
               </Typography>
               <Typography variant="body2" >
-                {timePeriod === 'day' ? 'Today' : timePeriod === 'week' ? 'This Week' : 'This Month'}
+                {timePeriod === 'day' ? t("dashboard.today") : timePeriod === 'week' ? t("dashboard.thisWeek") : t("dashboard.thisMonth")}
               </Typography>
             </CardContent>
           </Card>
@@ -98,13 +100,13 @@ const Dashboard: React.FC = () => {
           <Card>
             <CardContent className="bg-accent text-foreground">
               <Typography  gutterBottom>
-                Total Orders
+                {t("dashboard.totalOrders")}
               </Typography>
               <Typography variant="h5">
                 {data?.totalOrders || 0}
               </Typography>
               <Typography variant="body2" >
-                {timePeriod === 'day' ? 'Today' : timePeriod === 'week' ? 'This Week' : 'This Month'}
+                {timePeriod === 'day' ? t("dashboard.today") : timePeriod === 'week' ? t("dashboard.thisWeek") : t("dashboard.thisMonth")}
               </Typography>
             </CardContent>
           </Card>
@@ -115,13 +117,13 @@ const Dashboard: React.FC = () => {
           <Card>
           <CardContent className="bg-accent text-foreground">
               <Typography  gutterBottom>
-                Regular Customers
+                {t("dashboard.regularCustomers")}
               </Typography>
               <Typography variant="h5">
                 {data?.regularCustomers || 0}
               </Typography>
               <Typography variant="body2" >
-                Ordered more than 5 times
+                {t("dashboard.orderedMore")}
               </Typography>
             </CardContent>
           </Card>
@@ -132,13 +134,13 @@ const Dashboard: React.FC = () => {
           <Card>
           <CardContent className="bg-accent text-foreground">
               <Typography gutterBottom>
-                Order Completion
+                {t("dashboard.orderCompletion")}
               </Typography>
               <Typography variant="h5">
                 {data?.orderCompletionRate?.toFixed(1) || '0'}%
               </Typography>
               <Typography variant="body2" >
-                Successfully delivered
+                {t("dashboard.successfullyDelivered")}
               </Typography>
             </CardContent>
           </Card>
@@ -154,13 +156,13 @@ const Dashboard: React.FC = () => {
           <Card>
           <CardContent className="bg-accent text-foreground">
               <Typography variant="h6" gutterBottom>
-                Growth Rate
+                {t("dashboard.growthRate")}
               </Typography>
               <Typography variant="h3" color={data?.growthRate && data.growthRate >= 0 ? 'success.main' : 'error.main'}>
                 {data?.growthRate?.toFixed(1) || '0'}%
               </Typography>
               <Typography variant="body2">
-                Compared to previous {timePeriod === 'day' ? 'day' : timePeriod === 'week' ? 'week' : 'month'}
+                {t("dashboard.comparedToPrevious")} {timePeriod === 'day' ? t("dashboard.day") : timePeriod === 'week' ? t("dashboard.week") : t("dashboard.month")}
               </Typography>
             </CardContent>
           </Card>
@@ -171,7 +173,7 @@ const Dashboard: React.FC = () => {
           <Card>
           <CardContent className="bg-accent text-foreground">
               <Typography variant="h6" gutterBottom>
-                Quick Actions
+                {t("dashboard.quickActions")}
               </Typography>
               {/* Add quick action buttons or links here */}
             </CardContent>

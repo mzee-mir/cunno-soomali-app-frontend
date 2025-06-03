@@ -4,6 +4,7 @@ import StarRating from './StarRating';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { useQueryClient } from 'react-query';
+import { useTranslation } from 'react-i18next';
 
 interface ReviewInterfaceProps {
   orderId: string;
@@ -12,6 +13,7 @@ interface ReviewInterfaceProps {
 
 const ReviewInterface: React.FC<ReviewInterfaceProps> = ({ orderId, onReviewComplete }) => {
   const [rating, setRating] = useState<number>(5);
+  const { t } = useTranslation();
   const [comment, setComment] = useState<string>('');
   const [showForm, setShowForm] = useState<boolean>(true);
   const queryClient = useQueryClient();
@@ -37,7 +39,7 @@ const ReviewInterface: React.FC<ReviewInterfaceProps> = ({ orderId, onReviewComp
         onReviewComplete();
       }
     } catch (error) {
-      console.error("Failed to submit review:", error);
+      console.error(t('reviews.restaurantReviews.reviewError'), error);
     }
   };
 
@@ -53,7 +55,7 @@ const ReviewInterface: React.FC<ReviewInterfaceProps> = ({ orderId, onReviewComp
             <Input
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-              placeholder='How was your order experience?'
+              placeholder={t('reviews.reviewForm.placeholder')}
               className="bg-white mt-1 block border border-gray-300 rounded-md shadow-md"
             />
             <Button
@@ -61,16 +63,16 @@ const ReviewInterface: React.FC<ReviewInterfaceProps> = ({ orderId, onReviewComp
               className="bg-blue-500 mt-1.5 shadow-md"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Submitting...' : 'Submit'}
+              {isSubmitting ? t('reviews.restaurantReviews.submitting') : t('reviews.reviewForm.submit')}
             </Button>
           </div>
         </form>
       ) : (
-        <p className="text-center text-lg font-medium text-green-600">Thank you for your feedback!</p>
+        <p className="text-center text-lg font-medium text-green-600">{t('reviews.restaurantReviews.thankYou')}</p>
       )}
 
       {isLoadingReviews ? (
-        <p>Loading reviews...</p>
+        <p>{t('reviews.restaurantReviews.loadingReviews')}</p>
       ) : (
         <ul>
           {reviews.map((review) => (

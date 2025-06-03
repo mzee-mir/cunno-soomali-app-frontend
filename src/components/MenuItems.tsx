@@ -13,6 +13,8 @@ import { setMenuItemLoading } from "@/store/menuItemSlice";
 import toast from "react-hot-toast";
 import LoadinButton from "@/components/LoadinButton";
 import MenuItemsList from "./MenuItemList";
+import { useTranslation } from 'react-i18next';
+
 
 const menuItemFormSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -38,6 +40,7 @@ const MenuItems = () => {
   const [newItemImage, setNewItemImage] = useState<File | null>(null);
 
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { currentRestaurant } = useSelector(
     (state: RootState) => state.restaurant
   );
@@ -91,7 +94,7 @@ const MenuItems = () => {
   const onSubmit = async (formData: MenuItemFormData) => {
     try {
       if (!currentRestaurant?._id) {
-        toast.error("No restaurant selected");
+        toast.error(t("menuItems.noRestaurant"));
         return;
       }
   
@@ -123,7 +126,7 @@ const MenuItems = () => {
           }
         }
         
-        toast.success("Menu item updated successfully");
+        toast.success(t("menuItems.update"));
       } else {
         const newMenuItem = await MenuItemService.createMenuItem(
           dispatch,
@@ -151,7 +154,7 @@ const MenuItems = () => {
           }
         }
         
-        toast.success("Menu item created successfully");
+        toast.success(t("menuItems.success"));
       }
       
       setSelectedMenuItem(null);
@@ -162,7 +165,7 @@ const MenuItems = () => {
     } catch (error) {
       const errorMessage = error instanceof Error 
         ? error.message 
-        : "Operation failed";
+        : t("menuItems.error");
       toast.error(errorMessage);
     } finally {
       dispatch(setMenuItemLoading(false));
@@ -171,9 +174,9 @@ const MenuItems = () => {
 
   const handleDelete = async (menuItemId: string) => {
     try {
-      if (window.confirm("Are you sure you want to delete this menu item?")) {
+      if (window.confirm(t("menuItems.deleteConfirm"))) {
         await MenuItemService.softDeleteMenuItem(dispatch, menuItemId);
-        toast.success("Menu item deleted successfully");
+        toast.success(t("menuItems.deleteSuccess"));
         if (selectedMenuItem === menuItemId) {
           setSelectedMenuItem(null);
           form.reset(DEFAULT_FORM_VALUES);
@@ -182,7 +185,7 @@ const MenuItems = () => {
     } catch (error) {
       const errorMessage = error instanceof Error 
         ? error.message 
-        : "Failed to delete menu item";
+        : t("menuItems.deleteError");
       toast.error(errorMessage);
     }
   };
@@ -192,7 +195,7 @@ const MenuItems = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Menu Items List */}
         <div className="lg:col-span-1 bg-card p-6 rounded-lg shadow">
-          <h2 className="text-foregroundT text-2xl font-bold mb-4">Menu Items</h2>
+          <h2 className="text-foregroundT text-2xl font-bold mb-4">{t("menuItems.title")}</h2>
           <MenuItemsList 
             items={menuItems}
             selectedItemId={selectedMenuItem}
@@ -210,13 +213,13 @@ const MenuItems = () => {
                 className="space-y-6 bg-card p-6 rounded-lg shadow"
               >
                 <h2 className="text-2xl font-bold">
-                  {selectedMenuItem ? "Edit Menu Item" : "Add New Menu Item"}
+                  {selectedMenuItem ? t("menuItems.addItem") : t("menuItems.editItem")}
                 </h2>
 
                 <div className="grid grid-cols-1 gap-4">
                   {/* Image Upload Section */}
                   <div className="mb-6">
-                    <h3 className="text-lg font-semibold mb-2">Menu Item Image</h3>
+                    <h3 className="text-lg font-semibold mb-2">{t("menuItems.image")}</h3>
                     <MenuItemImageUploader
                       restaurantId={currentRestaurant?._id || ""}
                       menuItemId={selectedMenuItem || undefined}
@@ -228,7 +231,7 @@ const MenuItems = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Name
+                    {t("menuItems.name")}
                     </label>
                     <input
                       {...form.register("name")}
@@ -243,7 +246,7 @@ const MenuItems = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Price
+                    {t("menuItems.price")}
                     </label>
                     <input
                       type="number"
@@ -260,7 +263,7 @@ const MenuItems = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Description
+                    {t("menuItems.description")}
                     </label>
                     <textarea
                       {...form.register("description")}
@@ -277,7 +280,7 @@ const MenuItems = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Discount (%)
+                      {t("menuItems.discount")} (%)
                       </label>
                       <input
                         type="number"
@@ -303,7 +306,7 @@ const MenuItems = () => {
                         className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                       />
                       <label htmlFor="stock" className="ml-2 block text-sm text-gray-700">
-                        In Stock
+                      {t("menuItems.stock")}
                       </label>
                     </div>
 
@@ -315,7 +318,7 @@ const MenuItems = () => {
                         className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                       />
                       <label htmlFor="publish" className="ml-2 block text-sm text-gray-700">
-                        Publish
+                      {t("menuItems.publish")}
                       </label>
                     </div>
                   </div>
@@ -330,7 +333,7 @@ const MenuItems = () => {
                         onClick={() => handleDelete(selectedMenuItem)}
                         disabled={loading}
                       >
-                        Delete
+                        {t("menuItems.delete")}
                       </Button>
                     )}
                   </div>
@@ -343,9 +346,9 @@ const MenuItems = () => {
                       {loading ? (
                         <LoadinButton />
                       ) : selectedMenuItem ? (
-                        "Update Menu Item"
+                        t("menuItems.createItem")
                       ) : (
-                        "Create Menu Item"
+                        t("menuItems.updateItem")
                       )}
                     </Button>
                   </div>

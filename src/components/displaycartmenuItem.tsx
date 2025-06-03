@@ -8,6 +8,7 @@ import AddToCartButton from './AddToCart';
 import { DisplayPriceInRupees } from '@/utils/DisplayPriceInRupees';
 import toast from 'react-hot-toast';
 import CheckoutButton from './CheckoutButton'; // Add this import
+import { useTranslation } from 'react-i18next';
 
 interface CartSidebarProps {
   isOpen: boolean;
@@ -19,6 +20,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({ isOpen, onClose }) => {
   const cartItems = useSelector((state: RootState) => state.cartMenuItem.cartItems);
   const restaurant = useSelector((state: RootState) => state.restaurant.currentRestaurant); // <-- ADD THIS
   const { restaurantId } = useParams();
+  const { t } = useTranslation();
 
   // Calculate discounts and totals
   const subtotal = cartItems.reduce((sum, item) => {
@@ -50,7 +52,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({ isOpen, onClose }) => {
               <div className="flex items-start justify-between">
                 <h2 className="text-lg font-medium text-gray-900 flex items-center gap-2">
                   <FaShoppingCart />
-                  Shopping Cart
+                  {t("cart.title")}
                 </h2>
                 <button
                   type="button"
@@ -67,14 +69,14 @@ const CartSidebar: React.FC<CartSidebarProps> = ({ isOpen, onClose }) => {
                 {cartItems.length === 0 ? (
                   <div className="flex flex-col items-center justify-center py-12">
                     <FaShoppingCart className="h-16 w-16 text-gray-400 mb-4" />
-                    <h3 className="text-lg font-medium text-gray-900 mb-2">Your cart is empty</h3>
-                    <p className="text-gray-500 mb-6">Start adding some delicious items!</p>
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">{t("cart.emptyTitle")}</h3>
+                    <p className="text-gray-500 mb-6">{t("cart.emptyMessage")}</p>
                     <Link
                       to="/"
                       onClick={onClose}
                       className="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600"
                     >
-                      Shop Now
+                      {t("cart.shopNow")}
                     </Link>
                   </div>
                 ) : (
@@ -109,7 +111,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({ isOpen, onClose }) => {
                               )}
                             </div>
                             <div className="flex-1 flex items-end justify-between text-sm">
-                              <p className="text-gray-500">Qty {item.quantity}</p>
+                              <p className="text-gray-500">{t("cart.qty")} {item.quantity}</p>
                               <div className="w-32">
                               <AddToCartButton data={item.menuItemId} />
                               </div>
@@ -127,21 +129,21 @@ const CartSidebar: React.FC<CartSidebarProps> = ({ isOpen, onClose }) => {
             {cartItems.length > 0 && (
               <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                 <div className="flex justify-between text-base font-medium text-gray-900 mb-2">
-                  <p>Subtotal</p>
+                  <p>{t("cart.subtotal")}</p>
                   <p>{DisplayPriceInRupees(subtotal)}</p>
                 </div>
                 {totalDiscount > 0 && (
                   <div className="flex justify-between text-sm text-gray-600 mb-2">
-                    <p>Discount</p>
+                    <p>{t("cart.discount")}</p>
                     <p>-{DisplayPriceInRupees(totalDiscount)}</p>
                   </div>
                 )}
                 <div className="flex justify-between text-sm text-gray-600 mb-2">
-                  <p>Delivery</p>
-                  <p>{deliveryCharge === 0 ? 'FREE' : DisplayPriceInRupees(deliveryCharge)}</p>
+                  <p>{t("cart.delivery")}</p>
+                  <p>{deliveryCharge === 0 ? t("cart.free") : DisplayPriceInRupees(deliveryCharge)}</p>
                 </div>
                 <div className="flex justify-between text-base font-medium text-gray-900 mt-4 pt-4 border-t border-gray-200">
-                  <p>Total</p>
+                  <p>{t("cart.total")}</p>
                   <p>{DisplayPriceInRupees(grandTotal)}</p>
                 </div>
                 <div className="mt-6">
@@ -152,13 +154,13 @@ const CartSidebar: React.FC<CartSidebarProps> = ({ isOpen, onClose }) => {
                 </div>
                 <div className="mt-3 flex justify-center text-sm text-center text-gray-500">
                   <p>
-                    or{' '}
+                    {t("cart.or")}( ' ')
                     <button
                       type="button"
                       className="text-primary-500 font-medium hover:text-primary-600"
                       onClick={onClose}
                     >
-                      Continue Shopping<span aria-hidden="true"> &rarr;</span>
+                      {t("cart.continueShopping")}<span aria-hidden="true"> &rarr;</span>
                     </button>
                   </p>
                 </div>

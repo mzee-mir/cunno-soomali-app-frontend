@@ -1,0 +1,531 @@
+{
+    "addAddress": {
+      "title": "Kudar Cinwaan",
+      "addressLine": "Layinka Cinwaanka",
+      "city": "Magaalo",
+      "state": "Gobol",
+      "pincode": "Koodhka Boostada",
+      "country": "Dalka",
+      "mobile": "Lambarka Taleefanka",
+      "submit": "Gudbi"
+    },
+    "addToCart": {
+      "add": "Ku Dar Gaadhiga",
+      "outOfStock": "Bakhaar La'aan",
+      "removeItem": "waxaa laga saaray gaadhiga",
+      "updateError": "Kuwarka cusboonaysiintu kuma dhacday",
+      "removeError": "Ka saarida alaabta kuma dhacday",
+      "alreadyInCart": "Alaabtu horay ugu jirtaa gaadhiga",
+      "addError": "Ku darida alaabta gaadhiga kuma dhacday"
+    },
+    "cartMobile": {
+      "items": "alaab",
+      "viewCart": "Fiiri Gaadhiga"
+    },
+    "checkout": {
+      "title": "Geli Macluumaadka Gaarsiinta",
+      "name": "Magaca Buuxa",
+      "email": "Iimaylka",
+      "mobile": "Lambarka Taleefanka",
+      "savedAddresses": "Cinwaannada Keydiyey",
+      "selectAddress": "Xulo cinwaan keydiyey",
+      "newAddress": "Ama geli cinwaan cusub",
+      "deliveryAddress": "Cinwaanka Gaarsiinta",
+      "confirmPay": "Xaqiiji & Bixi",
+      "addressRequired": "Fadlan xulo ama geli cinwaanka gaarsiinta."
+    },
+    "orderTable": {
+      "status": "Xaalada",
+      "restaurant": "Maqaayadda",
+      "orderDate": "Taariikhda Dalbashada",
+      "amount": "Qadarka",
+      "review": "Dib u eegis",
+      "actions": "Ficilada",
+      "confirmDelete": "Xaqiiji Tirtirid",
+      "deleteQuestion": "Ma hubtaa inaad rabto inaad tirtirto dalabkan?",
+      "no": "Maya",
+      "yes": "Haa"
+    },
+    "cuisineFilter": {
+      "title": "Kala sooc Nooca Cuntada",
+      "reset": "Dib u dejiso shaandhaynta"
+    },
+    "dashboard": {
+      "title":"Dashboard",
+      "performance": "Tilmaamaha Hawlgalinta",
+      "revenueDescription": "Muujinta dakhliga iyo xogta dalabaadka ee dashboard-ka",
+      "revenue": "Dakhliga",
+      "orders": "Dalabaadka",
+      "totalRevenue": "Wadarta Dakhliga",
+      "totalOrders": "Wadarta Dalabaadka",
+      "regularCustomers": "Macamiisha Joogtada ah",
+      "orderCompletion": "Dhammaystirka Dalabka",
+      "growthRate": "Heerka Kordhinta",
+      "quickActions": "Ficilada Degdega ah",
+      "today": "Maanta",
+      "thisWeek": "Usbuucan",
+      "thisMonth": "Bishan",
+      "orderedMore": "Ka badan 5 jeer dalabay",
+      "successfullyDelivered": "Si guul leh loo gaarsiiyay",
+      "comparedToPrevious": "La barbardhiga kan hore"
+    },
+    "cart": {
+        "title": "Gaadhiga Suuqa",
+        "emptyTitle": "Gaadhigaagu waa madhan yahay",
+        "emptyMessage": "Bilow ku darida alaabo macaan!",
+        "shopNow": "Hadda Iibso",
+        "subtotal": "Wadarta Koose",
+        "discount": "Qiima dhimis",
+        "delivery": "Gaarsiinta",
+        "free": "BILAASH",
+        "total": "Wadarta",
+        "continueShopping": "Sii Iibso",
+        "qty": "Qadarka"
+      },
+      "editAddress": {
+        "editTitle": "Tafatir Cinwaan"
+      },
+      "footer": {
+        "privacy": "Qaanuunka Arrimaha Qarsoon",
+        "terms": "Shuruudaha Adeegga"
+      },
+      "nav": {
+        "orders": "Dalabaadka",
+        "restaurant": "Maqaayadda",
+        "adminDashboard": "Dashboard-ka Maamulaha",
+        "login": "Geli"
+      },
+      "menuItem": {
+        "discount": "(-{percent}%)" 
+      },
+      "loading": "Soo dejis",
+      "menuItemUploader": {
+        "title": "Ku dar Sawirka Alaabta Menu-ka",
+        "upload": "Soo rar Sawir",
+        "invalidFile": "Fadlan soo rar faylka sawirka",
+        "fileTooLarge": "Cabbirka sawirku waa inuu ka yaraan 2MB",
+        "success": "Sawirka alaabta menu-ka si guul leh ayaa loo soo raray",
+        "error": "Ku darida sawirka alaabta menu-ka kuma dhacday"
+      },
+      "menuItemList": {
+        "noItems": "Weli ma jiraan alaabo menu ah",
+        "clearSelection": "Nadiif doorashada",
+        "inStock": "Bakhaarka ku jira",
+        "outOfStock": "Bakhaar La'aan",
+        "published": "La daabacay",
+        "hidden": "Qarsoon",
+        "discount": "{percent}% off"
+      },
+      "menuItems": {
+        "title": "Alaabta Menu-ka",
+        "addItem": "Ku dar Alaab Menu",
+        "editItem": "Tafatir Alaab Menu",
+        "createItem": "Abuur Alaab Menu",
+        "updateItem": "Cusboonaysii Alaab Menu",
+        "deleteConfirm": "Ma hubtaa inaad rabto inaad tirtirto alaabtan menu-ka?",
+        "deleteSuccess": "Alaabta menu-ka si guul leh ayaa loo tirtiray",
+        "deleteError": "Tirtirida alaabta menu-ka kuma dhacday",
+        "noRestaurant": "Maqaayad lama xushin",
+        "success": "Alaabta menu-ka {action} si guul leh",
+        "error": "Hawsha kuma dhacday",
+        "name": "Magaca",
+        "price": "Qiimaha",
+        "description": "Sharaxaad",
+        "discount": "Qiima dhimis (%)",
+        "stock": "Bakhaarka ku jira",
+        "publish": "Daabac",
+        "image": "Sawirka Alaabta Menu-ka"
+      },
+      "mobileMenuItems": {
+        "addItem": "Ku dar Alaab Menu",
+        "myRestaurant": "Maqaayadayda"
+      },
+      "mobileNav": {
+        "welcome": "Soo dhawee macmiil",
+        "orderStatus": "Xaalada Dalabka",
+        "userProfile": "Profile-ka Isticmaalaha",
+        "address": "Cinwaanka",
+        "logout": "Ka bax"
+      },
+      "mobileOrders": {
+        "noOrders": "Lama helin dalabaad",
+        "order": "Dalabka #{id}",
+        "items": "Alaabta",
+        "status": "Xaalada",
+        "total": "Wadarta",
+        "deliveryTo": "Gaarsiin loo sameeyay",
+        "orderDetails": "Faahfaahinta Dalabka",
+        "orderId": "Aqoonsiga Dalabka",
+        "activeOrders": "Dalabaadka Firfircoon: {count}"
+      },
+      "notifications": {
+        "title": "Ogeysiisyada",
+        "noNotifications": "Ma jiro ogeysiisyo",
+        "clearRead": "Nadiif kuwa la akhriyay",
+        "delete": "×"
+      },
+      "orderHistory": {
+        "columns": "Tiirarka",
+        "noResults": "Natiijooyin lama helin",
+        "selectedCount": "{selected} of {total} saf(af) la xushay",
+        "previous": "Hore",
+        "next": "Xiga",
+        "orderReview": "Dib u eegis Dalabka"
+      },
+      "orderInfo": {
+        "orderDate": "Taariikhda Dalabka",
+        "restaurant": "Maqaayadda"
+      },
+      "orderItemCardInfo": {
+    "status": "Xaalada:",
+    "selectStatusPlaceholder": "Xulo xaalada",
+    "orderItems": "Alaabta Dalabka",
+    "deliveryTo": "Gaarsiin loo sameeyay:",
+    "total": "Wadarta"
+  },
+  "orderItemCard": {
+    "customer": "Macmiilka",
+    "items": "Alaabta:",
+    "status": "Xaalada:",
+    "total": "Wadarta:",
+    "id": "Aqoonsiga:"
+  },
+  "orderStatusDetail": {
+    "deliveringTo": "Gaarsiin loo sameeyay:",
+    "yourOrder": "Dalabkaaga",
+    "total": "Wadarta"
+  },
+  "orderStatusHeader": {
+    "orderStatus": "Xaalada dalabka:",
+    "expectedBy": "La filayo ilaa:",
+    "orderDate": "Taariikhda Dalabka:"
+  },
+  "orderSummary": {
+    "yourOrder": "Dalabkaaga",
+    "delivery": "Gaarsiinta"
+  },
+  "restaurantCard": {
+    "phone": "Taleefanka:",
+    "hours": "Saacadaha:",
+    "edit": "Tafatir",
+    "delete": "Tirtir"
+  },
+  "restaurantInfo": {
+    "cityCountry": "{city}, {country}"
+  },
+  "commons": {
+    "currencyFormat": "${amount}",
+    "dateFormats": {
+      "short": "MMM dd, yyyy h:mm a",
+      "timeWithDate": "HH:mm - MMM d, yyyy",
+      "dayMonthYear": "d-M-yyyy"
+    }
+  },
+  "review": {
+    "restaurantReviews": {
+      "customerReviews": "Dib u eegyada Macaamiisha",
+      "writeReview": "Qor Dib u eegis",
+      "noReviews": "Weli ma jiraan dib u eegis. Adiga u horreeya!",
+      "loadingReviews": "Soo dejis dib u eegyada...",
+      "reviewsCount": "({count} dib u eegis)",
+      "addYourReview": "Ku dar Dib u eegyadaada",
+      "yourReview": "Dib u eegyadaada",
+      "submitReview": "Gudbi Dib u eegis",
+      "submitting": "Gudbinaya...",
+      "thankYou": "Mahadsanid aragtidaada!",
+      "ratingRequired": "Fadlan xulo qiimaynta"
+    },
+    "reviewForm": {
+      "leaveReview": "Tag Dib u eegis",
+      "placeholder": "Sidee ahaa khibradaada dalabka?",
+      "submit": "Gudbi",
+      "servicesPlaceholder": "Sidee ahaa adeegyadaada"
+    },
+    "reviewList": {
+      "reviews": "Dib u eegyada"
+    }
+  },
+  "search": {
+    "searchBar": {
+      "reset": "Dib u dejiso",
+      "search": "Raadi",
+      "requiredError": "Magaca maqaayadda waa loo baahan yahay"
+    },
+    "searchResults": {
+      "restaurantsFound": "{total} Maqaayad ayaa laga helay {city}",
+      "changeLocation": "Beddel Goobta"
+    },
+    "sortOptions": {
+      "bestMatch": "Ku habboon",
+      "deliveryPrice": "Qiimaha gaarsiinta",
+      "estimatedDeliveryTime": "Wakhtiga la filayo ee gaarsiinta",
+      "sortBy": "Kala sooc by: {selectedSortLabel}"
+    }
+  },
+  "Auth": {
+    "signIn": {
+      "title": "Ku soo dhawoow",
+      "subtitle": "Geli iimaylkaaga si aad ugu galto akoonkaaga",
+      "email": "Iimaylka",
+      "password": "Furaha",
+      "forgot": "Furaha illowday?",
+      "button": "Geli",
+      "loading": "Galinaya...",
+      "info": "Ma haysataa akoon?",
+      "terms": "Markaad gujiso sii wad, waxaad ogolaataa Shuruudaha Adeegga iyo Qaanuunka Arrimaha Qarsoon."
+    },
+    "signUp": {
+      "title": "Ku soo dhawoow",
+      "subtitle": "Abuur akoonkaaga",
+      "username": "Magaca Isticmaalaha",
+      "email": "Iimaylka",
+      "password": "Furaha",
+      "confirmPassword": "Xaqiiji Furaha",
+      "button": "Saxiix",
+      "loading": "Abuurin Akoon...",
+      "terms": "Markaad gujiso sii wad, waxaad ogolaataa Shuruudaha Adeegga iyo Qaanuunka Arrimaha Qarsoon.",
+      "passwordMismatch": "Furaha lama wadaagin."
+    }
+  },
+  "common": {
+    "loading": "Soo dejis...",
+    "error": "Qalad: {error}",
+    "deliveryPrice": "Qiimaha Gaarsiinta: ${price}",
+    "deliveryTime": "{minutes} daqiiqo"
+  },
+  "user": {
+    "menu": {
+      "myRestaurant": "Maqaayadayda",
+      "userProfile": "Profile-ka Isticmaalaha",
+      "address": "Cinwaanka",
+      "logOut": "Ka bax"
+    },
+    "avatar": {
+      "updateTitle": "Cusboonaysii Sawirka Profile-ka",
+      "selectImage": "Xulo Sawir",
+      "uploading": "Soo raraya...",
+      "fileRequirements": "JPG, PNG ilaa 2MB",
+      "success": "Avatar si guul leh ayaa loo cusboonaysiiyay",
+      "error": {
+        "fileType": "Fadlan soo rar faylka sawirka",
+        "fileSize": "Cabbirka sawirku waa inuu ka yaraan 2MB",
+        "uploadFailed": "Ku darida avatar kuma dhacday"
+      }
+    }
+  },
+  "restaurant": {
+    "image": {
+      "addTitle": "Ku dar Sawirka Maqaayadda",
+      "selectImage": "Xulo Sawir",
+      "addImage": "Ku dar Sawir",
+      "uploading": "Soo raraya...",
+      "fileRequirements": "JPG, PNG ilaa 2MB",
+      "success": "Sawirka maqaayadda si guul leh ayaa loo soo raray",
+      "error": {
+        "fileType": "Fadlan soo rar faylka sawirka",
+        "fileSize": "Cabbirka sawirku waa inuu ka yaraan 2MB",
+        "uploadFailed": "Ku darida sawirka maqaayadda kuma dhacday"
+      }
+    }
+  },
+  "imageUploader": {
+    "title": "Soo rar Sawir",
+    "selectImage": "Xulo Sawir",
+    "uploading": "Soo raraya...",
+    "fileRequirements": "JPG, PNG ilaa 2MB",
+    "success": "Sawirka si guul leh ayaa loo soo raray",
+    "error": {
+      "fileType": "Fadlan soo rar faylka sawirka",
+      "fileSize": "Cabbirka sawirku waa inuu ka yaraan 2MB",
+      "uploadFailed": "Ku darida sawirka kuma dhacday"
+    }
+  },
+  "theme": {
+    "toggleLabel": "Beddel mawduuca"
+  },
+  "address": {
+    "title": "Cinwaanka",
+    "addAddress": "Ku dar Cinwaan",
+    "removeSuccess": "Cinwaankii waa laga saaray",
+    "fields": {
+      "addressLine": "Layinka Cinwaanka",
+      "city": "Magaalo",
+      "state": "Gobol",
+      "country": "Dalka",
+      "pincode": "Koodhka Boostada",
+      "mobile": "Taleefanka"
+    }
+  },
+  "auth": {
+    "callback": {
+      "verifying": "Xaqiijinaya oo ku sii wareejinaya...",
+      "checkingAccount": "Hubinta akoonkaaga..."
+    }
+  },
+  "checkouts": {
+    "title": "Geli Macluumaadka Gaarsiinta",
+    "button": {
+      "checkout": "Bill bixi",
+      "confirmPay": "Xaqiiji & Bixi"
+    },
+    "fields": {
+      "name": "Magaca Buuxa",
+      "email": "Iimaylka",
+      "mobile": "Lambarka Taleefanka",
+      "address": {
+        "saved": "Cinwaannada Keydiyey",
+        "new": "Ama geli cinwaan cusub",
+        "delivery": "Cinwaanka Gaarsiinta",
+        "selectPlaceholder": "Xulo cinwaan keydiyey",
+        "placeholder": "123 Magaca Waddada, Magaalada",
+        "error": "Fadlan xulo ama geli cinwaanka gaarsiinta"
+      }
+    }
+  },
+  "detailsPage": {
+    "loading": "Soo dejis...",
+    "notFound": "Maqaayadda lama helin"
+  },
+  "emailVerification": {
+    "title": "Xaqiiji Iimaylkaaga",
+    "description": "Geli koodhka 6-xarafka ah ee loo soo diray {email}",
+    "button": {
+      "verify": "Xaqiiji Iimaylka",
+      "verifying": "Xaqiijinaya..."
+    },
+    "error": "Iimayl lama helin. Fadlan horay u saxiix."
+  },
+  "forgotPassword": {
+    "title": "Furaha Illowday",
+    "button": {
+      "reset": "Dib u dejiso Furaha",
+      "sending": "Dirista OTP..."
+    },
+    "success": "OTP waa la diray! Hubi iimaylkaaga.",
+    "loginLink": "Furahaad xusuusatay? Halkan ku gal"
+  },
+  "homePage": {
+    "title": "Kacun meel waliba aad joogto cunno Somali ah.",
+    "subtitle": "Hadaba maxaad sugaysaa!",
+    "searchPlaceholder": "Raadi Magaalada ama Tuulo",
+    "appSection": {
+      "title": "Dhaqso dalbo",
+      "subtitle": "la soodag App-ka si aad cunadaada u hesho dhaqso"
+    }
+  },
+  "loginPage": {
+    "tabs": {
+      "signin": "Geli",
+      "signup": "Diiwaan geli"
+    }
+  },
+  "manageRestaurant": {
+    "tabs": {
+      "orders": "Dalabaadka",
+      "manage": "Maamul Maqaayadda",
+      "menu": "Alaabta Menu-ka",
+      "analytics": "Falanqaynta",
+      "dashboard": "Dashboard"
+    },
+    "mobileTabs": {
+      "orders": "📋 Dalabaadka",
+      "manage": "🏠 Maqaayadda",
+      "menu": "🍽️ Menu",
+      "analytics": "📊 Falanqaynta",
+      "dashboard": "📈 Dashboard"
+    },
+    "formTitles": {
+      "create": "Abuur Maqaayad",
+      "update": "Cusboonaysii Maqaayadda"
+    },
+    "orders": {
+      "active": "Dalabaadka Firfircoon: {count}",
+      "selectPrompt": "Xulo dalab si aad u aragto faahfaahintiisa",
+      "selectDescription": "Guji dalab kasta oo ka mid ah liiska si aad u aragto faahfaahintiisa buuxda"
+    },
+    "messages": {
+      "loading": "Soo dejis xogta maqaayadda...",
+      "success": {
+        "loaded": "Xogta maqaayadda si guul leh ayaa loo soo dejisay",
+        "created": "Maqaayadda si guul leh ayaa loo abuuray",
+        "updated": "Maqaayadda si guul leh ayaa loo cusboonaysiiyay",
+        "deleted": "Maqaayadda si guul leh ayaa loo tirtiray"
+      },
+      "error": {
+        "fetch": "Soo dejis maqaayadaha kuma dhacday",
+        "save": "Keydinta maqaayadda kuma dhacday",
+        "delete": "Tirtirida maqaayadda kuma dhacday"
+      }
+    }
+  },
+  "orderStatus": {
+    "loading": "Soo dejis...",
+    "noOrders": "Lama helin dalabaad"
+  },
+  "resetPassword": {
+    "title": "Dib u dejiso Furaha",
+    "fields": {
+      "newPassword": "Furaha Cusub",
+      "confirmPassword": "Xaqiiji Furaha"
+    },
+    "button": {
+      "reset": "Dib u dejiso Furaha",
+      "resetting": "Dib u dejisinaya Furaha..."
+    },
+    "messages": {
+      "success": "Furaha si guul leh ayaa loo dib u dejisay! Hadda waxaad gali kartaa.",
+      "error": {
+        "invalidRequest": "Codsi qalad ah. Fadlan dib u bilaw habka dib u dejisida furaha.",
+        "mismatch": "Furaha lama wadaagin."
+      },
+      "loginLink": "Furahaad xusuusatay? Halkan ku gal"
+    }
+  },
+  "resetPasswordVerification": {
+    "title": "Xaqiiji OTP",
+    "description": "Geli koodhka 6-xarafka ah ee loo soo diray {email}",
+    "button": {
+      "verify": "Xaqiiji OTP",
+      "verifying": "Xaqiijinaya..."
+    },
+    "messages": {
+      "success": "OTP si guul leh ayaa loo xaqiijiyay! Hadda waxaad dib u dejisan kartaa furahaada.",
+      "error": "Codsi qalad ah. Fadlan codsi dib u dejis furaha cusub."
+    }
+  },
+  "searchPage": {
+    "loading": "Soo dejis...",
+    "noResults": "Natiijooyin lama helin",
+    "searchPlaceholder": "Raadi nooca cuntada ama magaca maqaayadda"
+  },
+  "userProfile": {
+    "title": "Profile-ka Isticmaalaha",
+    "description": "Arag oo beddel macluumaadka profile-kaaga",
+    "avatar": {
+      "edit": "Tafatir Avatar"
+    },
+    "sections": {
+      "address": "Macluumaadka Cinwaanka"
+    },
+    "fields": {
+      "name": "Magaca",
+      "email": "Iimaylka",
+      "mobile": "Taleefanka",
+      "addressLine1": "Layinka Cinwaanka 1",
+      "city": "Magaalo",
+      "country": "Dalka"
+    },
+    "button": {
+      "save": "Keyd Isbeddelada",
+      "saving": "Keydinaya..."
+    },
+    "messages": {
+      "success": "Profile-ka si guul leh ayaa loo cusboonaysiiyay",
+      "error": "Cusboonaysiinta profile-ka kuma dhacday",
+      "validation": {
+        "required": "{field} waa loo baahan yahay",
+        "email": "Cinwaan iimayl qalad ah"
+      }
+    }
+  }
+}

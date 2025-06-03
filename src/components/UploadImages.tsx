@@ -4,6 +4,7 @@ import { FaRegUserCircle, FaCamera } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import Axios from '@/lib/Axios';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 interface ImageUploaderProps {
   uploadUrl: string;
@@ -22,10 +23,11 @@ const ImageUploader = ({
   onClose,
   isModal = false,
   previewImage = '',
-  title = 'Upload Image',
+  title = 'imageUploader.title',
   inputName = 'image',
   shape = 'rectangle',
 }: ImageUploaderProps) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
@@ -34,11 +36,11 @@ const ImageUploader = ({
     if (!file) return;
 
     if (!file.type.startsWith('image/')) {
-      toast.error('Please upload an image file');
+      toast.error(t('imageUploader.error.fileType'));
       return;
     }
     if (file.size > 2 * 1024 * 1024) {
-      toast.error('Image size should be less than 2MB');
+      toast.error(t('imageUploader.error.fileSize'));
       return;
     }
 
@@ -50,12 +52,11 @@ const ImageUploader = ({
       const response = await Axios.post(uploadUrl, formData);
       if (response.data?.success) {
         updateAction(response.data.data.imageUrl);
-;
-        toast.success('Image uploaded successfully');
+        toast.success(t('imageUploader.success'));
         if (onClose) onClose();
       }
     } catch (error) {
-      toast.error('Failed to upload image');
+      toast.error(t('imageUploader.error.uploadFailed'));
       console.error(error);
     } finally {
       setLoading(false);
@@ -67,7 +68,7 @@ const ImageUploader = ({
       <div className={isModal ? 'bg-white max-w-sm w-full rounded-lg p-6 shadow-lg' : 'w-full h-48 bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden'}>
         {isModal && (
           <div className='flex justify-between items-center mb-4'>
-            <h3 className='text-lg font-semibold'>{title}</h3>
+            <h3 className='text-lg font-semibold'>{t(title)}</h3>
             {onClose && (
               <button onClick={onClose} className='text-neutral-800 hover:text-neutral-600 transition-colors' disabled={loading}>
                 <IoClose size={24} />
@@ -79,7 +80,7 @@ const ImageUploader = ({
         <div className={`flex flex-col items-center gap-4 ${isModal ? '' : 'w-full h-full'}`}>
           <div className={`${shape === 'circle' ? 'w-24 h-24 rounded-full' : 'w-32 h-32 rounded-lg'} bg-gray-200 flex items-center justify-center overflow-hidden`}>
             {previewImage ? (
-              <img alt='Preview' src={previewImage} className='w-full h-full object-cover' />
+              <img alt={t('imageUploader.altText')} src={previewImage} className='w-full h-full object-cover' />
             ) : (
               shape === 'circle' ? <FaRegUserCircle size={48} className='text-gray-400' /> : <FaCamera size={48} className='text-gray-400' />
             )}
@@ -87,12 +88,12 @@ const ImageUploader = ({
           
           <label htmlFor='uploadImage'>
             <div className='border border-blue-200 cursor-pointer hover:text-white hover:bg-gradient-to-r from-blue-500 to-blue-300 px-4 py-1 rounded text-sm my-3'>
-              {loading ? 'Uploading...' : 'Select Image'}
+              {loading ? t('imageUploader.uploading') : t('imageUploader.selectImage')}
             </div>
             <input onChange={handleUploadImage} type='file' id='uploadImage' className='hidden' accept='image/*' />
           </label>
           
-          <p className='text-sm text-gray-500 text-center'>JPG, PNG up to 2MB</p>
+          <p className='text-sm text-gray-500 text-center'>{t('imageUploader.fileRequirements')}</p>
         </div>
       </div>
     </div>

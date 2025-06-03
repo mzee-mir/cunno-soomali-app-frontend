@@ -1,12 +1,14 @@
 import { Order } from "@/types";
 import { Progress } from "./ui/progress";
 import { ORDER_STATUS } from "@/config/order-status-config";
+import { useTranslation } from 'react-i18next';
 
 type Props = {
     order: Order;
 }
 
 const OrderStatusHeader= ({order}:Props) => {
+    const { t } = useTranslation();
 
     const getExpectedDelivery = () => {
         const created = new Date(order.createdAt);
@@ -40,9 +42,9 @@ const OrderStatusHeader= ({order}:Props) => {
   return (
     <>
     <h1 className="lg:text-4xl font-bold tracking-tighter flex flex-col ap-5 md:flex-row md:justify-between md:text-2xl sm:text-xl sm:flex-row sm:justify-between" >
-        <span>order status: {getOrderStatusInfo().label}</span>
-        <span>Expected by: {getExpectedDelivery()}</span>
-        <span className="lg-text-2xl font-bold md:text-2xl sm:text-xl ">Order Date: {getOrderDateInfo()}</span>
+        <span>{t('orderStatusHeader.orderStatus')}: {getOrderStatusInfo().label}</span>
+        <span>{t('orderStatusHeader.expectedBy')}: {getExpectedDelivery()}</span>
+        <span className="lg-text-2xl font-bold md:text-2xl sm:text-xl ">{t('orderStatusHeader.orderDate')} {getOrderDateInfo()}</span>
     </h1>
     <Progress className= "animate-pulse" value={getOrderStatusInfo().progressValue}/>
     </>

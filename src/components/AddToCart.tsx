@@ -5,6 +5,7 @@ import { useGlobalContext } from '@/Provider/Global';
 import Axios from '@/lib/Axios';
 import SummaryApi from '@/api/Userauth';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import LoadinButton from './LoadinButton';
 
 interface AddToCartButtonProps {
@@ -26,6 +27,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ data }) => {
     _id: string;
     quantity: number;
   } | null>(null);
+  const { t } = useTranslation();
 
   // Check if the menu item is already in the cart
   useEffect(() => {
@@ -60,17 +62,17 @@ const handleAddToCart = async () => {
             });
 
             if (!response.data.success) {
-                throw new Error(response.data.message || 'Failed to add item to cart');
+                throw new Error(response.data.message || t("addToCart.addError"));
             }
 
             toast.success(`${data.name} added to cart`);
             await fetchCartItem();
         } catch (error: any) {
             if(error.response?.status === 400) {
-                toast.error('Item is already in cart');
+                toast.error(t("addToCart.alreadyInCart"));
                 await fetchCartItem(); // Refresh cart state
             } else {
-                toast.error(error.message || 'Failed to add item to cart');
+                toast.error(error.message || t("addToCart.addError"));
             }
         } finally {
             setIsLoading(false);
@@ -83,7 +85,7 @@ const handleAddToCart = async () => {
     try {
       await updateCartItem(currentCartItem._id, currentCartItem.quantity + 1);
     } catch (error) {
-      toast.error('Failed to update quantity');
+      toast.error(t("addToCart.updateError"));
     }
   };
 
@@ -97,14 +99,14 @@ const handleAddToCart = async () => {
         await deleteCartItem(currentCartItem._id);
         toast.success(`${data.name} removed from cart`);
       } catch (error) {
-        toast.error('Failed to remove item');
+        toast.error(t("addToCart.removeError"));
       }
     } else {
       // Decrease quantity
       try {
         await updateCartItem(currentCartItem._id, currentCartItem.quantity - 1);
       } catch (error) {
-        toast.error('Failed to update quantity');
+        toast.error(t("addToCart.updateError"));
       }
     }
   };

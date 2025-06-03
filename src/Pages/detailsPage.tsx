@@ -1,7 +1,7 @@
 import { useGetRestaurant } from "@/api/RestaurentApi";
 import CheckoutButton from "@/components/CheckoutButton";
 import MenuItem from "@/components/MenuItem";
-import OrderSummary from "@/components/OrderSummery"; // <-- Make sure filename matches
+import OrderSummary from "@/components/OrderSummery";
 import RestaurantInfo from "@/components/RestaurantInfo";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Card, CardFooter } from "@/components/ui/card";
@@ -10,14 +10,13 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const DetailPage = () => {
+    const { t } = useTranslation();
     const { restaurantId } = useParams();
     const { restaurant, isLoading: isLoadingRestaurant } = useGetRestaurant(restaurantId);
-    console.log("restaurantData", restaurant);
-
     const { cartItems } = useSelector((state: RootState) => state.cartMenuItem);
-
 
     if (isLoadingRestaurant) {
         return (
@@ -39,7 +38,7 @@ const DetailPage = () => {
     }
 
     if (!restaurant) {
-        return <div className="flex justify-center items-center min-h-screen">Restaurant not found</div>;
+        return <div className="flex justify-center items-center min-h-screen">{t("detailsPage.notFound")}</div>;
     }
 
     return (
@@ -70,7 +69,7 @@ const DetailPage = () => {
                         <CardFooter>
                             <CheckoutButton 
                                 disabled={cartItems.length === 0}
-                                restaurantId= {restaurant._id}
+                                restaurantId={restaurant._id}
                             />
                         </CardFooter>    
                     </Card>

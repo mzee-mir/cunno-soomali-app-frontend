@@ -14,11 +14,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { IAddress } from "@/store/addressSlice";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     disabled?: boolean;
     isLoading?: boolean;
-    restaurantId:string;
+    restaurantId: string;
 };
 
 const CheckoutButton = ({ disabled }: Props) => {
@@ -28,6 +29,7 @@ const CheckoutButton = ({ disabled }: Props) => {
     const user = useSelector((state: RootState) => state.user);
     const addresses = useSelector((state: RootState) => state.address.addresses);
     const { fetchAddress } = useGlobalContext();
+    const { t } = useTranslation();
     
     const [open, setOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -37,19 +39,16 @@ const CheckoutButton = ({ disabled }: Props) => {
     const [selectedAddress, setSelectedAddress] = useState("");
     const [customAddress, setCustomAddress] = useState("");
 
-    // Load user data and addresses when dialog opens
     useEffect(() => {
         if (open) {
             const loadData = async () => {
                 setIsLoading(true);
                 try {
-                    // Pre-fill user details if available
                     if (user?._id) {
                         setName(user.name || "");
                         setEmail(user.email || "");
                         setMobile(user.mobile || "");
                         
-                        // Fetch addresses if not already loaded
                         if (addresses.length === 0 && fetchAddress) {
                             await fetchAddress();
                         }
@@ -67,20 +66,19 @@ const CheckoutButton = ({ disabled }: Props) => {
 
     const handleCheckout = async () => {
         if (!selectedAddress && !customAddress) {
-            toast.error("Please select or enter a delivery address.");
+            toast.error(t("checkouts.fields.address.error"));
             return;
         }
     
-        // Find the selected address details
         const addressDetails = addresses.find(addr => addr._id === selectedAddress);
     
         const checkoutData = {
             cartItems: cartItems.map(item => ({
                 menuItemId: item.menuItemId._id,
-                quantity: item.quantity.toString(), // Convert to string
+                quantity: item.quantity.toString(),
                 name: item.menuItemId.name,
                 price: item.menuItemId.price,
-                imageUrl:item.menuItemId.imageUrl
+                imageUrl: item.menuItemId.imageUrl
             })),
             deliveryDetails: {
                 email: email,
@@ -93,7 +91,6 @@ const CheckoutButton = ({ disabled }: Props) => {
             restaurantId: restaurantId!,
         };
     
-        
         try {
             const response = await createCheckoutSession(checkoutData);
             const url = response?.data?.url;
@@ -106,22 +103,18 @@ const CheckoutButton = ({ disabled }: Props) => {
         } catch (error) {
           console.error("Checkout failed:", error);
         }
-      };
-      
+    };
     
-    
-    
-
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button className="w-full" disabled={disabled}>
-                    Checkout
+                    {t("checkouts.button.checkout")}
                 </Button>
             </DialogTrigger>
             <DialogContent className="max-w-md">
                 <DialogHeader>
-                    <DialogTitle>Enter Delivery Info</DialogTitle>
+                    <DialogTitle>{t("checkouts.title")}</DialogTitle>
                 </DialogHeader>
                 {isLoading ? (
                     <div className="flex justify-center py-8">
@@ -130,42 +123,42 @@ const CheckoutButton = ({ disabled }: Props) => {
                 ) : (
                     <div className="flex flex-col gap-4">
                         <div>
-                            <Label htmlFor="name">Full Name</Label>
+                            <Label htmlFor="name">{t("checkouts.fields.name")}</Label>
                             <Input
                                 id="name"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                placeholder="John Doe"
+                                placeholder={t("checkouts.fields.name")}
                             />
                         </div>
                         <div>
-                            <Label htmlFor="email">Email</Label>
+                            <Label htmlFor="email">{t("checkouts.fields.email")}</Label>
                             <Input
                                 id="email"
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="john@example.com"
+                                placeholder={t("checkouts.fields.email")}
                             />
                         </div>
 
                         <div>
-                            <Label htmlFor="mobile">Mobile No.</Label>
+                            <Label htmlFor="mobile">{t("checkouts.fields.mobile")}</Label>
                             <Input
                                 id="mobile"
                                 type="mobile"
                                 value={mobile}
                                 onChange={(e) => setMobile(e.target.value)}
-                                placeholder="+252 00 00 000"
+                                placeholder={t("checkouts.fields.mobile")}
                             />
                         </div>
                         
                         {addresses.length > 0 && (
                             <div>
-                                <Label>Saved Addresses</Label>
+                                <Label>{t("checkouts.fields.address.saved")}</Label>
                                 <Select onValueChange={setSelectedAddress}>
                                     <SelectTrigger>
-                                        <SelectValue placeholder="Select a saved address" />
+                                        <SelectValue placeholder={t("checkouts.fields.address.selectPlaceholder")} />
                                     </SelectTrigger>
                                     <SelectContent>
                                         {addresses.filter(addr => addr.status).map((address: IAddress) => (
@@ -180,7 +173,9 @@ const CheckoutButton = ({ disabled }: Props) => {
                         
                         <div>
                             <Label htmlFor="address">
-                                {addresses.length > 0 ? "Or enter a new address" : "Delivery Address"}
+                                {addresses.length > 0 
+                                    ? t("checkouts.fields.address.new") 
+                                    : t("checkouts.fields.address.delivery")}
                             </Label>
                             <Input
                                 id="address"
@@ -189,7 +184,7 @@ const CheckoutButton = ({ disabled }: Props) => {
                                     setSelectedAddress("");
                                     setCustomAddress(e.target.value);
                                 }}
-                                placeholder="123 Street Name, City"
+                                placeholder={t("checkouts.fields.address.placeholder")}
                                 disabled={!!selectedAddress}
                             />
                         </div>
@@ -202,7 +197,7 @@ const CheckoutButton = ({ disabled }: Props) => {
                             {isCheckoutLoading ? (
                                 <Loader2 className="animate-spin mr-2 h-4 w-4" />
                             ) : (
-                                "Confirm & Pay"
+                                t("checkouts.button.confirmPay")
                             )}
                         </Button>
                     </div>

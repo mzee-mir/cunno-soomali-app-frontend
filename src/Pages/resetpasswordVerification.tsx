@@ -6,8 +6,10 @@ import Axios from "@/lib/Axios";
 import SummaryApi from "@/api/Userauth";
 import AxiosToastError from "@/lib/AxiosTost";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const VerifyResetPasswordOtp = () => {
+    const { t } = useTranslation();
     const [code, setCode] = useState(Array(6).fill(""));
     const [loading, setLoading] = useState(false);
     const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
@@ -19,10 +21,10 @@ const VerifyResetPasswordOtp = () => {
 
     useEffect(() => {
         if (!userEmail || !resetToken) {
-            toast.error("Invalid request. Please request a new password reset.");
+            toast.error(t("resetPasswordVerification.messages.error"));
             navigate("/forgot-Password");
         }
-    }, [userEmail, resetToken, navigate]);
+    }, [userEmail, resetToken, navigate, t]);
 
     const handleChange = (index: number, value: string) => {
         if (value.length > 1) {
@@ -110,9 +112,11 @@ const VerifyResetPasswordOtp = () => {
                     className="bg-blue-100 bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-2xl shadow-2xl p-8 w-full max-w-md"
                 >
                     <h2 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-blue-600 to-blue-800 text-transparent bg-clip-text">
-                        Verify OTP
+                        {t("resetPasswordVerification.title")}
                     </h2>
-                    <p className="text-center text-white mb-6">Enter the 6-digit code sent to {userEmail}</p>
+                    <p className="text-center text-white mb-6">
+                        {t("resetPasswordVerification.description", { email: userEmail })}
+                    </p>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="flex justify-between gap-2">
@@ -128,7 +132,7 @@ const VerifyResetPasswordOtp = () => {
                                     onKeyDown={(e) => handleKeyDown(index, e)}
                                     className="w-12 h-12 text-center text-2xl font-bold bg-blue-100 text-gray-600 border-2 border-gray-600 rounded-lg focus:border-green-500 focus:outline-none transition-colors"
                                     disabled={loading}
-                                    aria-label={`Digit ${index + 1}`}
+                                    aria-label={`${t("resetPasswordVerification.otpDigit")} ${index + 1}`}
                                 />
                             ))}
                         </div>
@@ -138,7 +142,7 @@ const VerifyResetPasswordOtp = () => {
                             className="w-full text-white bg-gradient-to-r from-blue-600 to-blue-800"
                             disabled={loading || code.some((digit) => !digit)}
                         >
-                            {loading ? "Verifying..." : "Verify OTP"}
+                            {loading ? t("resetPasswordVerification.button.verifying") : t("resetPasswordVerification.button.verify")}
                         </Button>
                     </form>
                 </motion.div>

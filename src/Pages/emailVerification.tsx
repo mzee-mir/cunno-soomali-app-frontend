@@ -20,10 +20,10 @@ const EmailVerificationPage = () => {
     // Redirect to signup if no email is found
     useEffect(() => {
         if (!userEmail) {
-            toast.error("No email found. Please sign up first.");
+            toast.error(t("emailVerification.error"));
             navigate("/signup");
         }
-    }, [userEmail, navigate]);
+    }, [userEmail, navigate, t]);
 
     //  Handle OTP input changes
     const handleChange = (index: number, value: string) => {
@@ -112,9 +112,9 @@ const EmailVerificationPage = () => {
                     className="bg-blue-100 bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-2xl shadow-2xl p-8 w-full max-w-md"
                 >
                     <h2 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-blue-600 to-blue-800 text-transparent bg-clip-text">
-                        Verify Your Email
+                    {t("emailVerification.title")}
                     </h2>
-                    <p className="text-center text-white mb-6">Enter the 6-digit code sent to {userEmail}</p>
+                    <p className="text-center text-white mb-6">{t("emailVerification.description")} {userEmail}</p>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="flex justify-between gap-2">
@@ -140,7 +140,7 @@ const EmailVerificationPage = () => {
                             className="w-full text-white bg-gradient-to-r from-blue-600 to-blue-800"
                             disabled={loading || code.some((digit) => !digit)}
                         >
-                            {loading ? "Verifying..." : "Verify Email"}
+                            {loading ? t("emailVerification.button.verifying") : t("emailVerification.button.verify")}
                         </Button>
                     </form>
                 </motion.div>

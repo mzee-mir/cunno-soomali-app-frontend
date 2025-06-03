@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import type { IRestaurant } from "@/store/restaurantSlice";
+import { useTranslation } from 'react-i18next';
 
 interface SearchResultsCardProps {
   restaurant: IRestaurant;
@@ -12,16 +13,17 @@ interface SearchResultsCardProps {
 const SearchResultsCard = ({ restaurant }: SearchResultsCardProps) => {
   // Get loading and error states from Redux store
   const { loading, error } = useSelector((state: RootState) => state.restaurant);
+  const { t } = useTranslation();
 
   // Format delivery price
   const formattedDeliveryPrice = restaurant.deliveryPrice;
 
   if (loading) {
-    return <div>Loading restaurant details...</div>;
+    return <div>{t('searchResults.loading')}</div>;
   }
 
   if (error) {
-    return <div>Error loading restaurant: {error}</div>;
+    return <div>{t('searchResults.error')}: {error}</div>;
   }
 
   return (
@@ -58,7 +60,7 @@ const SearchResultsCard = ({ restaurant }: SearchResultsCardProps) => {
 
             <div className="flex items-center gap-1">
               <Banknote className="text-green-600"/>
-              Delivery Price: 
+              {t("common.deliveryPrice")}: 
               <span className="text-green-600">
                 ${formattedDeliveryPrice}
               </span>

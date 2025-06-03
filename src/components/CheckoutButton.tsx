@@ -14,6 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { IAddress } from "@/store/addressSlice";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useTranslation } from 'react-i18next';
 
 type Props = {
     disabled?: boolean;
@@ -36,6 +37,7 @@ const CheckoutButton = ({ disabled }: Props) => {
     const [mobile, setMobile] = useState("");
     const [selectedAddress, setSelectedAddress] = useState("");
     const [customAddress, setCustomAddress] = useState("");
+    const { t } = useTranslation();
 
     // Load user data and addresses when dialog opens
     useEffect(() => {
@@ -67,7 +69,7 @@ const CheckoutButton = ({ disabled }: Props) => {
 
     const handleCheckout = async () => {
         if (!selectedAddress && !customAddress) {
-            toast.error("Please select or enter a delivery address.");
+            toast.error(t("checkout.addressRequired"));
             return;
         }
     
@@ -116,12 +118,12 @@ const CheckoutButton = ({ disabled }: Props) => {
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button className="w-full" disabled={disabled}>
-                    Checkout
+                    {t("checkout.button.checkout")}
                 </Button>
             </DialogTrigger>
             <DialogContent className="max-w-md">
                 <DialogHeader>
-                    <DialogTitle>Enter Delivery Info</DialogTitle>
+                    <DialogTitle>{t("checkout.title")}</DialogTitle>
                 </DialogHeader>
                 {isLoading ? (
                     <div className="flex justify-center py-8">
@@ -130,7 +132,7 @@ const CheckoutButton = ({ disabled }: Props) => {
                 ) : (
                     <div className="flex flex-col gap-4">
                         <div>
-                            <Label htmlFor="name">Full Name</Label>
+                            <Label htmlFor="name">{t("checkout.name")}</Label>
                             <Input
                                 id="name"
                                 value={name}
@@ -139,7 +141,7 @@ const CheckoutButton = ({ disabled }: Props) => {
                             />
                         </div>
                         <div>
-                            <Label htmlFor="email">Email</Label>
+                            <Label htmlFor="email">{t("checkout.email")}</Label>
                             <Input
                                 id="email"
                                 type="email"
@@ -150,7 +152,7 @@ const CheckoutButton = ({ disabled }: Props) => {
                         </div>
 
                         <div>
-                            <Label htmlFor="mobile">Mobile No.</Label>
+                            <Label htmlFor="mobile">{t("checkout.mobile")}</Label>
                             <Input
                                 id="mobile"
                                 type="mobile"
@@ -162,10 +164,10 @@ const CheckoutButton = ({ disabled }: Props) => {
                         
                         {addresses.length > 0 && (
                             <div>
-                                <Label>Saved Addresses</Label>
+                                <Label>{t("checkout.savedAddresses")}</Label>
                                 <Select onValueChange={setSelectedAddress}>
                                     <SelectTrigger>
-                                        <SelectValue placeholder="Select a saved address" />
+                                        <SelectValue placeholder={t("checkout.selectAddress")} />
                                     </SelectTrigger>
                                     <SelectContent>
                                         {addresses.filter(addr => addr.status).map((address: IAddress) => (
@@ -180,7 +182,7 @@ const CheckoutButton = ({ disabled }: Props) => {
                         
                         <div>
                             <Label htmlFor="address">
-                                {addresses.length > 0 ? "Or enter a new address" : "Delivery Address"}
+                                {addresses.length > 0 ? t("checkout.newAddress") : t("checkout.deliveryAddress")}
                             </Label>
                             <Input
                                 id="address"
@@ -202,7 +204,7 @@ const CheckoutButton = ({ disabled }: Props) => {
                             {isCheckoutLoading ? (
                                 <Loader2 className="animate-spin mr-2 h-4 w-4" />
                             ) : (
-                                "Confirm & Pay"
+                                t("checkout.confirmPay")
                             )}
                         </Button>
                     </div>

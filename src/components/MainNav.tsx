@@ -3,16 +3,18 @@ import UsernameMenu from "./UsernameMenu";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { FaShoppingCart, FaUtensils, FaChartLine, FaClipboardList, FaTachometerAlt } from "react-icons/fa";
+import { FaShoppingCart, FaUtensils, FaClipboardList, FaTachometerAlt } from "react-icons/fa";
 import { useState } from "react";
 import CartSidebar from "./displaycartmenuItem";
 import { useGlobalContext } from "@/Provider/Global";
 import NotificationBell from "./NotificationBell";
 import { ThemeToggle } from './ThemeToggle';
+import { useTranslation } from 'react-i18next';
 
 const MainNav = () => {
   const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.user);
+  const { t } = useTranslation();
 
   if (user.loading) {
     return (
@@ -39,7 +41,7 @@ const MainNav = () => {
     {
       to: "/order-status",
       icon: <FaClipboardList className="h-4 w-4" />,
-      text: "Orders"
+      text: (t("nav.orders"))
     }
   ];
 
@@ -48,7 +50,7 @@ const MainNav = () => {
     {
       to: "/manage-restaurant",
       icon: <FaUtensils className="h-4 w-4" />,
-      text: "Restaurant"
+      text: (t("nav.orders"))
     },
     
   ];
@@ -124,7 +126,7 @@ const MainNav = () => {
             className="font-bold hover:text-blue-500 hover:bg-white"
             onClick={handleLoginRedirect}
           >
-            Log in
+            {t("nav.login")}
           </Button>
         )}
       </span>

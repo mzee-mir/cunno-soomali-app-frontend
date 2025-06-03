@@ -1,0 +1,11 @@
+{
+  "title": "Welcome back",
+  "subtitle": "Login to your account",
+  "tab": "Sign In",
+  "email": "Email Address",
+  "password": "Password",
+  "button": "Login",
+  "loading": "Logging in...",
+  "forgot": "Forgot Password?",
+  "info": "or continue with"
+}

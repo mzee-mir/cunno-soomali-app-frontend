@@ -11,13 +11,15 @@ import AxiosToastError from '../lib/AxiosTost';
 import { RootState } from '@/store/store';
 import { useGlobalContext } from '@/Provider/Global';
 import { IAddress } from '@/store/addressSlice';
+import { useTranslation } from 'react-i18next';
 
 const Address = () => {
   const addressList = useSelector((state: RootState) => state.address.addresses)
   const [openAddress,setOpenAddress] = useState(false)
   const [OpenEdit,setOpenEdit] = useState(false)
   const [editData, setEditData] = useState<IAddress | null>(null);
-  const { fetchAddress} = useGlobalContext()
+  const { fetchAddress } = useGlobalContext()
+  const { t } = useTranslation();
 
   const handleDisableAddress = async(id:string)=>{
     try {
@@ -28,7 +30,7 @@ const Address = () => {
         }
       })
       if(response.data.success){
-        toast.success("Address Remove")
+        toast.success(t("address.removeSuccess"))
         if(fetchAddress){
           fetchAddress()
         }
@@ -40,16 +42,16 @@ const Address = () => {
   return (
     <div className=''>
         <div className='bg-card shadow-lg px-2 py-2 flex justify-between gap-4 items-center '>
-            <h2 className='font-semibold text-ellipsis line-clamp-1'>Address</h2>
+            <h2 className='font-semibold text-ellipsis line-clamp-1'>{t("address.title")}</h2>
             <button onClick={()=>setOpenAddress(true)} className='border border-primary text-primary px-3 hover:bg-primaryhover:text-black py-1 rounded-full'>
-                Add Address
+                {t("address.addAddress")}
             </button>
         </div>
         <div className='bg-card p-2 grid gap-4'>
               {
                 addressList.map((address,index)=>{
                   return(
-                      <div className={`border rounded p-3 flex gap-3 bg-card ${!address.status && 'hidden'}`}>
+                      <div className={`border rounded p-3 flex gap-3 bg-card ${!address.status && 'hidden'}`} key={address._id}>
                           <div className='w-full'>
                             <p>{address.address_line}</p>
                             <p>{address.city}</p>
@@ -75,7 +77,7 @@ const Address = () => {
                 })
               }
               <div onClick={()=>setOpenAddress(true)} className='h-16 bg-input border-2 border-dashed flex justify-center items-center cursor-pointer'>
-                Add address
+                {t("address.addAddress")}
               </div>
         </div>
 

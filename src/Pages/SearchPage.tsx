@@ -8,15 +8,17 @@ import SortOptionDropdown from "@/components/SortOptionDropdown";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export type SearchState = {
     searchQuery: string;
     page: number;
     selectedCuisines: string[];
     sortOption: string;
-  };
+};
 
 const SearchPage =() => {
+    const { t } = useTranslation();
     const {city} = useParams();
     const [searchState, setSearchState] = useState<SearchState>({
         searchQuery:"",
@@ -87,39 +89,44 @@ const SearchPage =() => {
     }
 
     if(!results?.data || !city){
-        return <span>No Results Found</span>;
+        return <span>{t("searchPage.noResults")}</span>;
     }
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5" >
-            <div id="cuisines-list" > 
-            <CuisineFilter
-            isExpanded={isExpanded}
-            onExpandedClick={() => setIsExpanded((prevIsExpanded)=> !prevIsExpanded)} 
-            selectedCuisines={searchState.selectedCuisines} 
-            onChange={setSelectedCuisines}
-            />    
+        <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
+            <div id="cuisines-list"> 
+                <CuisineFilter
+                    isExpanded={isExpanded}
+                    onExpandedClick={() => setIsExpanded((prevIsExpanded)=> !prevIsExpanded)} 
+                    selectedCuisines={searchState.selectedCuisines} 
+                    onChange={setSelectedCuisines}
+                />    
             </div>
-            <div id="main-content" className="flex flex-col gap-5" >
+            <div id="main-content" className="flex flex-col gap-5">
                 <SearchBar 
-                searchQuery={searchState.searchQuery}
-                onSubmit={setSearchQuery} placeHolder="search by cuisine or restaurant name" 
-                onReset={resetSearch} />
-                <div className="flex justify-between flex-col gap-3 lg:flex-row" >
-                <SearchResultsInfo total={results.pagination.total} city={city} />
-                <SortOptionDropdown 
-                    sortOption={searchState.sortOption} onChange={(value)=> setSortOption(value)} />
+                    searchQuery={searchState.searchQuery}
+                    onSubmit={setSearchQuery} 
+                    placeHolder={t("searchPage.searchPlaceholder")}
+                    onReset={resetSearch} 
+                />
+                <div className="flex justify-between flex-col gap-3 lg:flex-row">
+                    <SearchResultsInfo total={results.pagination.total} city={city} />
+                    <SortOptionDropdown 
+                        sortOption={searchState.sortOption} 
+                        onChange={(value)=> setSortOption(value)} 
+                    />
                 </div>
                 {results.data.map((restaurant) => (
                     <SearchResultsCard key={restaurant._id} restaurant={restaurant} />
-                    
                 ))}
                 <PaginationSelector 
-                page={results.pagination.page} 
-                pages={results.pagination.pages} onPageChange={setPage} />
+                    page={results.pagination.page} 
+                    pages={results.pagination.pages} 
+                    onPageChange={setPage} 
+                />
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default SearchPage;

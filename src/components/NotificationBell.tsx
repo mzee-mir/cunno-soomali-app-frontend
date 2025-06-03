@@ -17,8 +17,10 @@ import {
 } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { formatDistanceToNow } from "date-fns";
+import { useTranslation } from 'react-i18next';
 
 const NotificationBell = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { notifications, unreadCount, loading, error } = useSelector(
     (state: RootState) => state.notifications
@@ -68,6 +70,7 @@ const NotificationBell = () => {
         color="inherit"
         onClick={handleClick}
         sx={{ position: "relative" }}
+        aria-label={t('notifications.title')}
       >
         <Badge 
           badgeContent={unreadCount > 0 ? unreadCount : null} 
@@ -94,14 +97,14 @@ const NotificationBell = () => {
         sx={{
           "& .MuiPaper-root": {
             width: 350,
-            maxHeight: "70vh", // Changed to viewport height percentage
-            overflow: "auto", // Ensure scrolling works
+            maxHeight: "70vh",
+            overflow: "auto",
           },
         }}
       >
         <Box sx={{ p: 2, position: "sticky", top: 0, bgcolor: 'background.paper', zIndex: 1 }}>
           <Typography variant="h6" component="div">
-            Notifications
+            {t('notifications.title')}
           </Typography>
           {notifications.length > 0 && (
             <Button
@@ -111,7 +114,7 @@ const NotificationBell = () => {
               disabled={unreadCount === notifications.length}
               sx={{ float: "right" }}
             >
-              Clear Read
+              {t('notifications.clearRead')}
             </Button>
           )}
         </Box>
@@ -128,6 +131,7 @@ const NotificationBell = () => {
             }}
           >
             <CircularProgress size={24} />
+            <Typography sx={{ ml: 2 }}>{t('loading')}</Typography>
           </Box>
         ) : error ? (
           <Typography color="error" sx={{ p: 2 }}>
@@ -135,7 +139,7 @@ const NotificationBell = () => {
           </Typography>
         ) : notifications.length === 0 ? (
           <Typography sx={{ p: 2, textAlign: "center" }}>
-            No notifications
+            {t('notifications.noNotifications')}
           </Typography>
         ) : (
           <List dense>
@@ -159,9 +163,9 @@ const NotificationBell = () => {
                     edge="end"
                     size="small"
                     onClick={() => handleDeleteNotification(notification._id)}
-                    aria-label="Delete notification"
+                    aria-label={t('notifications.delete')}
                   >
-                    <Typography variant="caption">×</Typography>
+                    <Typography variant="caption">{t('notifications.delete')}</Typography>
                   </IconButton>
                 </ListItem>
                 <Divider component="li" />

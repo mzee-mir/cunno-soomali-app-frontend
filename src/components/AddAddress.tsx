@@ -6,6 +6,7 @@ import toast from 'react-hot-toast'
 import AxiosToastError from '@/lib/AxiosTost'
 import { IoClose } from "react-icons/io5";
 import { useGlobalContext } from '@/Provider/Global'
+import { useTranslation } from 'react-i18next';
 
 interface AddAddressProps {
   close: () => void;
@@ -23,7 +24,7 @@ interface AddressFormData {
 const AddAddress: React.FC<AddAddressProps> = ({ close }) => {
     const { register, handleSubmit, reset } = useForm<AddressFormData>()
     const { fetchAddress } = useGlobalContext()
-
+    const { t } = useTranslation();
     const onSubmit: SubmitHandler<AddressFormData> = async(data) => {
         try {
             const response = await Axios({
@@ -56,14 +57,14 @@ const AddAddress: React.FC<AddAddressProps> = ({ close }) => {
     <section className='bg-black fixed top-0 left-0 right-0 bottom-0 z-50 bg-opacity-70 h-screen overflow-auto'>
         <div className='bg-white p-4 w-full max-w-lg mt-8 mx-auto rounded'>
             <div className='flex justify-between items-center gap-4'>
-                <h2 className='font-semibold'>Add Address</h2>
+                <h2 className='font-semibold'>{t("addAddress.title")}</h2>
                 <button onClick={close} className='hover:text-red-500'>
                     <IoClose  size={25}/>
                 </button>
             </div>
             <form className='mt-4 grid gap-4' onSubmit={handleSubmit(onSubmit)}>
                 <div className='grid gap-1'>
-                    <label htmlFor='addressline'>Address Line :</label>
+                    <label htmlFor='addressline'>{t("addAddress.addressLine")} :</label>
                     <input
                         type='text'
                         id='addressline' 
@@ -72,7 +73,7 @@ const AddAddress: React.FC<AddAddressProps> = ({ close }) => {
                     />
                 </div>
                 <div className='grid gap-1'>
-                    <label htmlFor='city'>City :</label>
+                    <label htmlFor='city'>{t("addAddress.city")} :</label>
                     <input
                         type='text'
                         id='city' 
@@ -81,7 +82,7 @@ const AddAddress: React.FC<AddAddressProps> = ({ close }) => {
                     />
                 </div>
                 <div className='grid gap-1'>
-                    <label htmlFor='state'>State :</label>
+                    <label htmlFor='state'>{t("addAddress.state")} :</label>
                     <input
                         type='text'
                         id='state' 
@@ -90,7 +91,7 @@ const AddAddress: React.FC<AddAddressProps> = ({ close }) => {
                     />
                 </div>
                 <div className='grid gap-1'>
-                    <label htmlFor='pincode'>Pincode :</label>
+                    <label htmlFor='pincode'>{t("addAddress.pincode")} :</label>
                     <input
                         type='text'
                         id='pincode' 
@@ -99,7 +100,7 @@ const AddAddress: React.FC<AddAddressProps> = ({ close }) => {
                     />
                 </div>
                 <div className='grid gap-1'>
-                    <label htmlFor='country'>Country :</label>
+                    <label htmlFor='country'>{t("addAddress.country")} :</label>
                     <input
                         type='text'
                         id='country' 
@@ -108,7 +109,7 @@ const AddAddress: React.FC<AddAddressProps> = ({ close }) => {
                     />
                 </div>
                 <div className='grid gap-1'>
-                    <label htmlFor='mobile'>Mobile No. :</label>
+                    <label htmlFor='mobile'>{t("addAddress.mobile")} :</label>
                     <input
                         type='text'
                         id='mobile' 
@@ -117,7 +118,7 @@ const AddAddress: React.FC<AddAddressProps> = ({ close }) => {
                     />
                 </div>
 
-                <button type='submit' className='bg-primary-200 w-full  py-2 font-semibold mt-4 hover:bg-primary-100'>Submit</button>
+                <button type='submit' className='bg-primary-200 w-full  py-2 font-semibold mt-4 hover:bg-primary-100'>{t("addAddress.submit")}</button>
             </form>
         </div>
     </section>

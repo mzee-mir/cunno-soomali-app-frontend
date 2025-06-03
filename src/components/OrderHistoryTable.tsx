@@ -23,6 +23,7 @@ import { columns } from "@/components/columns";
 import { Order } from "@/store/OrderSlice";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import ReviewInterface from "./ReviewInterface";
+import { useTranslation } from 'react-i18next';
 
 interface OrderHistoryTableProps {
   orders: Order[];
@@ -36,6 +37,7 @@ export function OrderHistoryTable({ orders, handleRemoveOrder }: OrderHistoryTab
   const [rowSelection, setRowSelection] = React.useState({});
   const [selectedOrder, setSelectedOrder] = React.useState<Order | null>(null);
   const [showReviewDialog, setShowReviewDialog] = React.useState(false);
+  const { t } = useTranslation();
 
   const handleReviewClick = (orderId: string) => {
     const order = orders.find(o => o._id === orderId);
@@ -79,7 +81,7 @@ export function OrderHistoryTable({ orders, handleRemoveOrder }: OrderHistoryTab
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto border-border hover:bg-accent hover:text-accent-foreground">
-              Columns <ChevronDown className="ml-2 h-4 w-4" />
+            {t('orderHistory.columns')} <ChevronDown className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="bg-card border-border">
@@ -152,7 +154,7 @@ export function OrderHistoryTable({ orders, handleRemoveOrder }: OrderHistoryTab
                       colSpan={columns.length}
                       className="h-24 text-center text-muted-foreground"
                     >
-                      No results.
+                      {t('orderHistory.noResults')}
                     </TableCell>
                   </TableRow>
                 )}
@@ -174,7 +176,7 @@ export function OrderHistoryTable({ orders, handleRemoveOrder }: OrderHistoryTab
           disabled={!table.getCanPreviousPage()}
           className="border-border hover:bg-accent hover:text-accent-foreground"
         >
-          Previous
+          {t('orderHistory.previous')}
         </Button>
         <Button
           variant="outline"
@@ -183,7 +185,7 @@ export function OrderHistoryTable({ orders, handleRemoveOrder }: OrderHistoryTab
           disabled={!table.getCanNextPage()}
           className="border-border hover:bg-accent hover:text-accent-foreground"
         >
-          Next
+          {t('orderHistory.next')}
         </Button>
       </div>
 
@@ -191,7 +193,7 @@ export function OrderHistoryTable({ orders, handleRemoveOrder }: OrderHistoryTab
       <Dialog open={showReviewDialog} onOpenChange={setShowReviewDialog}>
         <DialogContent className="sm:max-w-[425px] bg-accent border-border">
           <DialogHeader>
-            <DialogTitle className="text-foreground">Order Review</DialogTitle>
+            <DialogTitle className="text-foreground">{t('orderHistory.orderReview')}</DialogTitle>
           </DialogHeader>
           {selectedOrder && (
             <div className="py-4">

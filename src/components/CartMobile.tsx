@@ -7,10 +7,12 @@ import { FaCaretRight } from "react-icons/fa";
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
 import { useGlobalContext } from '@/Provider/Global';
+import { useTranslation } from 'react-i18next';
 
 const CartMobileLink = () => {
     const { totalPrice, totalQty } = useGlobalContext()
     const cartItem = useSelector((state:RootState) => state.cartMenuItem.cartItems)
+    const { t } = useTranslation();
 
   return (
     <>
@@ -23,13 +25,13 @@ const CartMobileLink = () => {
                             <FaCartShopping/>
                         </div>
                         <div className='text-xs'>
-                                <p>{totalQty} items</p>
+                                <p>{totalQty} {t("cartMobile.items")}</p>
                                 <p>{DisplayPriceInRupees(totalPrice)}</p>
                         </div>
                     </div>
 
                     <Link to={"/cart"} className='flex items-center gap-1'>
-                        <span className='text-sm'>View Cart</span>
+                        <span className='text-sm'>{t("cartMobile.viewCart")}</span>
                         <FaCaretRight/>
                     </Link>
                 </div>
