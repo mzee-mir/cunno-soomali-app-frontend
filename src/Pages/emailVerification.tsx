@@ -6,6 +6,7 @@ import Axios from "@/lib/Axios"; // Import Axios
 import SummaryApi from "@/api/Userauth"; //  Use structured API endpoints
 import AxiosToastError from "@/lib/AxiosTost"; //  Handle errors with toast
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const EmailVerificationPage = () => {
     const [code, setCode] = useState(Array(6).fill(""));
@@ -13,6 +14,7 @@ const EmailVerificationPage = () => {
     const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
     const navigate = useNavigate();
     const location = useLocation();
+    const { t } = useTranslation();
 
     //  Get email from location state or localStorage
     const userEmail = location.state?.email || localStorage.getItem("userEmail");
