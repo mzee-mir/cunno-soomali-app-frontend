@@ -9,6 +9,7 @@ import { logout } from "@/store/userSlice";
 import Axios from "@/lib/Axios";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import LanguageSelector from "./LanguageSelector";
 
 const MobileNavLinks = () => {
   const { t } = useTranslation();
@@ -68,6 +69,8 @@ const MobileNavLinks = () => {
       >
         {t('mobileNav.address')}
       </Link>
+
+      <LanguageSelector />
 
       <Button 
         className="flex items-center px-3 font-bold bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-400 hover:to-blue-600 transition-all duration-300"
